@@ -7,24 +7,75 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>{% block title %}{% endblock%}</title>
+    <link href="{% static 'accounts/css/bootstrap.min.css' %}" rel="stylesheet">
+    <link href="{% static 'accounts/css/custom.css' %}" rel="stylesheet">
+
 </head>
 <body>
-    <div id="header">
+   <div id="wrapper">
+            <nav class="navbar navbar-expand-lg ">
+               <div class="container-fluid">
+               <a class="navbar-brand" href="#">Logo</a>
+               <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
+                  <span class="navbar-toggler-icon"></span>
+               </button>
+               <div class="collapse navbar-collapse justify-content-end" id="navbarNavAltMarkup">
+                  <div class="navbar-nav">
+                     <a class="nav-link" href="{% url 'home' %}">Home</a>
+                     <a class="nav-link" href="#">About</a>
+                     <a class="nav-link" href="#">Services</a>
+                     <a class="nav-link" href="#">Contact Us | </a>
+                     <a class="nav-link" href="{%url 'login' %}">Sign In</a>
+                     <a class="nav-link" href="{% url 'register' %}">Sign Up</a>
+                  </div>
+               </div>
+               </div>
+            </nav>
+            {% if messages %}
+            <ul class="messages">
+               {% for message in messages %}
+                  <li class="{{ message.tags }}">
+                     {{ message|safe }}
+                     <button type="button" class="btn-close" aria-label="Close"></button>
+                  </li>
+                  {% endfor %}
+            </ul>
+            {% endif %}
 
-    </div>
-    {% if messages %}
-     <ul class="messages">
-        {% for message in messages %}
-           <li class="{{ message.tags }}">
-            {{ message|safe }}
-            <a href="#" class="close">X</a>
-           </li>
-           {% endfor %}
-     </ul>
-     {% endif %}
-     <div id="content">
-        {% block content%}
-        {% endblock%}
-     </div>
+      
+
+         <div id="main-content">
+
+            {% block content %}
+            {% endblock%}
+      
+         </div>
+
+
+         <footer id="footer">
+
+      
+             <ul class="social_icons">
+               <li><a href="#"><ion-icon name="logo-facebook"></ion-icon></a>Facebook</li>
+               <li><a href="#"><ion-icon name="logo-instagram"></ion-icon></a>Instagram</li>
+               <li><a href="#"><ion-icon name="logo-twitter"></ion-icon></a>Twitter</li>
+               <li><a href="#"><ion-icon name="logo-linkedin"></ion-icon></a>LinkedIn</li>
+             </ul>
+             <div class="menu">
+               <li><a href="#">Home</a></li>
+               <li><a href="#">About</a></li>
+               <li><a href="#">Services</a></li>
+               <li><a href="#">Contact</a></li>
+               <li><a href="#">FAQs</a></li>
+               <li><a href="#">T&Cs</a></li>
+             </div>
+             <p>@copy2023 GenerationZ CMS|All Rights Reserved</p>
+         </footer>
+
+   </div>
+     <script type="module" src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.esm.js"></script>
+     <script nomodule src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.js"></script>
+     <script src="{% static 'accounts/javascript/bootstrap.bundle.min.js' %}"></script>
+     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.4/jquery.min.js"></script>
 </body>
 </html>

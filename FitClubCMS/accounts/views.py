@@ -8,6 +8,11 @@ from django.contrib import messages
 
 
 
+def landing_page(request):
+    return render(request, 'accounts/pages/landingpage.html')
+
+
+
 def user_login(request):
     if request.method == 'POST':
         form = LoginForm(request.POST)
@@ -71,5 +76,5 @@ def edit(request):
         
 
 @login_required 
-def account(request):
-    return render(request, 'accounts/account_page.html', {'section': 'account_page'})
+def user_page(request):
+    return render(request, 'accounts/pages/profile_page.html', {'section': 'profile_page'})

@@ -13,7 +13,8 @@ urlpatterns = [
     # path('password-reset/<uidb64>/<token>/',auth_views.PasswordResetConfirmView.as_view(), name='password_reset_confirm'),
     # path('password-reset-/complete/', auth_views.PasswordResetCompleteView.as_view(), name='password_reset_complete'),
      path('', include('django.contrib.auth.urls')),
-     path('', views.account, name='account'),
+     path('', views.landing_page, name='home'),
+     path('user_page/', views.user_page, name='profile'),
      path('register/', views.register, name='register'),
      path('edit/', views.edit, name='edit'),
    
