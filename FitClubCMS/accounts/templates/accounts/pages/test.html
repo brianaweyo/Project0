@@ -1,24 +1,15 @@
-{% extends "base.html" %}
-{% load static %}
-
-{% block title %} My Profile {% endblock %}
-
-
-
-
-{% block content %}
-<h1>Profile</h1>
-
-<div id="header">
-    <span class="user">
-    {% if request.user.is_authenticated %}
-    Hello {{ request.user.first_name|default:request.user.username }},
-    <a href="{% url "logout" %}">Logout</a>
-    {% else %}
-    <a href="{% url "login" %}">Log-in</a>
-    {% endif %}
-    </span>
-</div>
+{%  load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link href="{% static 'accounts/css/profile.css' %}" rel="stylesheet">
+    <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
+</head>
+<body>
 
 <div class="sidebar">
     <div class="logo-details">
@@ -130,32 +121,49 @@
             </ul>
         </li>
    
-
-    <div class="profile-details">
-        <div class="profile-content">
-            <img src="{% static 'accounts/images/bgimage.jpeg' %}">
-        </div>
-        <li>
-        <div class="name-job">
-            <div class="profile-name">Brian Aweyo</div>
-            <div class="job">Developer</div>
-        </div>
-        <i class='bx bx-log-out'></i>
-    </div>  
-   </li>
-  </ul>
+     <li>
+         <div class="profile-details">
+                <div class="profile-content">
+                    <img src="{% static 'accounts/images/bgimage.jpeg' %}">
+                </div>
+        
+                <div class="name-job">
+                    <div class="profile-name">Brian Aweyo</div>
+                    <div class="job">Developer</div>
+                </div>
+             <i class='bx bx-log-out'></i>
+         </div>  
+     </li>
+   </ul>
 </div>
 
 <section class="home-section">
   <div class="home-content">
-    <i class="bx bx-menu></i>
+    <i class="bx bx-menu"></i>
     <span class="text">Drop Down Sidebar</span>
    </div>
 </section>
 
+ <script type="module" src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.esm.js"></script>
+ <script nomodule src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.js"></script>
+ <script src="{% static 'accounts/javascript/myscript.js' %}"></script>
 
+ <script>
+    let arrow = document.querySelectorAll(" .arrow");
+    for (var i = 0; i<arrow.length; i++){
+     arrow[i].addEventListener("click",(e)=>{    
+    let arrowParent = e.target.parentElement.parentElement;
+    console.log(arrowParent);
+    arrowParent.classList.toggle("showMenu");
+    });
+}
 
-
-<p> Welcome to your Profile Page You can <a href="{% url "edit" %}">edit your 
-    profile</a> or <a href="{% url "password_change" %}">change your password</a></p>
-{% endblock %}
+let sidebar =document.querySelector(".sidebar");
+let sidebarBtn =document.querySelector(".bx-menu");
+console.log(sidebarBtn);
+sidebarBtn.addEventListener("click", ()=>{
+  sidebar.classList.toggle("close");
+});
+ </script>
+</body>
+</html>

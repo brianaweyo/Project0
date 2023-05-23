@@ -77,4 +77,4 @@ def edit(request):
 
 @login_required 
 def user_page(request):
-    return render(request, 'accounts/pages/profile_page.html', {'section': 'profile_page'})
+    return render(request, 'accounts/pages/test.html', {'section': 'profile_page'})
