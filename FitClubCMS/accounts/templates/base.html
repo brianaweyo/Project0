@@ -9,7 +9,8 @@
     <title>{% block title %}{% endblock%}</title>
     <link href="{% static 'accounts/css/bootstrap.min.css' %}" rel="stylesheet">
     <link href="{% static 'accounts/css/custom.css' %}" rel="stylesheet">
-
+    <link href="{% static 'accounts/css/profile.css' %}" rel="stylesheet">
+    <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
 </head>
 <body>
    <div id="wrapper">
@@ -27,9 +28,9 @@
                      <a class="nav-link" href="#">Contact Us | </a>
                      <a class="nav-link" href="{%url 'login' %}">Sign In</a>
                      <a class="nav-link" href="{% url 'register' %}">Sign Up</a>
-                  </div>
+                </div>
                </div>
-               </div>
+              </div>
             </nav>
             {% if messages %}
             <ul class="messages">
@@ -52,9 +53,15 @@
          </div>
 
 
-         <footer id="footer">
+     <!--   <footer id="footer">
 
-      
+           <div class="waves">
+               <div class="wave" id="wave1"></div>
+               <div class="wave" id="wave2"></div>
+               <div class="wave" id="wave3"></div>
+               <div class="wave" id="wave4"></div>
+           </div>
+          
              <ul class="social_icons">
                <li><a href="#"><ion-icon name="logo-facebook"></ion-icon></a>Facebook</li>
                <li><a href="#"><ion-icon name="logo-instagram"></ion-icon></a>Instagram</li>
@@ -71,11 +78,12 @@
              </div>
              <p>@copy2023 GenerationZ CMS|All Rights Reserved</p>
          </footer>
-
+      --> 
    </div>
      <script type="module" src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.esm.js"></script>
      <script nomodule src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.js"></script>
      <script src="{% static 'accounts/javascript/bootstrap.bundle.min.js' %}"></script>
+     <script src="{% static 'accounts/javascript/myscript.js' %}"></script>
      <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.4/jquery.min.js"></script>
 </body>
 </html>

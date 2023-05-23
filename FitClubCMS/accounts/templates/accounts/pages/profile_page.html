@@ -1,9 +1,14 @@
 {% extends "base.html" %}
+{% load static %}
 
 {% block title %} My Profile {% endblock %}
 
+
+
+
 {% block content %}
 <h1>Profile</h1>
+
 <div id="header">
     <span class="user">
     {% if request.user.is_authenticated %}
@@ -14,6 +19,143 @@
     {% endif %}
     </span>
 </div>
+
+<div class="sidebar">
+    <div class="logo-details">
+        <i class='bx bxl-c-plus-plus'></i>
+        <span class="logo_name">GZ</span>
+    </div>
+
+    <ul class="nav-links">
+        <li>
+            <a href="#">
+                <i class='bx bx-grid-alt'></i>
+                <span class="link_name">Dashboard</span>
+            </a>
+            <ul class="sub-menu blank">
+                <li><a class="link_name" href="#">Billings</a></li>
+            </ul>
+        </li>
+
+        <li>
+            <div class="iocn-link">
+             <a href="#">
+                <i class='bx bx-collection'></i>
+                <span class="link_name">Category</span>
+            </a>
+            <i class='bx bxs-chevron-down arrow'></i>
+         </div>
+             <ul class="sub-menu">
+                <li><a class="link_name" href="#">Category</a></li>
+                <li><a href="#">Regular</a></li>
+                <li><a href="#">Seasonal</a></li>
+             </ul>
+        </li>
+
+        <li>
+            <div class="iocn-link">
+             <a href="#">
+                <i class='bx bx-dollar'></i>
+                <span class="link_name">Billings</span>
+            </a>
+            <i class='bx bxs-chevron-down arrow'></i>
+         </div>
+
+         <ul class="sub-menu">
+            <li><a class="link_name" href="#">Billings</a></li>
+            <li><a href="#">Payment</a></li>
+            <li><a href="#">Records</a></li>
+         </ul>
+        </li>
+
+        <li>
+            <a href="#">
+                <i class='bx bx-grid-alt'></i>
+                <span class="link_name">Programs</span>
+            </a>
+            <ul class="sub-menu blank">
+                <li><a class="link_name" href="#">Programs</a></li>
+            </ul>
+        </li>
+
+        <li>
+            <a href="#">
+                <i class='bx bx-grid-alt'></i>
+                <span class="link_name">Trainers</span>
+            </a>
+            <ul class="sub-menu blank">
+                <li><a class="link_name" href="#">Trainers</a></li>
+            </ul>
+        </li>
+
+        <li>
+            <div class="iocn-link">
+             <a href="#">
+                <i class='bx bx-plug'></i>
+                <span class="link_name">Plugins</span>
+            </a>
+            <i class='bx bxs-chevron-down arrow'></i>
+         </div>
+
+         <ul class="sub-menu">
+            <li><a class="link_name" href="#">Plugins</a></li>
+            <li><a href="#">Payment</a></li>
+            <li><a href="#">Records</a></li>
+         </ul>
+        </li>
+
+        <li>
+            <div class="iocn-link">
+             <a href="#">
+                <i class='bx bx-time'></i>
+                <span class="link_name">Schedule</span>
+            </a>
+            <i class='bx bxs-chevron-down arrow'></i>
+         </div>
+
+         <ul class="sub-menu">
+            <li><a class="link_name" href="#">Schedule</a></li>
+            <li><a href="#">Sessions</a></li>
+            <li><a href="#">Book Now</a></li>
+         </ul>
+        </li>
+
+        <li>
+            <a href="#">
+                <i class='bx bx-cog'></i>
+                <span class="link_name">Settings</span>
+            </a>
+            <ul class="sub-menu blank">
+                <li><a class="link_name" href="#">Settings</a></li>
+            </ul>
+        </li>
+   
+
+    <div class="profile-details">
+        <div class="profile-content">
+            <img src="{% static 'accounts/images/bgimage.jpeg' %}">
+        </div>
+        <li>
+        <div class="name-job">
+            <div class="profile-name">Brian Aweyo</div>
+            <div class="job">Developer</div>
+        </div>
+        <i class='bx bx-log-out'></i>
+    </div>  
+   </li>
+  </ul>
+</div>
+
+<section class="home-section">
+  <div class="home-content">
+    <i class="bx bx-menu"></i>
+    <span class="text">Drop Down Sidebar</span>
+   </div>
+</section>
+
+
+
+
 <p> Welcome to your Profile Page You can <a href="{% url "edit" %}">edit your 
     profile</a> or <a href="{% url "password_change" %}">change your password</a></p>
 {% endblock %}
