@@ -1,0 +1,74 @@
+ body{
+    background-color: rgb(41, 51, 82);
+ }
+ .signup-box{
+    width: 360px;
+    height: 600px;
+    border-radius: 14px;
+    margin: auto;
+    background-color: white;
+    
+   }
+.brand{
+    color: white;
+    font-size: 20px;
+    line-height: 10px;
+    padding: 0 100px;
+    font-weight: bolder;
+   }
+ .signup-box p input[type="submit"]{
+    height: 35px;
+    margin-top: 20px;
+    border: none;
+    background-color:rgb(41, 51, 82);
+    color: white;
+    font-size: 18px;
+   }
+  h1{
+    text-align: center;
+    padding-top: 15px;
+
+   }
+.signup-box .p1{
+    text-align: center;
+    padding-top: 20px;
+    font-size: 1.2em;
+   }
+  
+  .para2{
+    text-align: center;
+    color: #49c1a2;
+    font-size: 20px;
+    margin-top: 10px;
+   }
+  .para2 a{
+    color:white;
+    text-decoration: none;
+   }
+   .para2 a:hover{
+    color:whitesmoke;
+   }
+.signup-box form{
+    width: 300px;
+    margin-left: 20px;
+   }
+  
+  .signup-box form p  label[for^="id_password"], 
+   label[for^="id_password2"],label[for^="id_first_name"],
+   label[for^="id_email"],label[for^="id_username"]{
+    display: flex;
+    margin-top: 20px;
+    font-size: 18px;
+    color: black;
+  
+   }
+ .signup-box form  p input[type="text"], 
+   input[type="email"],input[type="password"],input[type="submit"]{
+    width: 100%;
+    padding: 7px;
+    border: none;
+    border: 1px solid gray;
+    border-radius: 6px;
+    outline: none;
+    background-color: white;
+   }

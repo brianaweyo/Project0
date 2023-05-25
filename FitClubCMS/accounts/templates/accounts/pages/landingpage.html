@@ -1,30 +1,71 @@
 {% extends 'base.html' %}
 
 {% load static %}
+{% block title %}Home  {% endblock %}
 {% block content %}
   <div class="slant">
-    <div class="about">
+   <div class="about">
         <h1>About Us</h1>
         <p>Lorem ipsum dolor sit amet consectetur adipisicing elit.
              Provident exercitationem, quam eaque placeat, ducimus iusto eveniet 
              dicta est vitae voluptatum explicabo asperiores reprehenderit repudiandae? 
              Rem quia natus maxime dolore adipisci.
         </p>
+        <div class="more">
         <button><a href="#">Find More</a></button>
         <button><a href="#">Find More</a></button>
+     </div>
     </div>
-    <div class="image">
-        <div>
-        <img src="{% static 'accounts/images/image1.jpeg'%}" alt="a man exercising">
-    </div>
+  </div>
+  <div>
 
+    
+    <h4>Our Programs</h4>
+  <div class="card-group">
+    <div class="card">
+      <img class="card-img-top" src="{% static 'accounts/images/image1.jpg' %}" alt="Card image cap">
+      <div class="card-body">
+        <h5 class="card-title">Cardiovascular</h5>
+        <p class="card-text"> Unleash Your Inner Dynamo as you embark on heart-pumping adventures 
+          that melt away calories, ignite your metabolism, and elevate your stamina to new heights.
+           Get ready to unleash your true potential and leave a trail of sweat and triumph in your wake</p>
+        <p class="card-text"><small class="text-muted">Last updated 3 mins ago</small></p>
+      </div>
     </div>
-
+    <div class="card">
+      <img class="card-img-top" src="{% static 'accounts/images/image1.jpg' %}" alt="Card image cap">
+      <div class="card-body">
+        <h5 class="card-title">Group Fitness</h5>
+        <p class="card-text"> </p>
+        <p class="card-text"><small class="text-muted">Last updated 3 mins ago</small></p>
+      </div>
+    </div>
+    <div class="card">
+      <img class="card-img-top" src="{% static 'accounts/images/image1.jpg' %}" alt="Card image cap">
+      <div class="card-body">
+        <h5 class="card-title">Yoga</h5>
+        <p class="card-text">Immerse yourself in the art of yoga, where graceful movements and conscious 
+          breathing unite to create a symphony of rejuvenation,
+          cultivating a strong, flexible physique and an awakened, serene mind.</p>
+        <p class="card-text"><small class="text-muted">Last updated 3 mins ago</small></p>
+      </div>
+    </div>
+    <div class="card">
+      <img class="card-img-top" src="{% static 'accounts/images/image1.jpg' %}" alt="Card image cap">
+      <div class="card-body">
+        <h5 class="card-title">Cross Fit</h5>
+        <p class="card-text">Experience an exhilarating fitness revolution that melds intense strength training, 
+          heart-pumping cardio, and dynamic functional movements,
+          transforming your body and pushing your limits to unleash your inner champion.</p>
+        <p class="card-text"><small class="text-muted">Last updated 3 mins ago</small></p>
+      </div>
+    </div>
   </div>
 
-
-
-
-
+<div class="chevron-container">
+  <i class="bx bx-chevron-down"></i>
+</div>
+  
+</div>
 
 {% endblock %}
