@@ -1,18 +1,28 @@
-let arrow = document.querySelectorAll(" .arrow");
-for (var i = 0; i<arrow.length; i++){
-     arrow[i].addEventListener("click",(e)=>{    
-    let arrowParent = e.target.parentElement.parentElement;
-    console.log(arrowParent);
-    arrowParent.classList.toggle("showMenu");
-    });
 
-}
-let sidebar =document.querySelector(".sidebar");
-let sidebarBtn =document.querySelector(".bx-menu");
-console.log(sidebarBtn);
-sidebarBtn.addEventListener("click", ()=>{
-  sidebar.classList.toggle("close");
+$(document).ready(function() {
+  // Event listener for sidebar link clicks
+  $('.sub-menu a').on('click', function(event) {
+    console.log('Link clicked');
+     event.preventDefault(); // Prevent the default link behavior
+
+
+     var target = $(this).data('target'); // Get the target HTML file from the data-target attribute
+
+     // Load the content using AJAX
+     $.ajax({
+        url: target,
+        dataType: 'html',
+        success: function(data) {
+           $('#content-container').html(data); // Insert the loaded content into the container
+        },
+        error: function() {
+           // Handle any error that occurs during the AJAX request
+           console.log('Error loading content');
+        }
+     });
+  });
 });
+
 
 $(document).ready(function(){
   var showCards = 3; // Number of cards to show initially
@@ -31,6 +41,8 @@ $(document).ready(function(){
     toggleCards(); // Toggle the cards based on the updated value
   });
 });
+
+
 
 
 

@@ -3,8 +3,11 @@ from django.shortcuts import render
 from django.contrib.auth import authenticate, login
 from django.contrib.auth.decorators import login_required
 from .forms import LoginForm, UserRegistrationForm, UserEditForm,ProfileEditForm
-from .models import Profile
+from .models import Profile, Service
+from django.core import serializers
+from django.http import JsonResponse
 from django.contrib import messages
+import json
 
 
 
@@ -73,8 +76,15 @@ def edit(request):
                   'accounts/edit.html',{'user_form': user_form, 
                                         'profile_form':profile_form})
 
-        
+ 
+
 
 @login_required 
-def user_page(request):
-    return render(request, 'accounts/pages/test.html', {'section': 'profile_page'})
+def dashboard(request):
+    return render(request, 'accounts/pages/dashboard.html')
+
+
+def services(request):
+    data = Service.objects.all()
+    serialized_data = serializers.serialize('json',data)
+    return JsonResponse(serialized_data, safe=False)

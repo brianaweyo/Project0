@@ -5,7 +5,7 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    {% block title %}{% endblock %}
     <link href="{% static 'accounts/css/profile.css' %}" rel="stylesheet">
     <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
 </head>
@@ -24,7 +24,7 @@
                 <span class="link_name">Dashboard</span>
             </a>
             <ul class="sub-menu blank">
-                <li><a class="link_name" href="#">Billings</a></li>
+                <li><a class="link_name" href="#">Dashboard</a></li>
             </ul>
         </li>
 
@@ -89,8 +89,8 @@
          </div>
 
          <ul class="sub-menu">
-            <li><a class="link_name" href="#">Plugins</a></li>
-            <li><a href="#">Payment</a></li>
+            <li><a class="link_name" href="#">Profile</a></li>
+            <li><a href="#" id="edit-profile">Edit</a></li>
             <li><a href="#">Records</a></li>
          </ul>
         </li>
@@ -113,7 +113,7 @@
 
         <li>
             <a href="#">
-                <i class='bx bx-cog'></i>
+                <i class='bx bx-cog' data-url="{% url 'services'%}"></i>
                 <span class="link_name">Settings</span>
             </a>
             <ul class="sub-menu blank">
@@ -138,17 +138,23 @@
 </div>
 
 <section class="home-section">
-  <div class="home-content">
+   <div class="home-content">
     <i class="bx bx-menu"></i>
     <span class="text">Drop Down Sidebar</span>
    </div>
+
+   <div id="content-section">
+    {% block content %}{% endblock  %}
+   </div>
+   
 </section>
 
  <script type="module" src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.esm.js"></script>
  <script nomodule src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.js"></script>
+ <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
  <script src="{% static 'accounts/javascript/myscript.js' %}"></script>
 
- <script>
+<script>
     let arrow = document.querySelectorAll(" .arrow");
     for (var i = 0; i<arrow.length; i++){
      arrow[i].addEventListener("click",(e)=>{    
@@ -164,6 +170,32 @@ console.log(sidebarBtn);
 sidebarBtn.addEventListener("click", ()=>{
   sidebar.classList.toggle("close");
 });
- </script>
+
+ $(document).ready(function() {
+        $('.nav-links a').click(function(e) {
+            e.preventDefault();
+            var targetUrl = $(this).data('url');
+            $.ajax({
+                url: targetUrl,
+                type: 'GET',
+                dataType: 'json',
+                success: function(response) {
+                    var jsonData = JSON.parse(response);
+                    var htmlContent = '';
+                    // Generate HTML content using the retrieved JSON data
+                    // Modify this section according to your data and HTML structure
+                    for (var i = 0; i < jsonData.length; i++) {
+                        var service = jsonData[i].fields;
+                        htmlContent += '<div><h3>' + service.service_name + '</h3><p>' + service.description + '</p><p>' + service.cost + '</p></div>';
+                    }
+                    // Insert the generated HTML content into the main section
+                    $('#content-section').html(htmlContent);
+                }
+            });
+        });
+    });
+
+
+</script>
 </body>
 </html>
