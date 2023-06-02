@@ -18,4 +18,13 @@ urlpatterns = [
      path('register/', views.register, name='register'),
      path('edit/', views.edit, name='edit'),
      path('services/', views.services, name='services'),
+     path('packages/', views.packages, name='packages'),
+     path('my_package/', views.my_package, name='my_package'),
+     path('trainers/', views.trainers, name='trainers'),
+     path('schedule/', views.schedule, name='schedule'),
+     path('all_events/', views.all_events, name='all_events'),
+     path('update_event/', views.update_event, name='update_event'),
+     path('remove_event/', views.remove_event, name='remove_event'),
+     path('', views.index, name='index'),
+
 ]

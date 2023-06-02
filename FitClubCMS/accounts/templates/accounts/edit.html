@@ -1,6 +1,18 @@
 {% extends 'base2.html' %}
 {% block title %}Edit your account{% endblock %}
 {% block content %}
+
+{% if messages %}
+<ul class="messages">
+{% for message in messages %}
+    <li class="{{ message.tags }}">
+        {{ message|safe }}
+        <button type="button" class="btn-close" aria-label="Close">X</button>
+    </li>
+    {% endfor %}
+</ul>
+{% endif %}
+
  <h1>Edit your account</h1>
  <p>You can edit your account using the following form:</p>
  <form method="post" enctype="multipart/form-data">

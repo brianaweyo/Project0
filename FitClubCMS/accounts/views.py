@@ -3,11 +3,12 @@ from django.shortcuts import render
 from django.contrib.auth import authenticate, login
 from django.contrib.auth.decorators import login_required
 from .forms import LoginForm, UserRegistrationForm, UserEditForm,ProfileEditForm
-from .models import Profile, Service
+from .models import Profile, Service, Events
 from django.core import serializers
 from django.http import JsonResponse
 from django.contrib import messages
 import json
+from django_daraja.mpesa.core import MpesaClient
 
 
 
@@ -35,6 +36,7 @@ def user_login(request):
     else:
             form = LoginForm()
     return render(request, 'accounts/login.html', {'form':form})
+
 
 def register(request):
     if request.method == 'POST':
@@ -76,12 +78,84 @@ def edit(request):
                   'accounts/edit.html',{'user_form': user_form, 
                                         'profile_form':profile_form})
 
- 
+def index(request):
+    cl = MpesaClient()
+    # Use a Safaricom phone number that you have access to, for you to be able to view the prompt.
+    phone_number = '0111255250'
+    amount = 1
+    account_reference = 'reference'
+    transaction_desc = 'Description'
+    callback_url = 'https://api.darajambili.com/express-payment'
+    response = cl.stk_push(phone_number, amount, account_reference, transaction_desc, callback_url)
+    return HttpResponse(response)
 
 
 @login_required 
 def dashboard(request):
     return render(request, 'accounts/pages/dashboard.html')
+
+
+def packages(request):
+    return render(request, 'accounts/pages/packages.html')
+
+def my_package(request):
+    return render(request, 'accounts/pages/my_package.html')
+
+def trainers(request):
+    return render(request, 'accounts/pages/trainers.html')
+
+def schedule(request):
+    all_events = Events.objects.all()
+    context = {
+        "events": all_events,
+    }
+    return render(request, 'accounts/pages/schedule.html', context)
+
+
+def all_events(request):
+    all_events = Events.objects.all()
+    out = []
+    for event in all_events:
+        out.append({
+            'title':event.name,
+            'id': event.id,
+            'start': event.start.strftime("%m/%d/%Y,  %H:%M:%S"),
+            'END': event.end.strftime("%m/%d/%Y,  %H:%M:%S"),
+       })
+    return JsonResponse(out, safe=False)
+
+
+
+def add_event(request):
+    start = request.GET.get("start", None)
+    end = request.GET.get("end", None)
+    title = request.GET.get("title", None)
+    event = Events(name = str(title), start=start, end=end)
+    event.save()
+    data = {}
+    return JsonResponse(data)
+    
+def update_event(request):
+    start = request.GET.get("start", None)
+    end = request.GET.get("end", None)
+    title = request.GET.get("title", None)
+    id = request.GET.get("id", None)
+    event = Events.objects.get(id=id)
+    event.start = start
+    event.end = end
+    event.name = title
+    event.save()
+    data = {}
+    return JsonResponse(data)
+
+def remove_event (request):
+    id = request.GET.get("id", None)
+    event = Events.objects.get(id=id)
+    event.delete()
+    data = {}
+    return JsonResponse(data)
+
+
 
 
 def services(request):

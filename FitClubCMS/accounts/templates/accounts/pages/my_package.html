@@ -1,0 +1,51 @@
+{% extends "base2.html" %}
+{% load static %}
+{% block title %} Packages {% endblock %}
+
+{% block content %}
+ <div class="package-descr">
+    <div class="card" style="width: 18rem;">
+        <img src="{% static "accounts/images/diamondcrown.jpg" %}" class="card-img-top" alt="...">
+        <div class="card-body">
+          <h5 class="card-title">Beginner's Bundle</h5>
+          <p class="card-text">Designed for beginners, this package includes 
+            personalized training sessions and introductory fitness classes.</p>
+        </div>
+        <ul class="list-group list-group-flush">
+          <li class="list-group-item">Cras justo odio</li>
+          <li class="list-group-item">Dapibus ac facilisis in</li>
+          <li class="list-group-item">Vestibulum at eros</li>
+        </ul>
+        <div class="card-body">
+          <a href="#" class="card-link">Enroll</a>
+          <div class="cost">Ksh 1000</div>
+        </div>
+      </div>
+     <div class="descr-cont">
+
+      <form action="#" method="POST">
+        <fieldset><legend> Package Details</legend>
+            <label for="dop"> Subscription Date:</lable><input type="date" name="dop" required readonly>  <br>
+            <label for="doe"> Subscription Expiry:</lable><input type="date" name="doe" readonly required> <br>
+            <label for="days_left">Days Remaining:</label><input type="number"  name="days_left" min="0" required readonly><br>
+            <label for="amount"> Amount Paid(Ksh):</label><input type="number"  name="amount" step="0.01" readonly required><br>
+            <label for="goals"> Package Goals:</label><textarea name="goals" rows="7" readonly></textarea><br>
+            <label for="renew"><input type="button" name="renew" value="Renew Subscription"> <br>
+            <label for="upgrade"><input type="button" name="upgrade" value="Upgrade Now"><br>
+        </fieldset>
+        <fieldset><legend>My Goals</legend>
+            <p>Lorem ipsum dolor sit amet consectetur, adipisicing elit. Ad reprehenderit ab voluptates distinctio ut suscipit, maxime unde eos quibusdam optio qui tempore excepturi, 
+            harum, illo quas molestiae! Delectus, veritatis aliquam!</p>
+            <p>Do you want to Upgrade your Package?<label for="upgrade"><input type="button" name="upgrade" value="Upgrade Now"><br>
+            
+            <p>For any queries, inquiry or complains email us at <a href="mailto:brianaweyo23@gmail.com"> Brian</a> or call on <a href="tel:+1234567890">Call us</a>
+</p>
+        </fieldset>
+      </form>
+       
+     </div>
+
+
+ </div>  
+
+{% endblock %}

@@ -34,17 +34,6 @@
                </div>
               </div>
             </nav>
-            {% if messages %}
-            <ul class="messages">
-               {% for message in messages %}
-                  <li class="{{ message.tags }}">
-                     {{ message|safe }}
-                     <button type="button" class="btn-close" aria-label="Close"></button>
-                  </li>
-                  {% endfor %}
-            </ul>
-            {% endif %}
-
       
 
          <div id="main-content">
