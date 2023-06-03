@@ -86,4 +86,66 @@ label[for^="id_password"] {
   }
 
   
-  /* Sign Up Form styling*/
+
+  /* edit profile form */
+  
+  #content-section .edit-profile-form{
+    border: blue 2px solid;
+  }
+
+  #content-section .profile-edit-intro {
+    margin: 2em 2em;
+  }
+  #content-section .profile-edit-intro h1, p{
+    text-align: center;
+  }
+  #content-section .edit-profile-form form{
+     
+      border: orange 2px solid;
+      margin: 50px 30px;
+      display: inline-block; 
+      justify-content: space-around;
+      width: 45%;
+
+  }
+  #content-section .edit-profile-form form input[type="text"],
+    select, input[type='file']{
+    width: 50%;
+    margin-bottom: 1em;
+    display:block;
+    text-transform: uppercase;
+    text-align: center;
+    border-radius: 5px;
+    }
+  #content-section .edit-profile-form form select{
+    height: 2em;
+    height: 2.3em;
+    border-radius: 5px;
+    border-style: none;
+    width: 50%;
+  }
+    
+
+#content-section .edit-profile-form form input[type='email']{
+  text-transform: lowercase;
+  font-size: 1.2em;
+  display: block;
+  width: 50%;
+  height: 2em;
+  height: 2.3em;
+  border-radius: 5px;
+  border-style: none;
+  padding-left: 10px;
+  
+}
+#content-section .edit-profile-form form input[type='submit']{
+  width: 50%;
+
+}
+#content-section .edit-profile-form form p {
+  display: inline;
+}
+#content-section .edit-profile-form form label{
+  font-size: 1.2em;
+  font-weight: 400;
+}

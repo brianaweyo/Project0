@@ -1,19 +1,86 @@
 {% extends "base2.html" %}
+{% load static %}
 
 {% block title %} My Profile {% endblock %}
 
 {% block content %}
-<h1>Profile</h1>
-<div id="header">
-    <span class="user">
-    {% if request.user.is_authenticated %}
-    Hello {{ request.user.first_name|default:request.user.username }},
-    <a href="{% url "logout" %}">Logout</a>
-    {% else %}
-    <a href="{% url "login" %}">Log-in</a>
-    {% endif %}
-    </span>
+<h4>My Dashboard </h4>
+
+<div class="dashboard-cont">
+  
+   <div class="biodata">
+     <form>
+      {% if request.user.is_authenticated %}
+     
+        <input type="text" name="username" value="{{ request.user.username|default:request.user.username }}">
+        <input type="text" name="first_name" value="{{ request.user.first_name|default:request.user.first_name }}" > 
+        <input type="text" name="last_name"value="{{ request.user.last_name|default:request.user.last_name }}">
+     {% endif %} 
+     </form>
+
+   </div>
+
+
+
+   <div class="quick-access">
+    
+    <div class="card-group">
+
+        <div class="card">
+          <img class="card-img-top" src="{% static 'accounts/images/image1.jpg' %}" alt="Card image cap">
+          <div class="card-body">
+            <h5 class="card-title">Cardiovascular</h5>
+            <p class="card-text"> Unleash Your Inner Dynamo as you embark on heart-pumping adventures 
+            <p class="card-text"><small class="text-muted">Last updated 3 mins ago</small></p>
+          </div>
+        </div>
+
+        <div class="card">
+          <img class="card-img-top" src="{% static 'accounts/images/image1.jpg' %}" alt="Card image cap">
+          <div class="card-body">
+            <h5 class="card-title">Group Fitness</h5>
+            <p class="card-text"> </p>
+            <p class="card-text"><small class="text-muted">Last updated 3 mins ago</small></p>
+          </div>
+        </div>     
+
+        <div class="card">
+            <img class="card-img-top" src="{% static 'accounts/images/image1.jpg' %}" alt="Card image cap">
+            <div class="card-body">
+              <h5 class="card-title">Group Fitness</h5>
+              <p class="card-text"> </p>
+              <p class="card-text"><small class="text-muted">Last updated 3 mins ago</small></p>
+            </div>
+          </div>  
+
+          <div class="card">
+            <img class="card-img-top" src="{% static 'accounts/images/image1.jpg' %}" alt="Card image cap">
+            <div class="card-body">
+              <h5 class="card-title">Group Fitness</h5>
+              <p class="card-text"> </p>
+              <p class="card-text"><small class="text-muted">Last updated 3 mins ago</small></p>
+            </div>
+          </div>  
+
+    </div>
+
+
+   <div class="fitness-records">
+
+      <div class="progress">
+         <h1>PROGESS CHARTS AND BARS</h1>
+      </div>
+     
+   </div>
+
+   <div class="feed-form">
+    <p> Welcome to your Profile Page You can <a href="{% url "edit" %}">edit your 
+        profile</a> or <a href="{% url "password_change" %}">change your password</a></p>
+
+   </div>
+
 </div>
-<p> Welcome to your Profile Page You can <a href="{% url "edit" %}">edit your 
-    profile</a> or <a href="{% url "password_change" %}">change your password</a></p>
+
+
+
 {% endblock %}

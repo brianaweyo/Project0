@@ -10,9 +10,17 @@ class LoginForm(forms.Form):
 
 class UserRegistrationForm(forms.ModelForm):
     password = forms.CharField(label= 'Password',
-                               widget=forms.PasswordInput)
+                               widget=forms.PasswordInput(attrs={'placeholder': '.............'}))
     password2 = forms.CharField(label='Repeat Password',
-                                widget=forms.PasswordInput)
+                                widget=forms.PasswordInput(attrs={'placeholder': '............'}))
+    
+    email = forms.EmailField(label='Email', widget=forms.EmailInput(attrs={'placeholder': 'example@example.com'}))
+    
+
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
+        self.fields['username'].help_text = None
+
     class Meta:
         model = User
         fields = ['username', 'first_name','email']

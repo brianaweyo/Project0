@@ -12,6 +12,7 @@ from django_daraja.mpesa.core import MpesaClient
 
 
 
+
 def landing_page(request):
     return render(request, 'accounts/pages/landingpage.html')
 
