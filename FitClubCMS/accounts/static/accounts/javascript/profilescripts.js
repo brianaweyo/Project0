@@ -1,5 +1,6 @@
-$(document).ready((fuction) {
-    var calendar = $('calendar').fullCalendar({
+$(document).ready(function() {
+
+    var calendar = $('#calendar').fullCalendar({
         header:{
             left: 'prev, nex, today',
             center: 'title',
