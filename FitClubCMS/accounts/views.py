@@ -1,5 +1,5 @@
 from django.http import HttpResponse
-from django.shortcuts import render
+from django.shortcuts import render, get_object_or_404, redirect
 from django.contrib.auth import authenticate, login
 from django.contrib.auth.decorators import login_required
 from .forms import LoginForm, UserRegistrationForm, UserEditForm,ProfileEditForm
@@ -9,6 +9,8 @@ from django.http import JsonResponse
 from django.contrib import messages
 import json
 from django_daraja.mpesa.core import MpesaClient
+
+
 
 
 
@@ -79,18 +81,39 @@ def edit(request):
                   'accounts/edit.html',{'user_form': user_form, 
                                         'profile_form':profile_form})
 def payment_form(request):
-    return render(request, 'accounts/pages/payment_form.html')
+    # Retrieve the package data from the database or any other source
+    package_id = request.GET.get('package_id')
+    package = get_object_or_404(Package, pk=package_id)
+    
+    context = {
+        'package': package
+    }
+    return render(request, 'accounts/pages/payment_form.html', context)
+
+
+
 
 def index(request):
-    cl = MpesaClient()
-    # Use a Safaricom phone number that you have access to, for you to be able to view the prompt.
-    phone_number = '0111255250'
-    amount = 1
-    account_reference = 'reference'
-    transaction_desc = 'Description'
-    callback_url = 'https://api.darajambili.com/express-payment'
-    response = cl.stk_push(phone_number, amount, account_reference, transaction_desc, callback_url)
-    return HttpResponse(response)
+    if request.method == 'POST':
+        # Retrieve the form data
+        amount = float(request.POST.get('amount'))
+        amount = round(amount)  # Convert to integer by rounding to the nearest whole number
+        phone_number = request.POST.get('phone_no')
+
+        cl = MpesaClient()
+        account_reference = 'reference'
+        transaction_desc = 'Description'
+        callback_url = 'https://api.darajambili.com/express-payment'
+        response = cl.stk_push(phone_number, amount, account_reference, transaction_desc, callback_url)
+        # return HttpResponse(response)
+        return redirect('payment_success')
+    
+    # If the request method is not POST, you can handle it as desired
+    # For example, you can redirect the user to the payment form again
+    return redirect('payment_form')
+
+def payment_success_page(request):
+    return render(request, 'accounts/pages/payment_success.html')
 
 
 @login_required 

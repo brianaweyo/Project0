@@ -20,7 +20,7 @@
       <li class="list-group-item">Locker Room Facilities</li>
     </ul>
     <div class="card-body">
-      <a href="{% url 'payment_form' %}" class="card-link">Enroll</a>
+      <a href="{% url 'payment_form' %}?package_id={{ packages.0.package_id }}" class="card-link">Enroll</a>
        <div class="cost">Ksh {{ packages.0.price }}</div>
     </div>
   </div>
@@ -38,7 +38,7 @@
       <li class="list-group-item">Progress Tracking</li>
     </ul>
     <div class="card-body">
-      <a href="{% url 'payment_form' %}" class="card-link">Enroll</a>
+      <a href="{% url 'payment_form' %}?package_id={{ packages.1.package_id }}" class="card-link">Enroll</a>
       <div class="cost">Ksh {{ packages.1.price }}</div>
     </div>
   </div>
@@ -57,7 +57,7 @@
     </ul>
     <div class="card-body">
      
-      <a href="{% url 'payment_form' %}" class="card-link">Enroll</a>
+      <a href="{% url 'payment_form' %}?package_id={{ packages.2.package_id }}" class="card-link">Enroll</a>
       <div class="cost">Ksh {{ packages.2.price }}</div>
     </div>
   </div>
@@ -75,7 +75,7 @@
       <li class="list-group-item">Additional Amenities</li>
     </ul>
     <div class="card-body">
-      <a href="{% url 'payment_form' %}" class="card-link">Enroll</a>
+      <a href="{% url 'payment_form' %}?package_id={{ packages.3.package_id }}" class="card-link">Enroll</a>
       <div class="cost">Ksh {{ packages.3.price }}</div>
     </div>
   </div>
@@ -94,7 +94,7 @@
       <li class="list-group-item">VIP Treatment</li>
     </ul>
     <div class="card-body">
-      <a href="{% url 'payment_form' %}" class="card-link">Enroll</a>
+      <a href="{% url 'payment_form' %}?package_id={{ packages.4.package_id }}" class="card-link">Enroll</a>
       <div class="cost">Ksh {{ packages.4.price }} </div>
     </div>
   </div>

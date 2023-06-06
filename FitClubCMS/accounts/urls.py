@@ -27,5 +27,6 @@ urlpatterns = [
      path('remove_event/', views.remove_event, name='remove_event'),
      path('index/', views.index, name='index'),
      path('payment_form/', views.payment_form, name='payment_form'),
+     path('payment_success_page/', views.payment_success_page, name='payment_success'),
 
 ]

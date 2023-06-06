@@ -6,7 +6,9 @@
 {% block content %}
 
 <div class="payment-form">
-        <form action="">
+        <form method="post" action="{% url 'index' %}">
+
+            {% csrf_token %}
 
              <div class="intro">
                 <h2>Payment Details</h2>
@@ -22,7 +24,7 @@
 
                <p>
                 <label for="amount">Amount(Ksh):</label>
-                <input type="number" name="amount" readonly> 
+                <input type="number" name="amount" value="{{ package.price }}" readonly> 
                </p>
                 
                <p>
@@ -32,12 +34,12 @@
 
                <p>
                 <label for="package_name">Package</label>:</label>
-                <input type="email" name="package_name" id="emailField" readonly> 
+                <input type="text" name="package_name" value="{{ package.package_name }}" id="package_name" readonly> 
                </p>
 
                <p>
                 <label for="phone_no">M-Pesa No:</label>
-                <input type="tel" name="amount" id="phone_no" placeholder="e.g., 07...or 01..."> 
+                <input type="tel" name="phone_no" id="phone_no" placeholder="e.g., 07...or 01..."> 
                </p>
 
                <p>
