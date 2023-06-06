@@ -3,7 +3,7 @@ from django.shortcuts import render
 from django.contrib.auth import authenticate, login
 from django.contrib.auth.decorators import login_required
 from .forms import LoginForm, UserRegistrationForm, UserEditForm,ProfileEditForm
-from .models import Profile, Service, Events
+from .models import Profile, Service, Events, Package
 from django.core import serializers
 from django.http import JsonResponse
 from django.contrib import messages
@@ -78,6 +78,8 @@ def edit(request):
     return render(request,
                   'accounts/edit.html',{'user_form': user_form, 
                                         'profile_form':profile_form})
+def payment_form(request):
+    return render(request, 'accounts/pages/payment_form.html')
 
 def index(request):
     cl = MpesaClient()
@@ -97,7 +99,9 @@ def dashboard(request):
 
 
 def packages(request):
-    return render(request, 'accounts/pages/packages.html')
+    packages = Package.objects.all()
+    context = {'packages': packages}
+    return render(request, 'accounts/pages/packages.html', context)
 
 def my_package(request):
     return render(request, 'accounts/pages/my_package.html')

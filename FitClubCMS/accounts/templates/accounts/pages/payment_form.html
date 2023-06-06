@@ -1,0 +1,51 @@
+{% extends "base2.html" %}
+{% load static %}
+
+{% block title %} Payment Details {% endblock %}
+
+{% block content %}
+
+<div class="payment-form">
+        <form action="">
+
+             <div class="intro">
+                <h2>Payment Details</h2>
+                <hr>
+                <p>Accepted</p>
+            </div>
+
+            <div class="m-pesa-logo">
+                    
+            </div>
+
+            <div class="payment-info">
+
+               <p>
+                <label for="amount">Amount(Ksh):</label>
+                <input type="number" name="amount" readonly> 
+               </p>
+                
+               <p>
+                <label for="today">Date:</label>
+                <input type="datetime" name="today" id="todayField" readonly>
+               </p>
+
+               <p>
+                <label for="package_name">Package</label>:</label>
+                <input type="email" name="package_name" id="emailField" readonly> 
+               </p>
+
+               <p>
+                <label for="phone_no">M-Pesa No:</label>
+                <input type="tel" name="amount" id="phone_no" placeholder="e.g., 07...or 01..."> 
+               </p>
+
+               <p>
+                <input type="submit" value="Confirm Payment">
+               </p>
+            </div>
+
+        </form>
+</div>
+
+{% endblock %}

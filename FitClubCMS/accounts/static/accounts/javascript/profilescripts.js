@@ -105,3 +105,12 @@ $(document).ready(function() {
       }
     });
 });
+
+  // Get the current date in the payment form date field
+  var currentDate = new Date();
+
+  // Format the date as YYYY-MM-DD
+  var formattedDate = currentDate.toISOString().split('T')[0];
+
+  // Set the value of the input field
+  document.getElementById('todayField').value = formattedDate

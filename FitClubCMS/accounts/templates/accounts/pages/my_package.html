@@ -5,7 +5,7 @@
 {% block content %}
  <div class="package-descr">
     <div class="card" style="width: 18rem;">
-        <img src="{% static "accounts/images/diamondcrown.jpg" %}" class="card-img-top" alt="...">
+        <img src="{% static "accounts/images/bronze.jpeg" %}" class="card-img-top" alt="...">
         <div class="card-body">
           <h5 class="card-title">Beginner's Bundle</h5>
           <p class="card-text">Designed for beginners, this package includes 
@@ -17,7 +17,7 @@
           <li class="list-group-item">Vestibulum at eros</li>
         </ul>
         <div class="card-body">
-          <a href="#" class="card-link">Enroll</a>
+          <a href="#" class="card-link">Renew</a>
           <div class="cost">Ksh 1000</div>
         </div>
       </div>
@@ -36,7 +36,7 @@
         <fieldset><legend>My Goals</legend>
             <p>Lorem ipsum dolor sit amet consectetur, adipisicing elit. Ad reprehenderit ab voluptates distinctio ut suscipit, maxime unde eos quibusdam optio qui tempore excepturi, 
             harum, illo quas molestiae! Delectus, veritatis aliquam!</p>
-            <p>Do you want to Upgrade your Package?<label for="upgrade"><input type="button" name="upgrade" value="Upgrade Now"><br>
+            <p>Do you want to Upgrade your Package?<a href="{% url 'packages' %}">Upgrage now</a>
             
             <p>For any queries, inquiry or complains email us at <a href="mailto:brianaweyo23@gmail.com"> Brian</a> or call on <a href="tel:+1234567890">Call us</a>
 </p>

@@ -287,7 +287,13 @@ white-space: nowrap;
     margin: 2em;
     width: 60%;
  }
-
+.card .card-body .card-title{
+    text-align: center;
+    font-weight: 600;
+}
+.card .card-body{
+    text-align: center;
+}
 
 
  

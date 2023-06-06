@@ -33,20 +33,21 @@ body{
 
 
 .slant{
+  display: flex;
+  flex-direction: row;
   width: 100%;
-  min-height: 75vh;
-  color:#f1f1f1;
-  display:flex;
+  min-height: 60vh; 
+
+
+}
+.home-photo{
   background-image: url('../images/bgimage.jpeg');
   background-size: cover;
-  background-color: transparent;
-  background-repeat: no-repeat;
-  margin: 0;
-  box-shadow: 0 0 15px rgba(0, 0 , 0, 0.7);
+  width: 70%;
 }
 .about{
   padding: 1.5em;
-  width: 30%;
+  width: 35%;
   display: flex;
   justify-content: space-evenly;
   align-items: flex-start;
@@ -70,11 +71,25 @@ body{
   font-size: 5em; /* Adjust the font size as needed */
 }
 
+.services-section{
+  display: flex;
+  flex-direction: row;
+  
+}
+.carousel{
+  width: 60%;
+  padding-left: 5px;
+}
 
+.service-statement{
+  width: 40%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding-right: 5px;
+  
 
-
-
-
+}
 
 
 #footer {
