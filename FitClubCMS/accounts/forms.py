@@ -1,6 +1,7 @@
 from django import forms
-from django .contrib.auth.models import User
 from .models import Profile
+from django .contrib.auth.models import User
+
 
 
 
@@ -37,7 +38,7 @@ class UserRegistrationForm(forms.ModelForm):
         if User.objects.filter(email=data).exists():
             raise forms.ValidationError('Email already in use')
         return data
-
+    
 # UserEditForm allow users to edit the edit their first name, last name, and email, which are attributes of the built-in Django User model
 
 #ProfileEditForm  allow users to edit the profile data that is saved in the custom Profile model

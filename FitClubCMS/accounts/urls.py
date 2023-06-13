@@ -23,10 +23,12 @@ urlpatterns = [
      path('trainers/', views.trainers, name='trainers'),
      path('schedule/', views.schedule, name='schedule'),
      path('all_events/', views.all_events, name='all_events'),
+     path('add_event/', views.add_event, name='add_event'),
      path('update_event/', views.update_event, name='update_event'),
      path('remove_event/', views.remove_event, name='remove_event'),
      path('index/', views.index, name='index'),
      path('payment_form/', views.payment_form, name='payment_form'),
      path('payment_success_page/', views.payment_success_page, name='payment_success'),
-
+     path('sessions_list/', views.sessions_list, name='sessions_list'),
+    #  path('book_session/', views.book_session, name='book_session'),
 ]

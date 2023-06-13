@@ -1,3 +1,4 @@
+from django_daraja.mpesa.core import MpesaClient
 from django.http import HttpResponse
 from django.shortcuts import render, get_object_or_404, redirect
 from django.contrib.auth import authenticate, login
@@ -7,8 +8,9 @@ from .models import Profile, Service, Events, Package
 from django.core import serializers
 from django.http import JsonResponse
 from django.contrib import messages
+from django.utils import timezone
+from datetime import datetime, timedelta
 import json
-from django_daraja.mpesa.core import MpesaClient
 
 
 
@@ -183,7 +185,28 @@ def remove_event (request):
     data = {}
     return JsonResponse(data)
 
+def sessions_list(request):
+    current_time = timezone.now()
+    events = Events.objects.filter(start__gt=current_time)[:8]
 
+    events_data = []
+    for event in events:
+        trainer_name = event.trainer.user.first_name
+        events_data.append({
+            'events': events,
+            'trainer_name': trainer_name,
+
+        })
+    context = {"event_data": events_data}
+    return render(request, 'accounts/pages/booking_form.html', context)
+
+# def book_session(request):
+#     current_time = timezone.now()
+#     today = datetime.now().date()
+#     tomorrow = today + timedelta(days=1)
+#     events = Events.objects.filter(start__gt=current_time,  start__range=[today, tomorrow])
+#     events_with_detail = events.select_related('name')   
+#     return render(request, 'accounts/pages/booking_form.html')
 
 
 def services(request):

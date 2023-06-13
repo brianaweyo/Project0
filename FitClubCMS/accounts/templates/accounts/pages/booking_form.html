@@ -1,0 +1,38 @@
+{% extends 'base2.html' %}
+
+{% block title %} Book session {% endblock %}
+
+{% block content %} 
+
+<h1>Available Sessions for Booking </h1>
+
+<table>
+  <thead>
+    <tr>
+      <th>Session Name</th>
+      <th>Start</th>
+      <th>End</th>
+      <th>Trainer</th>
+      <th>Booking Status</th>
+    </tr>
+  </thead>
+  <tbody>
+    {% for event in events %}
+      <tr>
+        <td>{{ event.name }}</td>
+        <td>{{ event.start }}</td>
+        <td>{{ event.end }}</td>
+        <td>{{ event.trainer }}</td>
+        <td>
+          <form method="POST">
+            {% csrf_token %}
+            <input type="submit" value="Not Book" />
+          </form>
+        </td>
+      </tr>
+    {% endfor %}
+  </tbody>
+</table>
+
+
+{% endblock %}
