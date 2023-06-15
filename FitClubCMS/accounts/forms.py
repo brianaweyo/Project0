@@ -60,3 +60,12 @@ class ProfileEditForm(forms.ModelForm):
     class Meta:
         model = Profile
         fields = ['sex', 'phone_no', 'photo','date_of_birth']   
+
+
+
+class SessionForm(forms.Form):
+    trainers =  []
+    name = forms.CharField(max_length=255)
+    start = forms.DateTimeField()
+    end = forms.DateTimeField()
+    trainer = forms.ChoiceField(choices=[(trainer.trainer_id, trainer.first_name) for trainer in trainers])

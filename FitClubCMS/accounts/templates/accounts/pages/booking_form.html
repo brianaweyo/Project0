@@ -4,9 +4,10 @@
 
 {% block content %} 
 
-<h1>Available Sessions for Booking </h1>
+
 
 <table>
+  <h1>Available Sessions for Booking </h1>
   <thead>
     <tr>
       <th>Session Name</th>
@@ -18,18 +19,25 @@
   </thead>
   <tbody>
     {% for event in events %}
+
       <tr>
+
+        <form method="POST" class="booking-form" action="{% url 'book_session'%}">
+          {% csrf_token %}
+          <input type="hidden" name="event_name" value="{{ event.name}}" >
+          <input type="hidden" name="event_start" value="{{ event.start|date:"Y-m-d H:i:s"}}">
+          <input type="hidden" name="event_end" value="{{ event.end|date:"Y-m-d H:i:s" }}">
+          <input type="hidden" name="event_trainer" value="{{ event.trainer }}">
         <td>{{ event.name }}</td>
-        <td>{{ event.start }}</td>
-        <td>{{ event.end }}</td>
+        <td>{{ event.start|date:"Y-m-d H:i:s" }}</td>
+        <td>{{ event.end|date:"Y-m-d H:i:s" }}</td>
         <td>{{ event.trainer }}</td>
-        <td>
-          <form method="POST">
-            {% csrf_token %}
-            <input type="submit" value="Not Book" />
-          </form>
-        </td>
+        <td> <input type="submit" value="Not Booked" class="custom-button"/></td>
+
+      </form>
+
       </tr>
+
     {% endfor %}
   </tbody>
 </table>

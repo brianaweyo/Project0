@@ -32,14 +32,6 @@ class Package(models.Model):
     def __str__(self):
         return self.package_name
     
-class Trainers(models.Model):
-    user = models.OneToOneField(settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
-
-
-    
-    def __str__(self):
-        return self.user.username
-    
 class Transaction(models.Model):
     transaction_id = models.AutoField(primary_key=True)
     amount = models.DecimalField(max_digits=8, decimal_places=2)
@@ -67,6 +59,24 @@ class Transaction(models.Model):
         
         super().save(*args, **kwargs)
 
+class Trainers(models.Model):
+        # trainer_id = models.AutoField(primary_key=True)
+        # user = models.OneToOneField(Profile, on_delete=models.CASCADE)
+        user = models.OneToOneField(settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
+        trainer_id = models.AutoField(primary_key=True)
+        first_name = models.CharField(max_length=100)
+        last_name = models.CharField(max_length=100)
+        phone_number = models.CharField(max_length=20)
+
+        def __str__(self):
+         return self.first_name
+        
+        class Meta:
+             verbose_name ="Trainers"    #prevents the addition of (S) in the admin section
+             verbose_name_plural = "Trainers"
+             db_table = "trainers"
+       
+
 
 #Schedule model
 class Events(models.Model):
@@ -74,39 +84,34 @@ class Events(models.Model):
     name = models.CharField(max_length=255, null=True, blank=True)
     start = models.DateTimeField(null=True, blank=True)
     end = models.DateTimeField(null=True,blank=True)
-
+    trainer = models.ForeignKey(Trainers, on_delete=models.SET_NULL, null=True, blank=True)
     class Meta:
         verbose_name ="Events"
         verbose_name_plural = "Events"
         db_table = "events"
+ 
+class Booking(models.Model):
+    user = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
+    name = models.CharField(max_length=100)
+    start = models.DateTimeField()
+    end = models.DateTimeField()
+    trainer = models.CharField(max_length=100)
 
-# class Booking(models.Model):
-#     user = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
-#     event = models.ForeignKey('events.Event', on_delete=models.CASCADE)
-#     name = models.CharField(max_length=100)
-#     trainer = models.CharField(max_length=100)
-#     start = models.DateTimeField()
-#     end = models.DateTimeField()
+    def __str__(self):
+        return self.name
 
-#     def __str__(self):
-#         return self.name
+class Sessions(models.Model):
+    Session_name = models.CharField(max_length=255)
+    start = models.DateTimeField()
+    end = models.DateTimeField()
+    trainer = models.CharField(max_length=255)
 
-class Trainers(models.Model):
-        user = models.OneToOneField(settings.AUTH_USER_MODEL,
-                                on_delete=models.CASCADE, primary_key=True)
-        @property
-        def first_name(self):
-            return self.user.first_name
-
-        @property
-        def phone_number(self):
-            return self.user.phone_number
-        class Meta:
-             verbose_name ="Trainers"    #prevents the addition of (S) in the admin section
-             verbose_name_plural = "Trainers"
-             db_table = "trainers"
-       
-    
+    def __str__(self):
+        return self.id
+    class Meta:
+        verbose_name ="Session"
+        verbose_name_plural = "Sessions"
+        db_table = "sessions"
           
 class Service(models.Model):
     service_name = models.CharField(max_length=60, null=False )

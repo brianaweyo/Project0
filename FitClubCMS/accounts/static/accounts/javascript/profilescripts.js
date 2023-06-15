@@ -14,8 +14,10 @@ $(document).ready(function() {
         select: function(start, end, allDay){
             var title = prompt("Enter Event Title");
             if(title) {
-                var start = $.fullCalendar.formatDate(start,"Y-M-DD HH:mm:ss");
-                var end = $.fullCalendar.formatDate(end, "Y-MM-DD HH:mm:ss");
+                var start = $.fullCalendar.formatDate(start, "MMMM D, YYYY, h a");
+                var end = $.fullCalendar.formatDate(end, "MMMM D, YYYY, h a");
+                // var start = $.fullCalendar.formatDate(start, "yyyy-MM-dd HH:mm");
+                // var end = $.fullCalendar.formatDate(end, "yyyy-MM-dd HH:mm");
                 
                 $.ajax({
                     type: "GET",
@@ -34,8 +36,8 @@ $(document).ready(function() {
         },
 
         eventResize: function (event) {
-            var start = $.fullCalendar.formatDate(event.start, "Y-MM-DD HH:mm:ss");
-            var start = $.fullCalendar.formatDate(event.end, "Y-MM-DD HH:mm:ss");
+            var start = $.fullCalendar.formatDate(event.start, "Y-MM-DD HH:mm");
+            var start = $.fullCalendar.formatDate(event.end, "Y-MM-DD HH:mm");
             var title = event.title;
             var id = event.id;
             $.ajax({
@@ -59,8 +61,8 @@ $(document).ready(function() {
 
 
         eventDrop: function(event) {
-        var start = $.fullCalendar.formatDate(event.start, "Y-MM-DD HH:mm:ss");
-        var end = $.fullCalendar.formatDate(event.end, "Y-MM-DD HH:mm:ss");
+        var start = $.fullCalendar.formatDate(event.start, "Y-MM-DD HH:mm");
+        var end = $.fullCalendar.formatDate(event.end, "Y-MM-DD HH:mm");
         var title = event.title;
         var id = event.id;
         $.ajax({

@@ -30,5 +30,6 @@ urlpatterns = [
      path('payment_form/', views.payment_form, name='payment_form'),
      path('payment_success_page/', views.payment_success_page, name='payment_success'),
      path('sessions_list/', views.sessions_list, name='sessions_list'),
-    #  path('book_session/', views.book_session, name='book_session'),
+     path('add_session/', views.add_session, name='add_session'),
+     path('book_session/', views.book_session, name='book_session'),
 ]

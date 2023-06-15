@@ -358,3 +358,42 @@ white-space: nowrap;
 	border-radius: 15px 15px 0px 0px;
 	margin-top: 17px;
 }
+
+
+/* Booking table styles */
+
+table {
+    width: 90%;
+    border-collapse: collapse;
+    margin-left: 20px;
+  }
+table h1{
+    text-align: center;
+}
+  th, td {
+    padding: 8px;
+    text-align: left;
+    border-bottom: 1px solid #ddd;
+  }
+table input[type="text"]{
+    text-align: center;
+}
+.select-trainer{
+    width: 100%;
+    height: 2rem;
+    border-style: none;
+}
+
+  th {
+    background-color: #f2f2f2;
+  }
+  
+
+  table form {
+    display: inline-block;
+  }
+
+
+  table form input[type="submit"]:hover {
+    background-color: #45a049;
+  }

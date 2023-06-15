@@ -1,6 +1,6 @@
 from django.contrib import admin
 
-from .models import Profile, Service, Package, Transaction, Events, Trainers
+from .models import Profile, Service, Package, Transaction, Events, Trainers, Sessions, Booking
 
 # Register your models here.
 
@@ -25,9 +25,20 @@ class TransactionAdmin(admin.ModelAdmin):
 
 @admin.register(Events)
 class EventsAdmin(admin.ModelAdmin):
-     list_display = ['id', 'name', 'start', 'end']
+     list_display = ['id', 'name', 'start', 'end', 'trainer']
+     ordering = ['start']
  
 
 @admin.register(Trainers)
 class TrainersAdmin(admin.ModelAdmin):
-    list_display = ['first_name', 'phone_number']
+    list_display = ['trainer_id','user', 'first_name', 'last_name', 'phone_number']
+
+
+@admin.register(Booking)
+class BookingAdmin(admin.ModelAdmin):
+    list_display = ['user', 'name', 'start', 'end', 'trainer']
+    
+
+@admin.register(Sessions)
+class SessionsAdmin(admin.ModelAdmin):
+    list_display = ['Session_name', 'start', 'end', 'trainer']

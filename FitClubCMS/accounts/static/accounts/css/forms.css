@@ -73,7 +73,19 @@ label[for^="id_password"] {
     border-style: none;
     
   }
- 
+  .add-trainer .center-align{
+    display: flex;
+    justify-content: center;
+  }
+  .custom-button{
+    background-color: #4CAF50;
+    color: white;
+    border: none;
+    width: 100%;
+    padding: 6px 12px;
+    cursor: pointer;
+  }
+  
   input[type="submit"]{
     width: 80%;
     height: 2em;
@@ -85,7 +97,6 @@ label[for^="id_password"] {
     color: black;
   }
 
-  
 
   /* edit profile form */
   
@@ -209,7 +220,3 @@ label[for^="id_password"] {
   margin-bottom: 30px;
   padding-left: 20%;
 }
-
-
-
-

@@ -2,14 +2,17 @@ from django_daraja.mpesa.core import MpesaClient
 from django.http import HttpResponse
 from django.shortcuts import render, get_object_or_404, redirect
 from django.contrib.auth import authenticate, login
+from django.contrib.auth.models import User
 from django.contrib.auth.decorators import login_required
-from .forms import LoginForm, UserRegistrationForm, UserEditForm,ProfileEditForm
-from .models import Profile, Service, Events, Package
+from .forms import LoginForm, UserRegistrationForm, UserEditForm,ProfileEditForm, SessionForm
+from .models import Profile, Service, Events, Package, Trainers, Booking
 from django.core import serializers
 from django.http import JsonResponse
 from django.contrib import messages
 from django.utils import timezone
+from django.utils.dateparse import parse_datetime
 from datetime import datetime, timedelta
+from django.db import IntegrityError
 import json
 
 
@@ -149,8 +152,8 @@ def all_events(request):
         out.append({
             'title':event.name,
             'id': event.id,
-            'start': event.start.strftime("%m/%d/%Y,  %H:%M:%S"),
-            'END': event.end.strftime("%m/%d/%Y,  %H:%M:%S"),
+            'start': event.start.strftime("%Y/%m/%d,  %H:%M"),
+            'end': event.end.strftime("%Y/%m/%d,  %H:%M"),
        })
     return JsonResponse(out, safe=False)
 
@@ -185,28 +188,57 @@ def remove_event (request):
     data = {}
     return JsonResponse(data)
 
+
+def add_session(request):
+    form = SessionForm(request.POST)
+    if form.is_valid():
+        # Save the data from the form to the database.
+        sessions = form.save()
+        # Redirect the user to the success page.
+        return redirect('success')
+    else:
+        # Render the form again with the errors.
+        return render(request, 'accounts/pages/trainer_assignment.html')
+        
+
+
 def sessions_list(request):
     current_time = timezone.now()
     events = Events.objects.filter(start__gt=current_time)[:8]
-
-    events_data = []
-    for event in events:
-        trainer_name = event.trainer.user.first_name
-        events_data.append({
-            'events': events,
-            'trainer_name': trainer_name,
-
-        })
-    context = {"event_data": events_data}
+     
+    context = {"events": events}
     return render(request, 'accounts/pages/booking_form.html', context)
 
-# def book_session(request):
-#     current_time = timezone.now()
-#     today = datetime.now().date()
-#     tomorrow = today + timedelta(days=1)
-#     events = Events.objects.filter(start__gt=current_time,  start__range=[today, tomorrow])
-#     events_with_detail = events.select_related('name')   
-#     return render(request, 'accounts/pages/booking_form.html')
+@login_required  
+def book_session(request):
+      if request.method == 'POST':
+        event_name = request.POST.get('event_name')
+        event_start = request.POST.get('event_start')
+        event_end = request.POST.get('event_end')
+        event_trainer = request.POST.get('event_trainer')
+
+
+        # Get the User instance of the logged-in user
+        user = User.objects.get(username=request.user.username)
+    
+        event_start_ob =datetime.strptime(event_start, "Y-m-d H:i:s" )
+        event_end_ob =datetime.strptime(event_end, "Y-m-d H:i:s")
+   
+        booking = Booking.objects.create(
+            user = user,
+            name=event_name,
+            start=event_start_ob,
+            end=event_end_ob,
+            trainer=event_trainer
+        )
+       
+        return redirect('sessions_list')
+
+        booking.save()
+
+      return redirect( 'sessions_list')
+
+      
 
 
 def services(request):
