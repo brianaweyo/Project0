@@ -21,7 +21,7 @@ class PackageAdmin(admin.ModelAdmin):
 
 @admin.register(Transaction)
 class TransactionAdmin(admin.ModelAdmin):
-    list_display = ['transaction_id','amount', 'package','user', 'sender_no', 'recipient_no','transaction_date','status', 'created_at','updated_at'] 
+    list_display = ['transaction_id','amount', 'package','user', 'sender_no','transaction_date','status', 'created_at','updated_at'] 
 
 @admin.register(Events)
 class EventsAdmin(admin.ModelAdmin):
@@ -36,9 +36,9 @@ class TrainersAdmin(admin.ModelAdmin):
 
 @admin.register(Booking)
 class BookingAdmin(admin.ModelAdmin):
-    list_display = ['user', 'name', 'start', 'end', 'trainer']
+    list_display = ['user', 'name', 'start', 'end', 'trainer', 'book_time']
     
 
 @admin.register(Sessions)
 class SessionsAdmin(admin.ModelAdmin):
-    list_display = ['Session_name', 'start', 'end', 'trainer']
+    list_display = ['session_name', 'start', 'end', 'trainer']

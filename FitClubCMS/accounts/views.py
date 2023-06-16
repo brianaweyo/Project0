@@ -5,7 +5,7 @@ from django.contrib.auth import authenticate, login
 from django.contrib.auth.models import User
 from django.contrib.auth.decorators import login_required
 from .forms import LoginForm, UserRegistrationForm, UserEditForm,ProfileEditForm, SessionForm
-from .models import Profile, Service, Events, Package, Trainers, Booking
+from .models import Profile, Service, Events, Package, Trainers, Booking, Transaction
 from django.core import serializers
 from django.http import JsonResponse
 from django.contrib import messages
@@ -98,18 +98,29 @@ def payment_form(request):
 
 
 
-def index(request):
+def payment_index(request):
     if request.method == 'POST':
         # Retrieve the form data
         amount = float(request.POST.get('amount'))
         amount = round(amount)  # Convert to integer by rounding to the nearest whole number
         phone_number = request.POST.get('phone_no')
+        package_name =request.POST.get('package_name')
 
         cl = MpesaClient()
         account_reference = 'reference'
         transaction_desc = 'Description'
         callback_url = 'https://api.darajambili.com/express-payment'
         response = cl.stk_push(phone_number, amount, account_reference, transaction_desc, callback_url)
+
+        package = Package.objects.get(package_name=package_name)
+        transaction = Transaction.objects.create(
+        amount=amount,
+        package=package,
+        user=request.user,  # Assuming you have a logged-in user
+        transaction_date=timezone.now().date(),
+        # status='Pending',  # Set the initial status as 'Pending'
+        sender_no=request.POST.get('phone_no'),  # Assuming you have a 'phone_number' field in your User model
+        )
         # return HttpResponse(response)
         return redirect('payment_success')
     
@@ -220,16 +231,14 @@ def book_session(request):
 
         # Get the User instance of the logged-in user
         user = User.objects.get(username=request.user.username)
-    
-        event_start_ob =datetime.strptime(event_start, "Y-m-d H:i:s" )
-        event_end_ob =datetime.strptime(event_end, "Y-m-d H:i:s")
-   
+
         booking = Booking.objects.create(
             user = user,
             name=event_name,
-            start=event_start_ob,
-            end=event_end_ob,
+            start=event_start,
+            end=event_end,
             trainer=event_trainer
+    
         )
        
         return redirect('sessions_list')
