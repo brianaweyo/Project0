@@ -11,13 +11,11 @@
   <div class="biodata mt-4">
     <form>
       {% if request.user.is_authenticated %}
-        
-          <!-- <input type="text" name="full_name" value="{{ request.user.first_name|default:request.user.first_name }} {{ request.user.last_name|default:request.user.last_name }}" readonly > -->
 
-          <input type="text" name="time" id="current-time" readonly>
-          <input type="text" name="day" value="{{ date_today|date:'D' }}" readonly>
-          <input type="text" name="month" value="{{ date_today|date:'M' }}" readonly>
-          <input type="text" name="date" value="{{ date_today|date:'Y-m-d' }}" readonly>
+          <input type="text" name="time" id="current-time" readonly disabled>
+          <input type="text" name="day" value="{{ date_today|date:'D' }}" readonly disabled>
+          <input type="text" name="month" value="{{ date_today|date:'M' }}" readonly disabled>
+          <input type="text" name="date" value="{{ date_today|date:'Y-m-d' }}" readonly disabled>
         </div>
       {% endif %} 
     </form>
@@ -44,7 +42,7 @@
           <div class="card-body">
             <i class="fa-solid fa-dumbbell fa-3x custom-icon-color"></i>
             <h5 class="card-title">My Package</h5>
-            <p class="card-text">Bronze</p>
+            <p class="card-text">{% if package_name %}{{ package_name }}{% else %}Not Enrolled Yet{% endif %}</p></p>
             <p class="card-text">Expires on</p>
             <a href="{% url 'my_package'%}" class="btn btn-success">Package Details</a>
           </div>
@@ -53,7 +51,7 @@
       <div class="col-sm-3">
         <div class="card">
           <div class="card-body">
-            <i class="fa-sharp fa-solid fa-money-bill-wave fa-3x custom-icon-color"></i>
+            <i class="fa-solid fa-coins fa-3x custom-icon-color"></i>
             <h5 class="card-title">Payments</h5>
             <p class="card-text">Total payments made </p><br>
 

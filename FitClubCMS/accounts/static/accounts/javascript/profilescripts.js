@@ -260,29 +260,41 @@ $('.booking-form').submit(function() {
   // Set the value of the input field
   document.getElementById('todayField').value = formattedDate;
 
+
+
 // countdown to the next class
-  var countdownElement = document.getElementById('next-class-countdown');
-  var countdownValue = countdownElement.innerText;
+var countdownElement = document.getElementById('next-class-countdown');
+var countdownValue = countdownElement.textContent;
 
-  function updateCountdown() {
-    var countdownParts = countdownValue.split(':');
-    var hours = parseInt(countdownParts[0], 10);
-    var minutes = parseInt(countdownParts[1], 10);
-    var seconds = parseInt(countdownParts[2], 10);
+function updateCountdown() {
+  var countdownParts = countdownValue.split(':');
+  var hours = parseInt(countdownParts[0]);
+  var minutes = parseInt(countdownParts[1]);
+  var seconds = parseInt(countdownParts[2]);
 
+  if (seconds > 0) {
     seconds--;
-    if (seconds < 0) {
+  } else {
+    if (minutes > 0) {
       minutes--;
       seconds = 59;
+    } else {
+      if (hours > 0) {
+        hours--;
+        minutes = 59;
+        seconds = 59;
+      }
     }
-
-    if (minutes < 0) {
-      hours--;
-      minutes = 59;
-    }
-
-    countdownValue = ('0' + hours).slice(-2) + ':' + ('0' + minutes).slice(-2) + ':' + ('0' + seconds).slice(-2);
-    countdownElement.innerText = countdownValue;
   }
 
-  setInterval(updateCountdown, 1000);
+  countdownValue = hours.toString().padStart(2, '0') + ':' + minutes.toString().padStart(2, '0') + ':' + seconds.toString().padStart(2, '0');
+  countdownElement.textContent = countdownValue;
+
+  if (countdownValue !== '00:00:00') {
+    setTimeout(updateCountdown, 1000);
+  }
+}
+
+if (countdownValue !== 'N/A') {
+  updateCountdown();
+}

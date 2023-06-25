@@ -80,9 +80,9 @@
          </div>
 
          <ul class="sub-menu">
-            <li><a class="link_name" href="#">Billings</a></li>
-            <!-- <li><a href="#">Payment</a></li> -->
-            <li><a href="#">Records</a></li>
+            <!-- <li><a class="link_name" href="#">Billings</a></li>
+            <li><a href="#">Payment</a></li> -->
+            <li><a href="{% url 'payment_history' %}">Records</a></li>
          </ul>
         </li>
 
@@ -101,7 +101,7 @@
          </ul>
         </li>
 
-        <li>
+        <!-- <li>
             <a href="#">
                 <i class='bx bx-grid-alt'></i>
                 <span class="link_name">Programs</span>
@@ -109,7 +109,7 @@
             <ul class="sub-menu blank">
                 <li><a class="link_name" href="#">Programs</a></li>
             </ul>
-        </li>
+        </li> -->
 
         <li>
             <a href="{% url 'trainers' %}">

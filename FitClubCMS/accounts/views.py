@@ -156,8 +156,24 @@ def dashboard(request):
             time_diff = next_session_start - datetime.combine(current_date, datetime.min.time())
             countdown = str(time_diff).split('.')[0]  # Extract hours:minutes:seconds
             context['countdown'] = countdown
+                # Retrieve the package associated with the logged-in user
+        try:
+            profile = Profile.objects.get(user=request.user)
+            package = profile.package
+            context['package_name'] = package.package_name
+        except Profile.DoesNotExist:
+            context['package_name'] = None
         
     return render(request, 'accounts/pages/dashboard.html', context)
+
+
+
+@login_required
+def payment_history(request):
+    transactions = Transaction.objects.filter(user=request.user).order_by('-created_at')
+    return render(request, 'accounts/pages/payment_records.html', {'transactions': transactions})
+
+
 
 @login_required 
 def packages(request):
