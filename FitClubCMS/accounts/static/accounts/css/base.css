@@ -10,9 +10,9 @@ body{
     min-height: 100vh;
 }
 #wrapper .navbar{
-  background: #000000;
+  background-color: rgb(41, 51, 82);
   color: #ffffff;
-  height: 70px;
+  height: 5em;
   width: 100%;
   padding: 1em;
   margin-top: 0px;
@@ -25,6 +25,11 @@ body{
 }
 .nav-link{
   color:#ffffff;
+  opacity: 0.75;
+}
+.nav-link:hover{
+  color: #ffffff;
+  opacity: 1;
 }
 #main-content{
  width:100%
@@ -32,33 +37,31 @@ body{
 
 
 
-.slant{
+.index-home-section{
   display: flex;
   flex-direction: row;
   width: 100%;
-  min-height: 60vh; 
-
-
 }
 .home-photo{
-  background-image: url('../images/bgimage.jpeg');
-  background-size: cover;
-  width: 70%;
+  width: 50%;
 }
-.about{
+ .about{
+  
+  width: 50%;
   padding: 1.5em;
-  width: 35%;
   display: flex;
   justify-content: space-evenly;
   align-items: flex-start;
   flex-direction: column;
+} 
+.register-link{
+  text-align: center;
+  font-weight: 300;
 }
+
 .about .p{
   font-size: 0.9em;
   line-height: 23px;
-}
-.about .h1{
- margin: 0;
 }
 
 
@@ -74,6 +77,7 @@ body{
 .services-section{
   display: flex;
   flex-direction: row;
+  
   
 }
 .carousel{
@@ -93,7 +97,7 @@ body{
 
 
 #footer {
-    background-color: #1f1f25;
+  background-color: rgb(41, 51, 82);
     position: relative;
     padding: 20px 50px;
     margin-top: auto;

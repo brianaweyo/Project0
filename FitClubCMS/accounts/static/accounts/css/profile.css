@@ -294,8 +294,6 @@ white-space: nowrap;
 .card .card-body{
     text-align: center;
 }
-
-
  
 
  .single-team .inner {
@@ -397,3 +395,42 @@ table input[type="text"]{
   table form input[type="submit"]:hover {
     background-color: #45a049;
   }
+
+  /* user full name after login */
+  .top-right {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    display: flex;
+    align-items: center;
+}
+
+.user-profile {
+    display: flex;
+    align-items: center;
+}
+
+.user-profile img {
+    width: 30px;
+    height: 30px;
+    margin-right: 5px;
+}
+
+.user-name {
+    font-size: 14px;
+    font-weight: bold;
+    margin-right: 1.5em;
+}
+
+  .custom-icon-color{
+    color: #001d3d;
+  }
+.user-icon{
+    color: #5f9360;
+    cursor: pointer;
+}
+.logout-link{
+    text-decoration: none;
+}
+
+

@@ -3,23 +3,6 @@ from django.conf import settings
 from datetime import datetime
 
 
-class Profile(models.Model):
-    CHOICES = [
-        ('option1','Male'),
-        ('option2','Female')
-    ]
-    user = models.OneToOneField(settings.AUTH_USER_MODEL,
-                                on_delete=models.CASCADE)
-    
-    last_name = models.CharField(max_length=50)
-    phone_no = models.CharField(max_length=50)
-    sex = models.CharField(max_length=10, choices=CHOICES)
-    date_of_birth= models.DateField(blank=True, null=True)
-    package = models.ForeignKey('Package', on_delete=models.SET_NULL, null=True)
-    photo = models.ImageField(upload_to='users/%Y/%m/%d/', blank=True)
-
-    def __str__(self):
-        return f'Profile of {self.user.username}'
 
 class Package(models.Model):
     package_id = models.AutoField(primary_key=True)
@@ -28,9 +11,32 @@ class Package(models.Model):
     price = models.DecimalField(max_digits=8, decimal_places=2)
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
+    package_photo = models.ImageField(upload_to='site/%Y/%m/%d/', blank=True)
+    
 
     def __str__(self):
         return self.package_name
+
+class Profile(models.Model):
+    CHOICES = [
+        ('Male','Male'),
+        ('Female','Female')
+    ]
+    user = models.OneToOneField(settings.AUTH_USER_MODEL,
+                                on_delete=models.CASCADE)
+    
+    last_name = models.CharField(max_length=50)
+    phone_no = models.CharField(max_length=50)
+    sex = models.CharField(max_length=10, choices=CHOICES)
+    date_of_birth= models.DateField(blank=True, null=True)
+    photo = models.ImageField(upload_to='users/%Y/%m/%d/', blank=True)
+    package = models.ForeignKey('Package', on_delete=models.SET_NULL, null=True)
+  
+
+    def __str__(self):
+        return f'Profile of {self.user.username}'
+
+
     
 class Transaction(models.Model):
     transaction_id = models.AutoField(primary_key=True)
@@ -91,6 +97,7 @@ class Events(models.Model):
         db_table = "events"
  
 class Booking(models.Model):
+    booking_id = models.AutoField(primary_key=True)
     user = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
     name = models.CharField(max_length=100)
     start = models.CharField(max_length=20)
@@ -98,8 +105,6 @@ class Booking(models.Model):
     trainer = models.CharField(max_length=100)
     book_time = models.DateTimeField(auto_now=True)
 
-    def __str__(self):
-        return self.id
 
 class Sessions(models.Model):
     session_name = models.CharField(max_length=255)

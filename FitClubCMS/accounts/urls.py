@@ -4,14 +4,6 @@ from . import views
 
 
 urlpatterns = [
-    # path('login/', auth_views.LoginView.as_view(), name='login'),
-    # path('login/', auth_views.LogoutView.as_view(), name='logout'),
-    # path('password-change/', auth_views.PasswordChangeView.as_view(), name='password_change'),
-    # path('password-change/done/', auth_views.PasswordChangeDoneView.as_view(), name='password_change_done'),
-    # path('password-reset/', auth_views.PasswordResetView.as_view(), name='password_reset'),
-    # path('password-reset/done/', auth_views.PasswordResetDoneView.as_view(), name='password_reset_done'),
-    # path('password-reset/<uidb64>/<token>/',auth_views.PasswordResetConfirmView.as_view(), name='password_reset_confirm'),
-    # path('password-reset-/complete/', auth_views.PasswordResetCompleteView.as_view(), name='password_reset_complete'),
      path('', include('django.contrib.auth.urls')),
      path('', views.landing_page, name='home'),
      path('dashboard/', views.dashboard, name='dashboard'),
@@ -32,4 +24,6 @@ urlpatterns = [
      path('sessions_list/', views.sessions_list, name='sessions_list'),
      path('add_session/', views.add_session, name='add_session'),
      path('book_session/', views.book_session, name='book_session'),
+     path('my_bookings/', views.my_bookings, name='my_bookings'),
+     path('cancel_booking/', views.cancel_booking, name='cancel_booking'),
 ]

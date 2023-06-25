@@ -5,11 +5,10 @@
 {% block content %}
  <div class="package-descr">
     <div class="card" style="width: 18rem;">
-        <img src="{% static "accounts/images/bronze.jpeg" %}" class="card-img-top" alt="...">
+        <img src="{{ package.package_photo.url }}" class="card-img-top" alt="...">
         <div class="card-body">
-          <h5 class="card-title">Beginner's Bundle</h5>
-          <p class="card-text">Designed for beginners, this package includes 
-            personalized training sessions and introductory fitness classes.</p>
+          <h5 class="card-title">{{ package.package_name }}</h5>
+          <p class="card-text">{{ package.description }}</p>
         </div>
         <ul class="list-group list-group-flush">
           <li class="list-group-item">Cras justo odio</li>
@@ -17,8 +16,8 @@
           <li class="list-group-item">Vestibulum at eros</li>
         </ul>
         <div class="card-body">
-          <a href="#" class="card-link">Renew</a>
-          <div class="cost">Ksh 1000</div>
+          <a href="{% url 'payment_form' %}?package_id={{ package.package_id }}" class="card-link">Renew</a>
+          <div class="cost">Ksh {{ package.price }}</div>
         </div>
       </div>
      <div class="descr-cont">

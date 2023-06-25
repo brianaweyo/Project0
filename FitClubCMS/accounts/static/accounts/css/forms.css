@@ -96,7 +96,11 @@ label[for^="id_password"] {
     margin-top: 2em;
     color: black;
   }
-
+/* Dashboard form */
+.biodata form input[type="text"]{
+  width: 8rem;
+  text-align: right;
+}
 
   /* edit profile form */
   

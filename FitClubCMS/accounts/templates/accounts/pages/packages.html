@@ -9,7 +9,7 @@
 
 
   <div class="card" style="width: 18rem;">
-    <img src="{% static "accounts/images/bronze.jpeg" %}" class="card-img-top" alt="...">
+    <img src="{{ packages.0.package_photo.url }}" class="card-img-top" alt="...">
     <div class="card-body">
       <h5 class="card-title">{{packages.0.package_name }}</h5>
       <p class="card-text">Get started with essential workout equipment and basic fitness classes</p>
@@ -21,12 +21,12 @@
     </ul>
     <div class="card-body">
       <a href="{% url 'payment_form' %}?package_id={{ packages.0.package_id }}" class="card-link">Enroll</a>
-       <div class="cost">Ksh {{ packages.0.price }}</div>
+       <div class="cost">Ksh {{ packages.0.price }} Monthly </div>
     </div>
   </div>
 
   <div class="card" style="width: 18rem;">
-    <img src="{% static "accounts/images/silver.jpeg" %}" class="card-img-top" alt="...">
+    <img src="{{ packages.1.package_photo.url }}" class="card-img-top" alt="...">
     <div class="card-body">
       <h5 class="card-title">{{ packages.1.package_name }}</h5>
       <p class="card-text">Designed for beginners, this package includes 
@@ -39,12 +39,12 @@
     </ul>
     <div class="card-body">
       <a href="{% url 'payment_form' %}?package_id={{ packages.1.package_id }}" class="card-link">Enroll</a>
-      <div class="cost">Ksh {{ packages.1.price }}</div>
+      <div class="cost">Ksh {{ packages.1.price }} Monthly </div>
     </div>
   </div>
 
   <div class="card" style="width: 18rem;">
-    <img src="{% static "accounts/images/goldstar.jpeg" %}" class="card-img-top" alt="...">
+    <img src="{{ packages.2.package_photo.url }}" class="card-img-top" alt="...">
     <div class="card-body">
       <h5 class="card-title">{{ packages.2.package_name }}</h5>
       <p class="card-text">Enjoy unlimited access to facilities, a variety of fitness classes,
@@ -58,12 +58,12 @@
     <div class="card-body">
      
       <a href="{% url 'payment_form' %}?package_id={{ packages.2.package_id }}" class="card-link">Enroll</a>
-      <div class="cost">Ksh {{ packages.2.price }}</div>
+      <div class="cost">Ksh {{ packages.2.price }} Monthly</div>
     </div>
   </div>
 
   <div class="card" style="width: 18rem;">
-    <img src="{% static "accounts/images/diamondstar.jpeg" %}" class="card-img-top" alt="...">
+    <img src="{{ packages.3.package_photo.url }}" class="card-img-top" alt="...">
     <div class="card-body">
       <h5 class="card-title">	{{ packages.3.package_name }}</h5>
       <p class="card-text">Elevate your fitness journey with priority class bookings, 
@@ -76,12 +76,12 @@
     </ul>
     <div class="card-body">
       <a href="{% url 'payment_form' %}?package_id={{ packages.3.package_id }}" class="card-link">Enroll</a>
-      <div class="cost">Ksh {{ packages.3.price }}</div>
+      <div class="cost">Ksh {{ packages.3.price }} Monthly</div>
     </div>
   </div>
 
   <div class="card" style="width: 18rem;">
-    <img src="{% static "accounts/images/platinum.jpeg" %}" class="card-img-top" alt="...">
+    <img src="{{ packages.4.package_photo.url }}" class="card-img-top" alt="...">
     <div class="card-body">
     <h5 class="card-title">	{{ packages.4.package_name }}</h5>
 
@@ -95,7 +95,7 @@
     </ul>
     <div class="card-body">
       <a href="{% url 'payment_form' %}?package_id={{ packages.4.package_id }}" class="card-link">Enroll</a>
-      <div class="cost">Ksh {{ packages.4.price }} </div>
+      <div class="cost">Ksh {{ packages.4.price }} Monthly</div>
     </div>
   </div>
 

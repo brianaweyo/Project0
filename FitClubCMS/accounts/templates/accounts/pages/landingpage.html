@@ -5,23 +5,19 @@
 {% block title %} Home  {% endblock %}
 
 {% block content %}
-  <div class="slant">
+  <div class="index-home-section">
    
-   <div class="about">
-        <h1>About Us</h1>
-        <p>Lorem ipsum dolor sit amet consectetur adipisicing elit.
-             Provident exercitationem, quam eaque placeat, ducimus iusto eveniet 
-             dicta est vitae voluptatum explicabo asperiores reprehenderit repudiandae? 
-             Rem quia natus maxime dolore adipisci.
+   <div class="about text-center my-5">
+        <p> As your dedicated partner, we strive to provide you with an exceptional gym experience,
+          join us on this transformative journey, where we'll guide, support, 
+          and empower you every step of the way. Together, 
+          let's unlock your full potential and sculpt the best version of yourself.<a href="#">Find More</a><br>
+             <a href="{% url 'register' %}">Join Us Now</a>
         </p>
-        <div class="more">
-        <button><a href="#">Find More</a></button>
-        <button><a href="#">Find More</a></button>
-     </div>
     </div>
 
     <div class="home-photo">
-   
+      <img src="{% static 'accounts/images/bgimage.jpeg' %}" alt="Home Photo" class="img-fluid">   
     </div>
 
   </div>

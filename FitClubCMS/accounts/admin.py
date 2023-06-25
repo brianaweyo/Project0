@@ -6,7 +6,7 @@ from .models import Profile, Service, Package, Transaction, Events, Trainers, Se
 
 @admin.register(Profile)
 class ProfileAdmin(admin.ModelAdmin):
-    list_display =['user', 'last_name', 'sex', 'phone_no', 'photo']
+    list_display =['user', 'last_name', 'sex', 'phone_no', 'photo','package']
     raw_id_fields=['user']
 
 
@@ -16,7 +16,7 @@ class ServiceAdmin(admin.ModelAdmin):
 
 @admin.register(Package)
 class PackageAdmin(admin.ModelAdmin):
-    list_display = ['package_id','package_name', 'description', 'price', 'created_at', 'updated_at']
+    list_display = ['package_id','package_name', 'description', 'price', 'created_at', 'updated_at', 'package_photo']
     ordering = ['created_at']
 
 @admin.register(Transaction)
@@ -36,7 +36,7 @@ class TrainersAdmin(admin.ModelAdmin):
 
 @admin.register(Booking)
 class BookingAdmin(admin.ModelAdmin):
-    list_display = ['user', 'name', 'start', 'end', 'trainer', 'book_time']
+    list_display = ['booking_id','user', 'name', 'start', 'end', 'trainer', 'book_time']
     
 
 @admin.register(Sessions)

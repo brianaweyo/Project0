@@ -8,61 +8,72 @@
 
 <div class="dashboard-cont">
   
-   <div class="biodata">
-     <form>
+  <div class="biodata mt-4">
+    <form>
       {% if request.user.is_authenticated %}
-     
-        <input type="text" name="username" value="{{ request.user.username|default:request.user.username }}">
-        <input type="text" name="first_name" value="{{ request.user.first_name|default:request.user.first_name }}" > 
-        <input type="text" name="last_name"value="{{ request.user.last_name|default:request.user.last_name }}">
-     {% endif %} 
-     </form>
+        
+          <!-- <input type="text" name="full_name" value="{{ request.user.first_name|default:request.user.first_name }} {{ request.user.last_name|default:request.user.last_name }}" readonly > -->
 
-   </div>
+          <input type="text" name="time" id="current-time" readonly>
+          <input type="text" name="day" value="{{ date_today|date:'D' }}" readonly>
+          <input type="text" name="month" value="{{ date_today|date:'M' }}" readonly>
+          <input type="text" name="date" value="{{ date_today|date:'Y-m-d' }}" readonly>
+        </div>
+      {% endif %} 
+    </form>
+  </div>
 
 
 
-   <div class="quick-access">
-    
-    <div class="card-group">
+   <div class="quick-access mt-4 mb-4">
+    <div class="row justify-content-around mx-auto">
 
+      <div class="col-sm-3">
         <div class="card">
-          <img class="card-img-top" src="{% static 'accounts/images/image1.jpg' %}" alt="Card image cap">
           <div class="card-body">
-            <h5 class="card-title">Cardiovascular</h5>
-            <p class="card-text"> Unleash Your Inner Dynamo as you embark on heart-pumping adventures 
-            <p class="card-text"><small class="text-muted">Last updated 3 mins ago</small></p>
+            <i class="fa-solid fa-book-open-reader fa-3x custom-icon-color"></i>
+            <h5 class="card-title">Session Bookings</h5>
+            <p class="card-text">All Bookings {{ total_bookings }} </p>
+            <p class="card-text">Next Session in <span id="next-class-countdown">{% if countdown %}{{ countdown }}{% else %}N/A{% endif %}</span></p>
+            <a href="{% url 'sessions_list' %}" class="btn btn-success">Active Bookings</a>
           </div>
         </div>
-
+      </div>
+      <div class="col-sm-3">
         <div class="card">
-          <img class="card-img-top" src="{% static 'accounts/images/image1.jpg' %}" alt="Card image cap">
           <div class="card-body">
-            <h5 class="card-title">Group Fitness</h5>
-            <p class="card-text"> </p>
-            <p class="card-text"><small class="text-muted">Last updated 3 mins ago</small></p>
+            <i class="fa-solid fa-dumbbell fa-3x custom-icon-color"></i>
+            <h5 class="card-title">My Package</h5>
+            <p class="card-text">Bronze</p>
+            <p class="card-text">Expires on</p>
+            <a href="{% url 'my_package'%}" class="btn btn-success">Package Details</a>
           </div>
-        </div>     
-
+        </div>
+      </div>
+      <div class="col-sm-3">
         <div class="card">
-            <img class="card-img-top" src="{% static 'accounts/images/image1.jpg' %}" alt="Card image cap">
-            <div class="card-body">
-              <h5 class="card-title">Group Fitness</h5>
-              <p class="card-text"> </p>
-              <p class="card-text"><small class="text-muted">Last updated 3 mins ago</small></p>
-            </div>
-          </div>  
+          <div class="card-body">
+            <i class="fa-sharp fa-solid fa-money-bill-wave fa-3x custom-icon-color"></i>
+            <h5 class="card-title">Payments</h5>
+            <p class="card-text">Total payments made </p><br>
 
-          <div class="card">
-            <img class="card-img-top" src="{% static 'accounts/images/image1.jpg' %}" alt="Card image cap">
-            <div class="card-body">
-              <h5 class="card-title">Group Fitness</h5>
-              <p class="card-text"> </p>
-              <p class="card-text"><small class="text-muted">Last updated 3 mins ago</small></p>
-            </div>
-          </div>  
+            <a href="#" class="btn btn-success">View Records</a>
+          </div>
+        </div>
+      </div>
+      <div class="col-sm-3">
+        <div class="card">
+          <div class="card-body">
+            <h5 class="card-title">Special title treatment</h5>
+            <p class="card-text">With supporting text below as a natural lead-in to additional content.</p>
+            <a href="#" class="btn btn-success">Go somewhere</a>
+          </div>
+        </div>
+      </div>
 
     </div>
+    
+   </div>
 
 
 

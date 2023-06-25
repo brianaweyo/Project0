@@ -18,6 +18,7 @@
    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/fullcalendar/3.9.0/fullcalendar.css">
    <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.24.0/moment.min.js"></script>
    <script src="https://cdnjs.cloudflare.com/ajax/libs/fullcalendar/3.9.0/fullcalendar.js"></script>
+   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"/>
 </head>
 <body>
 
@@ -36,6 +37,22 @@
             <ul class="sub-menu blank">
                 <li><a class="link_name" href="#">Dashboard</a></li>
             </ul>
+        </li>
+
+        <li>
+            <div class="iocn-link">
+             <a href="#">
+                <i class='bx bx-plug'></i>
+                <span class="link_name">Profile</span>
+            </a>
+            <i class='bx bxs-chevron-down arrow'></i>
+         </div>
+
+         <ul class="sub-menu">
+            <li><a class="link_name" href="#">My Profile</a></li>
+            <li><a href="{% url "edit" %}" id="edit-profile">Edit Profile</a></li>
+            <li><a href="#">Notifications</a></li>
+         </ul>
         </li>
 
         <li>
@@ -64,8 +81,23 @@
 
          <ul class="sub-menu">
             <li><a class="link_name" href="#">Billings</a></li>
-            <li><a href="#">Payment</a></li>
+            <!-- <li><a href="#">Payment</a></li> -->
             <li><a href="#">Records</a></li>
+         </ul>
+        </li>
+
+        <li>
+            <div class="iocn-link">
+             <a href="#">
+                <i class='bx bx-time'></i>
+                <span class="link_name">Schedule</span>
+            </a>
+            <i class='bx bxs-chevron-down arrow'></i>
+         </div>
+
+         <ul class="sub-menu">
+            <li><a class="link_name" href="{% url 'schedule' %}">Schedule</a></li>
+            <li><a href="{% url 'sessions_list' %}">Book Now</a></li>
          </ul>
         </li>
 
@@ -87,37 +119,6 @@
             <ul class="sub-menu blank">
                 <li><a class="link_name" href="{% url 'trainers' %}">Trainers</a></li>
             </ul>
-        </li>
-
-        <li>
-            <div class="iocn-link">
-             <a href="#">
-                <i class='bx bx-plug'></i>
-                <span class="link_name">Profile</span>
-            </a>
-            <i class='bx bxs-chevron-down arrow'></i>
-         </div>
-
-         <ul class="sub-menu">
-            <li><a class="link_name" href="#">My Profile</a></li>
-            <li><a href="{% url "edit" %}" id="edit-profile">Edit Profile</a></li>
-            <li><a href="#">Notifications</a></li>
-         </ul>
-        </li>
-
-        <li>
-            <div class="iocn-link">
-             <a href="#">
-                <i class='bx bx-time'></i>
-                <span class="link_name">Schedule</span>
-            </a>
-            <i class='bx bxs-chevron-down arrow'></i>
-         </div>
-
-         <ul class="sub-menu">
-            <li><a class="link_name" href="{% url 'schedule' %}">Schedule</a></li>
-            <li><a href="{% url 'sessions_list' %}">Book Now</a></li>
-         </ul>
         </li>
 
         <li>
@@ -153,13 +154,18 @@
     <i class="bx bx-menu"></i>
     
     <span class="text">
-        {% if request.user.is_authenticated %}
-         Welcome {{ request.user.first_name|default:request.user.username }}
-        {% endif %}
-    </span>
    </div>
 
    <div id="content-section">
+    <div class="top-right">
+        {% if request.user.is_authenticated %}
+            <div class="user-profile">
+                <span class="user-name">Welcome {{ request.user.first_name|default:request.user.username|title }} {{ request.user.last_name|default:request.user.username|title }}</span>
+                <span><i class="fa-solid fa-user user-icon fa-2x"></i> <br> <a href="{% url 'logout' %}" class="logout-link">Logout</a></span>
+                
+            </div>
+        {% endif %}
+    </div>
     {% block content %}{% endblock  %}
    </div>
    
@@ -171,7 +177,10 @@
  <script src="{% static 'accounts/javascript/profilescripts.js' %}"></script> 
  <script src="{% static 'accounts/javascript/myscript.js' %}"></script>
 
+
+
 <script>
+      
     let arrow = document.querySelectorAll(" .arrow");
     for (var i = 0; i<arrow.length; i++){
      arrow[i].addEventListener("click",(e)=>{    
@@ -188,31 +197,13 @@ sidebarBtn.addEventListener("click", ()=>{
   sidebar.classList.toggle("close");
 });
 
-//  $(document).ready(function() {
-//         $('.nav-links a').click(function(e) {
-//             e.preventDefault();
-//             var targetUrl = $(this).data('url');
-//             $.ajax({
-//                 url: targetUrl,
-//                 type: 'GET',
-//                 dataType: 'json',
-//                 success: function(response) {
-//                     var jsonData = JSON.parse(response);
-//                     var htmlContent = '';
-//                     // Generate HTML content using the retrieved JSON data
-//                     // Modify this section according to your data and HTML structure
-//                     for (var i = 0; i < jsonData.length; i++) {
-//                         var service = jsonData[i].fields;
-//                         htmlContent += '<div><h3>' + service.service_name + '</h3><p>' + service.description + '</p><p>' + service.cost + '</p></div>';
-//                     }
-//                     // Insert the generated HTML content into the main section
-//                     $('#content-section').html(htmlContent);
-//                 }
-//             });
-//         });
-//     });
-
-
+$(document).ready(function() {
+    $('.booking-form').submit(function() {
+      var submitBtn = $(this).find('input[type=submit]');
+      submitBtn.attr('disabled', 'disabled');
+      submitBtn.val('Booked');
+    });
+  });
 
 </script>
 </body>
