@@ -1,44 +1,83 @@
 from django.contrib import admin
 
-from .models import Profile, Service, Package, Transaction, Events, Trainers, Sessions, Booking
+from .models import (
+    Booking,
+    Events,
+    Package,
+    Profile,
+    Service,
+    Sessions,
+    Trainers,
+    Transaction,
+)
 
 # Register your models here.
 
+
 @admin.register(Profile)
 class ProfileAdmin(admin.ModelAdmin):
-    list_display =['user', 'last_name', 'sex', 'phone_no', 'photo','package']
-    raw_id_fields=['user']
+    list_display = ["user", "last_name", "sex", "phone_no", "photo", "package"]
+    raw_id_fields = ["user"]
 
 
 @admin.register(Service)
 class ServiceAdmin(admin.ModelAdmin):
-    list_display = ['service_name', 'description', 'cost']
+    list_display = ["service_name", "description", "cost"]
+
 
 @admin.register(Package)
 class PackageAdmin(admin.ModelAdmin):
-    list_display = ['package_id','package_name', 'description', 'price', 'created_at', 'updated_at', 'package_photo']
-    ordering = ['created_at']
+    list_display = [
+        "package_id",
+        "package_name",
+        "description",
+        "price",
+        "created_at",
+        "updated_at",
+        "package_photo",
+    ]
+    ordering = ["created_at"]
+
 
 @admin.register(Transaction)
 class TransactionAdmin(admin.ModelAdmin):
-    list_display = ['transaction_id','amount', 'package','user', 'sender_no','transaction_date','status', 'created_at','updated_at'] 
+    list_display = [
+        "transaction_id",
+        "amount",
+        "package",
+        "user",
+        "sender_no",
+        "transaction_date",
+        "status",
+        "created_at",
+        "updated_at",
+    ]
+
 
 @admin.register(Events)
 class EventsAdmin(admin.ModelAdmin):
-     list_display = ['id', 'name', 'start', 'end', 'trainer']
-     ordering = ['start']
- 
+    list_display = ["id", "name", "start", "end", "trainer"]
+    ordering = ["start"]
+
 
 @admin.register(Trainers)
 class TrainersAdmin(admin.ModelAdmin):
-    list_display = ['trainer_id','user', 'first_name', 'last_name', 'phone_number']
+    list_display = ["trainer_id", "user", "first_name", "last_name", "phone_number"]
 
 
 @admin.register(Booking)
 class BookingAdmin(admin.ModelAdmin):
-    list_display = ['booking_id','user', 'name', 'start', 'end', 'trainer', 'book_time']
-    
+    list_display = [
+        "booking_id",
+        "user",
+        "name",
+        "start",
+        "end",
+        "trainer",
+        "book_time",
+    ]
+
 
 @admin.register(Sessions)
 class SessionsAdmin(admin.ModelAdmin):
-    list_display = ['session_name', 'start', 'end', 'trainer']
+    list_display = ["session_name", "start", "end", "trainer"]

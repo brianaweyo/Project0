@@ -1,15 +1,7 @@
-
-{% extends 'base2.html' %}
-
-{% block title %} Payment History {% endblock %}
-
-{% block content %} 
-
-
-
+{% extends 'base2.html' %} {% block title %}{% endblock %} {% block content %}
 
 <table>
-  <h1>My Payments History </h1>
+  <h1>My Payments History</h1>
   <thead>
     <tr>
       <th>Tranasaction Id</th>
@@ -19,22 +11,20 @@
       <th>Phone</th>
       <th>Package</th>
       <th>Status</th>
-      
     </tr>
   </thead>
   <tbody>
-    
     {% for transaction in transactions %}
 
-      <tr>
-          <td>{{ transaction.transaction_id }}</td>
-          <td>{{ transaction.transaction_date }}</td>
-          <td>{{ transaction.created_at|time:"P"}}</td>
-          <td>{{ transaction.amount }}</td>
-          <td>{{ transaction.sender_no }}</td>
-          <td>{{ transaction.package }}</td>
-          <td>{{ transaction.status }}</td>
-      </tr>
+    <tr>
+      <td>{{ transaction.transaction_id }}</td>
+      <td>{{ transaction.transaction_date }}</td>
+      <td>{{ transaction.created_at|time:"P"}}</td>
+      <td>{{ transaction.amount }}</td>
+      <td>{{ transaction.sender_no }}</td>
+      <td>{{ transaction.package }}</td>
+      <td>{{ transaction.status }}</td>
+    </tr>
 
     {% endfor %}
   </tbody>

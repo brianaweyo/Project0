@@ -1,23 +1,17 @@
-{% extends 'base2.html' %}
-
-{% block title %} Book session {% endblock %}
-
-{% block content %} 
-
+{% extends 'base2.html' %} {% block title %} {% endblock %} {% block content %}
 {% if messages %}
 <div class="messages">
   {% for message in messages %}
-    <div class="message {{ message.tags }}">
-      <span class="message-text">{{ message }}</span>
-      <button class="close-button">&times;</button>
-    </div>
+  <div class="message {{ message.tags }}">
+    <span class="message-text">{{ message }}</span>
+    <button class="close-button">&times;</button>
+  </div>
   {% endfor %}
 </div>
 {% endif %}
 
-
 <table>
-  <h1>Available Sessions for Booking </h1>
+  <h1>Available Sessions for Booking</h1>
   <thead>
     <tr>
       <th>Session Name</th>
@@ -28,31 +22,27 @@
     </tr>
   </thead>
   <tbody>
-    
     {% for event in events %}
 
-      <tr>
+    <tr>
+      <form method="POST" class="booking-form" action="{% url 'book_session'%}">
+        {% csrf_token %}
+        <input type="hidden" name="event_name" value="{{ event.name}}" >
+        <input type="hidden" name="event_start" value="{{ event.start|date:"Y-m-d H:i:s"}}">
+        <input type="hidden" name="event_end" value="{{ event.end|date:"Y-m-d H:i:s" }}">
+        <input type="hidden" name="event_trainer" value="{{ event.trainer }}">
 
-        <form method="POST" class="booking-form" action="{% url 'book_session'%}">
-          {% csrf_token %}
-          <input type="hidden" name="event_name" value="{{ event.name}}" >
-          <input type="hidden" name="event_start" value="{{ event.start|date:"Y-m-d H:i:s"}}">
-          <input type="hidden" name="event_end" value="{{ event.end|date:"Y-m-d H:i:s" }}">
-          <input type="hidden" name="event_trainer" value="{{ event.trainer }}">
         <td>{{ event.name }}</td>
         <td>{{ event.start}}</td>
         <td>{{ event.end}}</td>
         <td>{{ event.trainer }}</td>
-        <td> <input type="submit" value="Book" class="custom-button"/></td>
-
+        <td><input type="submit" value="Book" class="custom-button" /></td>
       </form>
-
-      </tr>
+    </tr>
 
     {% endfor %}
   </tbody>
 </table>
-
 
 <div class="my-bookings mt-5">
   <h2>Active Bookings</h2>
@@ -65,10 +55,18 @@
         <th>Action</th>
       </tr>
     </thead>
-    <tbody>
-
-    </tbody>
+    <tbody></tbody>
   </table>
 </div>
+
+<script>
+// Remove the message box when the close button is clicked
+const closeButton = document.querySelector('.close-button');
+closeButton.addEventListener('click', function() {
+  const messageBox = this.closest('.message');
+  messageBox.remove();
+  });
+
+</script>
 
 {% endblock %}

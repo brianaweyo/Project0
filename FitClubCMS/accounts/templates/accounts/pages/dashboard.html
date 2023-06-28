@@ -1,7 +1,7 @@
 {% extends "base2.html" %}
 {% load static %}
 
-{% block title %} My Profile {% endblock %}
+{% block title %} {% endblock %}
 
 {% block content %}
 <h4>My Dashboard </h4>
@@ -21,8 +21,6 @@
     </form>
   </div>
 
-
-
    <div class="quick-access mt-4 mb-4">
     <div class="row justify-content-around mx-auto">
 
@@ -32,7 +30,7 @@
             <i class="fa-solid fa-book-open-reader fa-3x custom-icon-color"></i>
             <h5 class="card-title">Session Bookings</h5>
             <p class="card-text">All Bookings {{ total_bookings }} </p>
-            <p class="card-text">Next Session in <span id="next-class-countdown">{% if countdown %}{{ countdown }}{% else %}N/A{% endif %}</span></p>
+            <p class="card-text">Next Session  {{ next_session_start }}</p>
             <a href="{% url 'sessions_list' %}" class="btn btn-success">Active Bookings</a>
           </div>
         </div>
@@ -42,8 +40,8 @@
           <div class="card-body">
             <i class="fa-solid fa-dumbbell fa-3x custom-icon-color"></i>
             <h5 class="card-title">My Package</h5>
-            <p class="card-text">{% if package_name %}{{ package_name }}{% else %}Not Enrolled Yet{% endif %}</p></p>
-            <p class="card-text">Expires on</p>
+            <p class="card-text">Current Package: {% if package_name %}{{ package_name }}{% else %}Not Enrolled Yet{% endif %}</p></p>
+            <p class="card-text">Subscription Expires on  {% if expiry_date %}{{ expiry_date }}{% else %}N/A{% endif %}</p>
             <a href="{% url 'my_package'%}" class="btn btn-success">Package Details</a>
           </div>
         </div>
@@ -53,18 +51,19 @@
           <div class="card-body">
             <i class="fa-solid fa-coins fa-3x custom-icon-color"></i>
             <h5 class="card-title">Payments</h5>
-            <p class="card-text">Total payments made </p><br>
-
-            <a href="#" class="btn btn-success">View Records</a>
+            <p class="card-text">Total payments made {{ total_transactions }}</p><br>
+            <a href="{% url 'payment_history' %}" class="btn btn-success">View Records</a>
           </div>
         </div>
       </div>
       <div class="col-sm-3">
         <div class="card">
           <div class="card-body">
-            <h5 class="card-title">Special title treatment</h5>
-            <p class="card-text">With supporting text below as a natural lead-in to additional content.</p>
-            <a href="#" class="btn btn-success">Go somewhere</a>
+            <i class="fa-solid fa-user-tag fa-3x custom-icon-color"></i>
+            <h5 class="card-title">Account Profile</h5>
+            <p class="card-text">Status: {% if account_status %}Active{% else %}Inactive{% endif %}</p>
+            <p class="card-text">Last login {% if last_login %}{{ last_login }}{% else %}N/A{% endif %} </p>
+            <a href="{% url 'edit' %}" class="btn btn-success">View Profile</a>
           </div>
         </div>
       </div>
