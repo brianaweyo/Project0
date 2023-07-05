@@ -4,6 +4,10 @@
 
 {% block content %}
  
-  <h1> Successfuly Paid </h1> 
+<div class="notification">
+  <h1>Your payment has been successfully submittted for processing!</h1>
+  <p>You can view your payment records <a href="{% url 'payment_history' %}">here</a> for updated payment records.</p>
+  <p>Go back to your <a href="{% url 'dashboard' %}">dashboard</a>.</p>
+</div>
 
 {% endblock%}

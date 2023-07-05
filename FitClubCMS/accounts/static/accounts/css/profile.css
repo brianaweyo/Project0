@@ -257,6 +257,14 @@ white-space: nowrap;
 }
 
 
+.biodata{
+    display: flex;
+    justify-content: flex-end;
+}
+.notification-bell{
+    margin-left: auto;
+    margin-right: 2em;
+}
 .package-class{
     display: flex;
     width: inherit;
@@ -434,3 +442,52 @@ table input[type="text"]{
 }
 
 
+.feed-form {
+    width: 100%;
+    margin: 0 auto;
+    padding: 20px;
+    display: flex;
+  }
+  .feed-form form, .feed-form .profile-overview{
+    width: 50%;
+  }
+  
+  .form-group {
+    margin-bottom: 20px;
+  }
+  .feed-form form .form-control {
+    width: 75%;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 7px;
+  }
+
+  .feed-form form input[type='submit']{
+    width: 30%;
+  }
+
+  .profile-overview{
+    border: 1px solid black;
+  }
+
+
+.notification {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    /* width: 10;
+    height: 10%; */
+    text-align: center;
+    align-content: center;
+    transform: translate(-50%, -50%);
+    background-color: green;
+    color: white;
+    padding: 20px; /* Increase the padding for a larger box */
+    font-size: 1.3em;
+
+}
+  @media (max-width: 768px) {
+    .feed-form {
+      max-width: 100%;
+    }
+  }

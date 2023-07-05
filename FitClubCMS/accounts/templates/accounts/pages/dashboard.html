@@ -16,10 +16,22 @@
           <input type="text" name="day" value="{{ date_today|date:'D' }}" readonly disabled>
           <input type="text" name="month" value="{{ date_today|date:'M' }}" readonly disabled>
           <input type="text" name="date" value="{{ date_today|date:'Y-m-d' }}" readonly disabled>
-        </div>
-      {% endif %} 
+      
     </form>
+    <!-- Add the notification bell icon -->
+   
+      <div class="notification-bell">
+        <i class="fa-solid fa-bell fa-2x"></i>
+        <span class="notification-count">{{ total_notifications }} Email Notifications</span>
+      </div>
+
+     {% endif %} 
+   </div>
+
   </div>
+
+
+ 
 
    <div class="quick-access mt-4 mb-4">
     <div class="row justify-content-around mx-auto">
@@ -63,7 +75,7 @@
             <h5 class="card-title">Account Profile</h5>
             <p class="card-text">Status: {% if account_status %}Active{% else %}Inactive{% endif %}</p>
             <p class="card-text">Last login {% if last_login %}{{ last_login }}{% else %}N/A{% endif %} </p>
-            <a href="{% url 'edit' %}" class="btn btn-success">View Profile</a>
+            <a href="{% url 'edit' %}" class="btn btn-success">Update Profile</a>
           </div>
         </div>
       </div>
@@ -73,14 +85,116 @@
    </div>
 
 
-
+  <div>
+    {% if messages %}
+    <ul class="messages">
+      {% for message in messages %}
+        <li{% if message.tags %} class="{{ message.tags }}"{% endif %}>{{ message }}<button class="close-button" onclick="this.parentElement.style.display='none'">&times;</button></li></li>
+      {% endfor %}
+    </ul
+    {% endif %}
+  </div>
 
    <div class="feed-form">
-    <p> Welcome to your Profile Page You can <a href="{% url "edit" %}">edit your 
-        profile</a> or <a href="{% url "password_change" %}">change your password</a></p>
 
-   </div>
 
+    <form method="post" action="{% url 'send_email' %}">
+      {% csrf_token %}
+      <h3>Feedback and Queries</h3>
+      {% if request.user.is_authenticated %}
+
+      <div class="form-group">
+        <label for="id_subject">Subject:</label>
+        <input type="text" class="form-control" id="id_subject" name="subject" required>
+      </div>
+      <div class="form-group">
+        <label for="id_content">Content:</label>
+        <textarea class="form-control" id="id_content" rows="4" name="content" required></textarea>
+      </div>
+      <input type="submit" class="custom-button" value="Send Email">
+      <hr>
+      <h3>Email or Call Directly</h3><br>
+      <div class="icon"><i class="fa-solid fa-envelope"></i><span><a href="mailto:brianaweyo23@gmail.com">  brianaweyo23@gmail.com</a></span></div> <br>
+      <div class="icon"><i class="fa-solid fa-phone-volume"></i><span><a href="tel:+07595449949849">  07595449949849</a></span></div>
+      {% endif %}
+
+    </form> 
+
+    <div class="profile-overview">
+      
+
+      <div class="row">
+        <div class="col"><img src="{{ photo_url }}" class="rounded float-left img-fluid  mt-5" alt="profile picture" style="width: 200px; height: 200px; padding-left: .5rem;"></div>
+        <div class="col">
+          
+          <div class="form-outline">
+            <input type="text" class="form-control mt-5" value="{{ user.first_name }}" readonly />
+            <label class="form-label">Firstname</label>
+          </div>
+        </div>
+        <div class="col">
+       
+          <div class="form-outline">
+            <input type="email" class="form-control mt-5 " value="{{ profile.last_name }}" readonly  />
+            <label class="form-label">Last Name</label>
+          </div>
+        </div>
+      </div>
+      
+      <hr />
+      
+      <div class="row">
+        <div class="col">
+   
+          <div class="form-outline">
+            <input type="text" id="form8Example3" class="form-control" value="{{ profile.date_of_birth }}" readonly />
+            <label class="form-label" for="form8Example3">Date of Birth</label>
+          </div>
+        </div>
+        <div class="col">
+          
+          <div class="form-outline">
+            <input type="text"  class="form-control" value="{{ profile.sex }}" readonly />
+            <label class="form-label">Gender</label>
+          </div>
+        </div>
+        <div class="col">
+        
+          <div class="form-outline">
+            <input type="email" class="form-control" value="{{ user.email }}" readonly />
+            <label class="form-label">Email address</label>
+          </div>
+        </div>
+      </div>
+
+      <hr />
+
+      <div class="row">
+        <div class="col">
+        
+          <div class="form-outline">
+            <input type="text"  class="form-control" value="{{ profile.phone_no }}" readonly />
+            <label class="form-label" >Phone Number</label>
+          </div>
+        </div>
+        <div class="col">
+
+          <div class="form-outline">
+            <input type="text"  class="form-control" value="{{ profile.address }}" readonly />
+            <label class="form-label">Address</label>
+          </div>
+        </div>
+        <div class="col">
+          <div class="form-outline">
+            <input type="text" class="form-control" value="{{ last_login }}" readonly />
+            <label class="form-label">Joined Date</label>
+          </div>
+        </div>
+      </div>
+      
+     </div>
+
+  </div>
 </div>
 
 

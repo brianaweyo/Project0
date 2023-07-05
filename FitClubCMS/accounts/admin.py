@@ -1,7 +1,16 @@
-from django.contrib import admin
+from django import forms
+from django.conf import settings
+from django.contrib import admin, messages
+from django.core.exceptions import ValidationError
+from django.core.mail import EmailMessage, send_mail
+from django.http import HttpResponseRedirect
+from django.shortcuts import redirect, render
+from django.urls import reverse
+from django.utils.html import format_html
 
 from .models import (
     Booking,
+    Email,
     Events,
     Package,
     Profile,
@@ -16,7 +25,15 @@ from .models import (
 
 @admin.register(Profile)
 class ProfileAdmin(admin.ModelAdmin):
-    list_display = ["user", "last_name", "sex", "phone_no", "photo", "package"]
+    list_display = [
+        "user",
+        "last_name",
+        "sex",
+        "phone_no",
+        "photo",
+        "package",
+        "address",
+    ]
     raw_id_fields = ["user"]
 
 
@@ -50,7 +67,7 @@ class TransactionAdmin(admin.ModelAdmin):
         "transaction_date",
         "status",
         "created_at",
-        "updated_at",
+        "receipt_no",
     ]
 
 
@@ -76,6 +93,34 @@ class BookingAdmin(admin.ModelAdmin):
         "trainer",
         "book_time",
     ]
+
+
+class ReplyForm(forms.Form):
+    content = forms.CharField(widget=forms.Textarea(attrs={"rows": 5, "cols": 60}))
+
+
+@admin.register(Email)
+class EmailAdmin(admin.ModelAdmin):
+    list_display = ["sender_email", "recipient", "subject", "content", "sent_date"]
+    actions = ["reply_to_email"]
+
+    def sender_email(self, obj):
+        return obj.sender.email
+
+    sender_email.short_description = "Sender Email"
+
+    def reply_to_email(self, request, queryset):
+        # Assuming queryset contains only one Email object, modify the code accordingly if needed
+        email = queryset.first()
+
+        # Prepare the redirect URL
+
+        redirect_url = f"https://mail.google.com/mail/?view=cm&fs=1&to={email.sender.email}&su={email.subject}&body="
+
+        # Redirect to the Gmail compose page with pre-filled fields
+        return redirect(redirect_url)
+
+    reply_to_email.short_description = "Reply to selected email(s)"
 
 
 @admin.register(Sessions)

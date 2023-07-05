@@ -1,6 +1,7 @@
 from datetime import datetime
 
 from django.conf import settings
+from django.core.mail import send_mail
 from django.db import models
 
 
@@ -23,6 +24,7 @@ class Profile(models.Model):
 
     last_name = models.CharField(max_length=50)
     phone_no = models.CharField(max_length=50)
+    address = models.CharField(max_length=256, null=True)
     sex = models.CharField(max_length=10, choices=CHOICES)
     date_of_birth = models.DateField(blank=True, null=True)
     photo = models.ImageField(upload_to="users/%Y/%m/%d/", blank=True)
@@ -39,8 +41,8 @@ class Transaction(models.Model):
     user = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
     transaction_date = models.DateField()
     status = models.CharField(max_length=255)
-    created_at = models.DateTimeField(auto_now_add=True)
-    updated_at = models.DateTimeField(auto_now=True)
+    created_at = models.DateTimeField()
+    receipt_no = models.CharField(max_length=256, blank=True, null=True)
     sender_no = models.CharField(max_length=15)
 
     def __str__(self):
@@ -120,3 +122,16 @@ class Service(models.Model):
     service_name = models.CharField(max_length=60, null=False)
     description = models.TextField(null=False)
     cost = models.FloatField(null=False)
+
+
+class Email(models.Model):
+    sender = models.ForeignKey(
+        settings.AUTH_USER_MODEL, on_delete=models.CASCADE, related_name="sent_emails"
+    )
+    recipient = models.EmailField(default=settings.EMAIL_HOST_USER)
+    subject = models.CharField(max_length=255)
+    content = models.TextField()
+    sent_date = models.DateTimeField(auto_now_add=True)
+
+    def __str__(self):
+        return f"From: {self.sender.email} | To: {self.recipient} | Subject: {self.subject}" # return self.subject

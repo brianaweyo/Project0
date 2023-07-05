@@ -2,6 +2,9 @@
 {% load static %}
 
 {% block title %}  {% endblock %}
+<style>
+
+</style>
 
 {% block content %}
 
@@ -29,7 +32,7 @@
                 
                <p>
                 <label for="today">Date:</label>
-                <input type="datetime" name="today" id="todayField" readonly>
+                <input type="date" name="today" id="todayField" value="{% now 'Y-m-d' %}" readonly>
                </p>
 
                <p>
@@ -39,15 +42,38 @@
 
                <p>
                 <label for="phone_no">M-Pesa No:</label>
-                <input type="tel" name="phone_no" id="phone_no" placeholder="e.g., 07...or 01..."> 
+                <input type="tel" name="phone_no" id="phone_no" placeholder="e.g., 07...or 01..." required> 
                </p>
 
                <p>
-                <input type="submit" value="Confirm Payment">
+                <input type="submit" value="Confirm Payment" onclick="return showConfirmation();">
                </p>
             </div>
 
         </form>
 </div>
+<script>
+function showConfirmation() {
+        var amount = document.querySelector("input[name='amount']").value;
+        if (confirm("Confirm you want to pay Ksh " + amount + " to GZFitness Club account")) {
+            return true; // Proceed with form submission
+        } else {
+            showCancellationNotification();
+            return false; // Prevent form submission
+        }
+    }
+
+    function showCancellationNotification() {
+        var notification = document.createElement('div');
+        notification.classList.add('notification');
+        notification.textContent = "Payment Cancelled";
+        document.querySelector('.payment-form').appendChild(notification);
+
+        setTimeout(function() {
+            notification.remove();
+        }, 2000); // Remove the notification after 3 seconds
+    }
+</script>
+
 
 {% endblock %}

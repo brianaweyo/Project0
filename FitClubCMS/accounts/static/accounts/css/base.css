@@ -9,6 +9,7 @@ body{
     flex-direction: row;
     min-height: 100vh;
 }
+
 #wrapper .navbar{
   background-color: rgb(41, 51, 82);
   color: #ffffff;
@@ -42,12 +43,14 @@ body{
   flex-direction: row;
   width: 100%;
 }
-.home-photo{
+.home-photo, .about{
   width: 50%;
+  background-size: contain;
+}
+.home-photo img{
+ min-height: 100%;
 }
  .about{
-  
-  width: 50%;
   padding: 1.5em;
   display: flex;
   justify-content: space-evenly;
@@ -63,29 +66,46 @@ body{
   font-size: 0.9em;
   line-height: 23px;
 }
-
-
-.chevron-container {
+/* About us section */
+.about-page{
+  display: flex;
+  flex-direction: row;
+}
+.org-mission, .team{
+  width: 50%;
+}
+.org-mission{
   text-align: center;
-  margin-top: 10px; /* Adjust the margin as needed */
+  padding: 20px 20px;
+}
+.team{
+  text-align: center;
+
 }
 
-.bx-chevron-down {
-  font-size: 5em; /* Adjust the font size as needed */
+.programs{
+  display: flex;
+  flex-direction: row;
+}
+
+.programs-intro, .services-card{
+  width: 50%;
+  
+}
+.services-card{
+  padding-left: 15px;
 }
 
 .services-section{
   display: flex;
-  flex-direction: row;
-  
-  
+  flex-direction: row;  
 }
-.carousel{
-  width: 60%;
+.carousel,.service-statement{
+  width: 50%;
   padding-left: 5px;
 }
 
-.service-statement{
+/* .service-statement{
   width: 40%;
   display: flex;
   justify-content: center;
@@ -93,7 +113,8 @@ body{
   padding-right: 5px;
   
 
-}
+} */
+
 
 
 #footer {
@@ -184,22 +205,125 @@ body{
     bottom: 20px ;
     animation: animateWave2 3s linear infinite;
   }
+/* styling contact section */
 
-  @keyframes animateWave
-  {
-    0%{
-       background-position-x:  1000px;  
-    }
-    100%{
-        background-position-x: 0px;
-    }
-  }
-  @keyframes animateWave2
-  {
-    0%{
-        background-position-x: 0px ;
-    } 
-    100%{
-        background-position-x: 1000px;
-    }
-  }
+
+.contact-page{
+  display: flex;
+  flex-direction: column; 
+}
+.contact-text{
+  align-items: center;
+
+}
+.contact-text > h2{
+  text-align:  center;
+}
+
+.contact-container{
+  display: flex;
+  flex-direction: row;
+}
+.contact-info, .contact-form{
+  width: 50%;
+}
+.contact-info{
+  margin-left: 2rem;
+}
+.contact-container .contact-info{
+ width: 50%;
+ display: flex;
+ flex-direction: column;
+}
+
+.contact-container .contact-info .box{
+  position: relative;
+  padding: 20px 0;
+  display: flex;
+}
+
+.contact-container .contact-info .box .icon{
+  min-width: 60px;
+  height: 60px;
+  background-color: blue;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-radius: 50px;
+  font-size: 22px;
+  color: #fff;
+}
+.contact-container .contact-info .box .contact-text{
+  display: flex;
+  margin-left: 10px;
+  font-size: 16px;
+  flex-direction: column;
+  font-weight: 200;
+
+}
+.contact-container .contact-info .box .contact-text h3{
+  font-weight: 300;
+  color: #576567;
+}
+
+.contact-form{
+ background-color: #fff;
+ display: flex;
+align-items: center;
+}
+
+.contact-form h2{
+  font-size: 30px;
+  color: #333;
+}
+.contact-form form{
+  width: 50%;
+  margin-top: 10px;
+  border-radius: 7px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2); 
+}
+.contact-form .input-box{
+  position:relative;
+  width: 100%;
+  margin-top: 20px;
+
+}
+
+.contact-form .input-box input,
+.contact-form .input-box textarea{
+  width: 100%;
+  font-size: 1em;
+  margin: 10px 0;
+  border: none;
+  font-size: 1.2em;
+  border-bottom: 2px solid #333;
+  outline: none;
+}
+.contact-form .input-box span{
+ position: absolute;
+ left: 0;
+ padding: 5px 0;
+ font-size: 16px;
+ margin: 10px 20px;
+ pointer-events: none;
+ transition: 0.5s;
+ color: #666;
+}
+.contact-form .input-box input:focus~ span,
+.contact-form .input-box input:valid~ span,
+.contact-form .input-box textarea:focus~ span,
+.contact-form .input-box textarea:valid~ span{
+  color: #e91e63;
+  font-size: 12px;
+  transform: translateY(-20px);
+}
+
+.contact-form .input-box input[type="submit"]{
+  width: 30%;
+  background-color: #429735;
+  color: #fff;
+  border: none;
+  cursor: pointer;
+  padding: 10px;
+  font-size: 1.4em;
+}

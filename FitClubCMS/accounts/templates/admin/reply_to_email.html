@@ -1,0 +1,12 @@
+{% extends "admin/base_site.html" %}
+
+{% block content %}
+  <div>
+    <h1>Reply to selected emails</h1>
+    <form method="post" action="">
+      {% csrf_token %}
+      {{ form.as_p }}
+      <button type="submit">Send</button>
+    </form>
+  </div>
+{% endblock %}

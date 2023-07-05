@@ -22,6 +22,8 @@
 </head>
 <body>
 
+  
+  
 <div class="sidebar">
     <div class="logo-details">
         <i class='bx bxl-c-plus-plus'></i>
@@ -166,9 +168,8 @@
     <div class="top-right">
         {% if request.user.is_authenticated %}
             <div class="user-profile">
-                <span class="user-name">Welcome {{ request.user.first_name|default:request.user.username|title }} {{ request.user.last_name|default:request.user.username|title }}</span>
-                <span><i class="fa-solid fa-user user-icon fa-2x"></i> <br> <a href="{% url 'logout' %}" class="logout-link">Logout</a></span>
-                
+                <span class="user-name">Welcome {{ request.user.username|default:request.user.username|title }}</span>
+                <span><i class="fa-solid fa-user user-icon fa-2x"></i> <br> <a href="{% url 'logout' %}" class="logout-link">Logout</a></span>  
             </div>
         {% endif %}
     </div>

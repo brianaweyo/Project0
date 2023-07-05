@@ -79,3 +79,11 @@ class SessionForm(forms.Form):
     trainer = forms.ChoiceField(
         choices=[(trainer.trainer_id, trainer.first_name) for trainer in trainers]
     )
+
+    from django import forms
+
+
+class ReplyEmailForm(forms.Form):
+    recipient = forms.EmailField()
+    subject = forms.CharField(max_length=255)
+    message = forms.CharField(widget=forms.Textarea)
