@@ -439,7 +439,9 @@ table input[type="text"]{
 .logout-link{
     text-decoration: none;
 }
-
+.card-text{
+    color: #11101d;
+}
 
 .feed-form {
     width: 100%;

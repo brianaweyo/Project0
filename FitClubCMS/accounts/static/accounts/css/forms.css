@@ -1,3 +1,94 @@
+@font-face {
+  font-family: "TT Wellingtons Trial";
+  src: url("../tt_wellingtonss/TT Wellingtons Trial Regular.otf") format('opentype');
+  font-weight: 400;
+}
+
+@font-face {
+  font-family: "TT Wellingtons Trial";
+  src: url("../Fonts/TT Wellingtons Trial Medium.otf") format('opentype');
+  font-weight: 500;
+}
+
+@font-face {
+  font-family: "TT Wellingtons Trial";
+  src: url("../tt_wellingtons/TT Wellingtons Trial DemiBold.otf") format('opentype');
+  font-weight: 600;
+}
+
+@font-face {
+  font-family: "TT Wellingtons Trial";
+  src: url("../tt_wellingtons/TT Wellingtons Trial Bold.otf") format('opentype');
+  font-weight: 700;
+}
+
+@font-face {
+  font-family: "TT Wellingtons Trial";
+  src: url("../tt_wellingtons/TT Wellingtons Trial ExtraBold.otf") format('opentype');
+  font-weight: 800;
+}
+
+@font-face {
+  font-family: "TT Wellingtons Trial";
+  src: url("../tt_wellingtons/ Wellingtons Trial Black.otf") format('opentype');
+  font-weight: 900;
+}
+
+#main-content h1, p {
+  text-align: center;
+  color: #fff;
+  font-family: "TT Wellingtons Trial", sans-serif;
+}
+
+#main-content .reset-notification{
+  font-family: "TT Wellingtons Trial", sans-serif;
+  color: #fff;
+  
+}
+
+#main-content h1{
+  font-size: 3rem;
+  font-weight: 800;
+  padding-top: 10rem;
+} 
+
+#main-content p{
+  font-size: 1.5rem;
+  font-weight: 400;
+}
+#main-content input[type="submit"]{
+  width: 15%;
+  font-size: 1.3rem;
+
+}
+
+#main-content input[type="email"] {
+ width: 25%;
+ height: 2rem;
+ font-size: 1.3rem;
+}
+
+
+#main-content .reset-pass-form{
+  text-align: center;
+  color: #fff;
+  font-family: "TT Wellingtons Trial", sans-serif;
+  font-weight: 500;
+}
+
+#main-content #id_new_password1, #id_new_password2{
+  width: 20%;
+}
+#main-content .reset-pass-form label[for^="id_new_password1"], label[for^="id_new_password2"] {
+  font-size: 1em;
+  font-weight: 400;
+}
+#main-content .reset-pass-form .reset-form{
+ color: #fff;
+}
+
+
+
 
 /* Login form styling */
 .form-container {
@@ -10,7 +101,6 @@
     height: 100vh;
     background-color: transparent;
     align-content: center;
-    background-image: url('../images/image1.jpeg');
     background-repeat: no-repeat;
     background-size: cover;
     color: white;

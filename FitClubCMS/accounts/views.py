@@ -10,6 +10,8 @@ from django.contrib.auth import authenticate, login
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.models import User
 from django.core import serializers
+from django.core.cache import cache
+from django.core.exceptions import ObjectDoesNotExist
 from django.core.mail import send_mail
 from django.db import IntegrityError
 from django.http import HttpResponse, JsonResponse
@@ -78,8 +80,6 @@ def register(request):
             new_user.set_password(user_form.cleaned_data["password"])
             # save user object
             new_user.save()
-            # create the user Profile object associated with new created user
-            Profile.objects.create(user=new_user)
             return render(
                 request, "accounts/register_done.html", {"new_user": new_user}
             )
@@ -129,7 +129,6 @@ from django.views.decorators.csrf import csrf_exempt
 @csrf_exempt
 @login_required
 def payment_index(request):
-
     if request.method == "POST":
         # Retrieve the form data
         amount = float(request.POST.get("amount"))
@@ -139,34 +138,29 @@ def payment_index(request):
         phone_number = request.POST.get("phone_no")
         package_name = request.POST.get("package_name")
 
+        user = request.user
         # storing the two in order to be accessed from the response in payment_result
-        request.session["session_package_name"] = package_name
-        request.session["username"] = request.user.username
-
-        request.session.save()  # Save the session
-
-        package_retrieved_name = request.session.get("session_package_name")
-        username = request.session.get("username")
+        cache.set("package_name", package_name)
+        cache.set("user", user)
 
         print(package_name)
-        print(username)
-
-        
+        print(user)
 
         cl = MpesaClient()
         account_reference = "reference"
         transaction_desc = "Description"
-        callback_url = "https://ed51-105-160-111-11.ngrok-free.app/payment_result/"
+        callback_url = "https://dd07-41-89-10-241.ngrok-free.app/payment_result/"
         response = cl.stk_push(
             phone_number, amount, account_reference, transaction_desc, callback_url
         )
+
+        return redirect('payment_success')
 
     return HttpResponse(response)
 
 
 @csrf_exempt
 def payment_result(request):
-    print("callback returned")
     cl = MpesaClient()
     if request.method == "POST":
         result = cl.parse_stk_result(request.body)
@@ -180,26 +174,36 @@ def payment_result(request):
             print(receipt_no)
             print(transaction_date)
             print(phone_number)
+            print(type(phone_number))
 
-
-            
+            number = str(phone_number)
+            print(type(number))
             transaction_date_str = str(transaction_date)
             transaction_date = datetime.strptime(transaction_date_str, "%Y%m%d%H%M%S")
             print(transaction_date)
-           
 
+            phone_number_str = str(type(phone_number))
             # Retrieve the package_name and username from the session
-            package_name = request.session.get("session_package_name")
-            username = request.session.get("username")
+            user = cache.get("user")
+            package_name = cache.get("package_name")
 
             print(package_name)
-            print(username)
+            print(user)
 
+            # create transaction object to save the transaction into the database
+            transaction = Transaction.objects.create(
+                amount=amount,
+                package=package_name,
+                user=user,
+                transaction_date=transaction_date,
+                status="Complete",
+                receipt_no=receipt_no,
+                sender_no=number,
+            )
+            user = cache.delete("user")
+            package_name = cache.delete("package_name")
 
     return HttpResponse("okay")
-
-
- 
 
 
 def payment_success_page(request):
@@ -247,13 +251,16 @@ def dashboard(request):
         else:
             context["next_session_start"] = "No upcoming sessions"
 
-        # Retrieve the package associated with the logged-in user
         try:
             profile = Profile.objects.get(user=request.user)
-            package = profile.package
             context["profile"] = profile
             context["user"] = request.user
-            context["package_name"] = package.package_name
+
+            # Check if the profile has a package
+            if profile.package:
+                context["package_name"] = profile.package.package_name
+            else:
+                context["package_name"] = None
 
         except Profile.DoesNotExist:
             context["package_name"] = None
@@ -283,9 +290,14 @@ def dashboard(request):
 
         try:
             profile = Profile.objects.get(user=request.user)
-            photo_url = profile.photo.url
-            context["photo_url"] = photo_url
-        except Profile.DoesNotExist:
+            if (
+                profile.photo and profile.photo.file
+            ):  # Check if photo attribute has a file
+                photo_url = profile.photo.url
+                context["photo_url"] = photo_url
+            else:
+                context["photo_url"] = None
+        except ObjectDoesNotExist:
             context["photo_url"] = None
 
     return render(request, "accounts/pages/dashboard.html", context)
@@ -293,7 +305,9 @@ def dashboard(request):
 
 @login_required
 def payment_history(request):
-    transactions = Transaction.objects.filter(user=request.user).order_by("-created_at")
+    transactions = Transaction.objects.filter(user=request.user).order_by(
+        "-transaction_date"
+    )
     return render(
         request, "accounts/pages/payment_records.html", {"transactions": transactions}
     )
@@ -466,24 +480,6 @@ def cancel_booking(request, booking_id):
             )  # Return an error response if the booking is not found
     else:
         return JsonResponse({"success": False, "error": "Invalid request method"})
-    # if request.method == "POST":
-    #     booking_id = request.POST.get(
-    #         "bookingId"
-    #     )  # Retrieve the booking ID from the POST data
-    #     try:
-    #         booking = Booking.objects.get(
-    #             booking_id=booking_id
-    #         )  # Retrieve the booking from the database
-    #         booking.delete()  # Delete the booking
-    #         return JsonResponse({"success": True})  # Return a success response
-    #     except Booking.DoesNotExist:
-    #         return JsonResponse(
-    #             {"success": False, "error": "Booking not found"}
-    #         )  # Return an error response if the booking is not found
-    # else:
-    #     return JsonResponse(
-    #         {"success": False, "error": "Invalid request method"}
-    #     )  # Return an error response for other request methods
 
 
 @login_required

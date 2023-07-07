@@ -66,7 +66,6 @@ class TransactionAdmin(admin.ModelAdmin):
         "sender_no",
         "transaction_date",
         "status",
-        "created_at",
         "receipt_no",
     ]
 

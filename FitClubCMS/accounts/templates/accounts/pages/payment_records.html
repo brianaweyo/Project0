@@ -6,8 +6,8 @@
     <tr>
       <th>Tranasaction Id</th>
       <th>Date</th>
-      <th>Time</th>
       <th>Amount</th>
+      <th>Receipt No</th>
       <th>Phone</th>
       <th>Package</th>
       <th>Status</th>
@@ -19,8 +19,8 @@
     <tr>
       <td>{{ transaction.transaction_id }}</td>
       <td>{{ transaction.transaction_date }}</td>
-      <td>{{ transaction.created_at|time:"P"}}</td>
       <td>{{ transaction.amount }}</td>
+      <td>{{ transaction.receipt_no }}</td>
       <td>{{ transaction.sender_no }}</td>
       <td>{{ transaction.package }}</td>
       <td>{{ transaction.status }}</td>

@@ -1,5 +1,6 @@
 from django import forms
 from django.contrib.auth.models import User
+from django.forms import DateInput
 
 from .models import Profile
 
@@ -70,6 +71,10 @@ class ProfileEditForm(forms.ModelForm):
         model = Profile
         fields = ["sex", "phone_no", "photo", "date_of_birth"]
 
+        widgets = {
+            "date_of_birth": DateInput(attrs={"type": "date"}),
+        }
+
 
 class SessionForm(forms.Form):
     trainers = []
@@ -79,8 +84,6 @@ class SessionForm(forms.Form):
     trainer = forms.ChoiceField(
         choices=[(trainer.trainer_id, trainer.first_name) for trainer in trainers]
     )
-
-    from django import forms
 
 
 class ReplyEmailForm(forms.Form):
