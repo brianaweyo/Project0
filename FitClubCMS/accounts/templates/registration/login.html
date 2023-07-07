@@ -1,35 +1,37 @@
-{%  extends "base.html" %}
+{% extends 'base.html' %}
+{% load static %}
 
-{% block title %} Login {% endblock %}
+
+{% block title %}Login{% endblock title %}
+
+{% block styles %}
+<link rel="stylesheet" href="{% static 'accounts/css/login.css' %}">
+{% endblock styles %}
+
+
 {% block content %}
-   
-<div class="form-container">
-    <div class="login-text">Login</div>
-         <div class="login-credentials">
-            
-               <form method = "post">
-                     {{ form.as_p }}
-                     {% csrf_token %}
-                     <input type="hidden" name="next" value="{{ next }}"/>
-                     <p><input type="submit" value="Log in"></p>
-                 </form>
-         </div>
-        <div class="directives" >
-             <p>
-                Forgotten your password?
-              <a href="{% url "password_reset" %}">
-                 Reset
-                 </a>
-             </p>
-             
-             {% if form.errors %}
-             <p>
-                 Your username and password didn't match! try again.<br>
-             </p>
-               <p>
-                 If you don't have an account <a href="{% url "register" %}">Register Now .</a>
-               </p>
-              {% endif %}
-        </div>
+{% include 'accounts/components/messages.html' %}
+<h1 class="logo-login">GenZFit</h1>
+
+<div class="login-form">
+  <h1 class="title-login">Login</h1>
+  <form method="POST">
+        {{ form.as_p }}
+        {% csrf_token %}
+       <input type="hidden" name="next" value="{{ next }}" />
+
+       <div class="button-style">
+        <input type="submit" value="Log-in" id="btn-login">
+      </div>
+  </form>
+
+  <a href="{% url "password_reset" %}" class="reset-pass">Forgotten password?</a>
 </div>
-{%  endblock %}
+
+<p class="para-2">
+  Not have an account? <a href="{% url 'register' %}">Sign Up Here</a>
+</p>
+{% endblock content %}
+
+{% block navigationbar %}{% endblock navigationbar %}
+{% block footer %}{% endblock footer%}

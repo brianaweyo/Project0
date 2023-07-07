@@ -1,0 +1,75 @@
+body {
+    background-color: rgb(41, 51, 82);
+  }
+  
+  .logo-login {
+    font-size: 2.5rem;
+    font-weight: 900;
+    text-align: center;
+    color: white;
+    margin-top: 2rem;
+    margin-bottom: 2rem;
+  }
+  
+  .login-form {
+    width: 360px;
+    margin: auto;
+    border-radius: 16px;
+    background-color: white;
+    padding: 1rem;
+  }
+  
+  .title-login {
+    text-align: center;
+    font-weight: 700;
+  }
+  
+  .login-form form label {
+    display: block;
+    margin-top: 20px;
+    font-size: 18px;
+  }
+  
+  .login-form form input {
+    width: 90%; 
+    padding: 12px 16px;
+    border: 1px solid gray;
+    border-radius: 6px;
+  }
+  
+  .button-style {
+    margin-top: 32px;
+  }
+  
+  #btn-login {
+    font-family: inherit;
+    border: none;
+    background-color: blue;
+    color: white;
+    font-size: 20px;
+    font-weight: bold;
+    border-radius: 6px;
+    padding: 8px 16px;
+  }
+  
+  .reset-pass {
+    display: block;
+    text-align: center;
+    margin-top: 0.75rem;
+  }
+  
+  .para-2 {
+    text-align: center;
+    color: white;
+    font-size: 20px;
+    margin-top: 1rem;
+  }
+  
+  .para-2 a {
+    color: #49c1a2;
+  }
+  
+  .errorlist {
+    color: rgba(255, 0, 0, 0.8);
+    padding-left: 0;
+  }

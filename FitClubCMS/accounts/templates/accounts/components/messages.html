@@ -1,0 +1,47 @@
+{% if messages %}
+<style>
+    .messages {
+        position: absolute;
+        z-index: 300;
+        width: 100%;
+        top: 56px;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        padding: 1rem;
+    }
+</style>
+<div class="messages">
+    {% for message in messages %} {% if message.level_tag == "error" %}
+    <div class="alert alert-danger alert-dismissible fade show" role="alert">
+        {{ message }}
+        <button
+            type="button"
+            class="btn-close"
+            data-bs-dismiss="alert"
+            aria-label="Close"
+        ></button>
+    </div>
+    {% elif message.level_tag == 'success' or message.level_tag == 'warning' or message.level_tag == 'info' %}
+    <div class="alert alert-{{message.level_tag}} alert-dismissible fade show" role="alert">
+        {{ message }}
+        <button
+            type="button"
+            class="btn-close"
+            data-bs-dismiss="alert"
+            aria-label="Close"
+        ></button>
+    </div>
+    {% else %}
+    <div class="alert alert-info alert-dismissible fade show" role="alert">
+        {{ message }}
+        <button
+            type="button"
+            class="btn-close"
+            data-bs-dismiss="alert"
+            aria-label="Close"
+        ></button>
+    </div>
+    {% endif %} {% endfor %}
+</div>
+{% endif %}

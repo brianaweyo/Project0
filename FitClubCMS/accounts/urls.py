@@ -1,3 +1,4 @@
+from django.contrib import admin
 from django.contrib.auth import views as auth_views
 from django.urls import include, path
 
@@ -30,4 +31,3 @@ urlpatterns = [
     path("send_email/", views.send_email, name="send_email"),
     path("payment_result/", views.payment_result, name="payment_result"),
 ]
-

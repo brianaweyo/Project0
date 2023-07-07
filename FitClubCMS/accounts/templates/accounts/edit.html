@@ -26,3 +26,27 @@
               </form>
         </div>
 {% endblock %}
+
+<!-- {% extends 'base2.html' %}
+
+{% block dashboard_styles %}
+<style>
+    .dashboard_content {
+        background-color: white;
+        border-left: 2px solid rgba(1, 1, 1, .10);
+    }
+</style>
+{% endblock dashboard_styles %}
+
+{% block dashboard_content %}
+<div>
+    <h1 class="dashboard-title">My Profile</h1>
+
+    <form method="post" class="dashboard-form">
+        {% csrf_token %}
+        {% include 'accounts/components/form_fields.html' with form=user_form %}
+        {% include 'accounts/components/form_fields.html' with form=profile_form %}
+        {% include 'accounts/components/btn_submit.html' with btn_text="Save Profile" %}
+    </form>
+</div>
+{% endblock dashboard_content %} -->

@@ -1,0 +1,288 @@
+ @font-face {
+    font-family: "TT Wellingtons Trial";
+    src: url("../tt_wellingtonss/TT Wellingtons Trial Regular.otf") format('opentype');
+    font-weight: 400;
+}
+
+@font-face {
+    font-family: "TT Wellingtons Trial";
+    src: url("../Fonts/TT Wellingtons Trial Medium.otf") format('opentype');
+    font-weight: 500;
+}
+
+@font-face {
+    font-family: "TT Wellingtons Trial";
+    src: url("../tt_wellingtons/TT Wellingtons Trial DemiBold.otf") format('opentype');
+    font-weight: 600;
+}
+
+@font-face {
+    font-family: "TT Wellingtons Trial";
+    src: url("../tt_wellingtons/TT Wellingtons Trial Bold.otf") format('opentype');
+    font-weight: 700;
+}
+
+@font-face {
+    font-family: "TT Wellingtons Trial";
+    src: url("../tt_wellingtons/TT Wellingtons Trial ExtraBold.otf") format('opentype');
+    font-weight: 800;
+}
+
+@font-face {
+    font-family: "TT Wellingtons Trial";
+    src: url("../tt_wellingtons/ Wellingtons Trial Black.otf") format('opentype');
+    font-weight: 900;
+}
+
+@font-face {
+    font-family: "TT Wellingtons Trial";
+    src: url("../tt_wellingtons/TT\ Wellingtons\ Trial\ ExtraLight.otf");
+    font-weight: 900;
+}
+
+
+
+
+html,
+body {
+    width: 100%;
+    font-family: "TT Wellingtons Trial", sans-serif;
+    
+}
+
+/* * {
+    padding: 0;
+    margin: 0;
+    text-decoration: none;
+    box-sizing: border-box;
+}
+
+ul,
+ol {
+    list-style: none;
+}
+img.gravatar-img {
+    border: 2px solid rgba(0, 0, 0, 0.1);
+    border-radius: 50%;
+}
+
+.navbar {
+    background-color: #F0EFED;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    color: black;
+    height: 71px;
+    width: 100%;
+    padding: 0 40px;
+}
+
+.brand-title {
+    font-size: 50px;
+    line-height: 80px;
+    padding: 0;
+    font-weight: 900;
+    color: black;
+}
+
+.navbar ul li {
+    display: inline-block;
+    line-height: 50px;
+    margin: 0;
+    opacity: 1;
+}
+
+.navbar ul li a {
+    color: black;
+    margin: 20px;
+    text-decoration: none;
+    font-size: 1.3em;
+    opacity: 0.7;
+    transition: 0.5s;
+}
+
+.navbar-links li:hover a {
+    color: black;
+    opacity: 1;
+}
+
+.navbar-links ul li.sep::after {
+    content: "|";
+}
+
+.toggle-button {
+
+    display: none;
+    flex-direction: column;
+    justify-content: space-between;
+    width: 30px;
+    height: 21px;
+}
+
+.toggle-button .bar {
+    height: 3px;
+    width: 100%;
+    background-color: black;
+    border-radius: 10px;
+}
+
+@media (max-width: 952px) {
+    .navbar {
+        height: auto;
+        padding: 0;
+    }
+
+    .my-logo {
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+        justify-content: space-between;
+        padding-left: 20px;
+        padding-right: 20px;
+    }
+
+    .toggle-button {
+        display: flex;
+    }
+
+    .navbar-links {
+        display: none;
+        width: 100%;
+    }
+
+    .navbar-links.active {
+        display: flex;
+    }
+
+    .navbar {
+        flex-direction: column;
+        align-items: stretch;
+    }
+
+    .navbar-links ul li.sep::after {
+        content: "";
+    }
+
+ 
+    .navbar-links li a {
+        padding: .5rem 1rem;
+    }
+
+    .navbar-links.active ul {
+        display: flex;
+        flex-direction: column;
+        gap: 8px;
+    }
+}
+
+
+
+.main {
+    
+    display: flex;
+    flex: 1;
+}
+
+.hero-h1 {
+    color: #001855;
+} */
+
+
+/* @media screen and (max-width: 767px) {
+
+    .hero-h1 {
+        margin-top: 10px;
+        font-size: 35px;
+        line-height: 41px;
+    }
+}
+
+.footerContainer {
+    background-color: #F0EFED;
+    width: 100%;
+    margin-bottom: auto;
+    padding-bottom: 0;
+    padding-top: 1px;
+}
+
+.socialIcons {
+    display: flex;
+    justify-content: center;
+
+} */
+
+/* .socialIcons a {
+    text-decoration: none;
+    padding: 10px;
+    background-color: #F0EFED;
+    margin: 10px;
+    border-radius: 50%;
+}
+
+.socialIcons a i {
+    font-size: 2em;
+    color: black;
+    opacity: 0.9;
+}
+
+.socialIcons a:hover {
+    background-color: white;
+    transition: .5s;
+}
+
+.socialIcons a:hover i {
+    color: black;
+    transition: 0.5s;
+}
+
+.footNav {
+    margin: 3px 0;
+}
+
+.footNav ul {
+    display: flex;
+    justify-content: center;
+}
+
+.footNav ul li a {
+    color: black;
+    margin: 20px;
+    text-decoration: none;
+    font-size: 1.3em;
+    opacity: 0.7;
+    transition: 0.5s;
+}
+
+.footNav ul li a:hover {
+    opacity: 1;
+}
+
+.footerBottom {
+    padding: 20px;
+    text-align: center;
+    color: black;
+    opacity: 0.8;
+    width: 100%;
+} */
+/* @media(max-width: 952px) { 
+    .footNav ul {
+        flex-direction: column;
+        align-items: center;
+        width: 100%;
+    }
+
+    .footNav ul li {
+
+        text-align: center;
+        margin: 10px;
+    }
+
+    .footerBottom {
+        background-color: #F0EFED;
+        padding: 20px;
+        text-align: center;
+        color: black;
+        opacity: 0.8;
+        width: 100%;
+    }
+} */

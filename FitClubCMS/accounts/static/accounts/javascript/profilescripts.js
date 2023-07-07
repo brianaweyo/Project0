@@ -230,14 +230,6 @@ setInterval(updateTime, 1000);
 
 
 
-//implementing the close button functionality
-const closeButtons = document.querySelectorAll(".close-button");
-closeButtons.forEach(function(button) {
-      button.addEventListener("click", function() {
-      this.parentElement.style.display = "none";
-    });
-  });
-
 $('.booking-form').submit(function() {
   var submitBtn = $(this).find('input[type=submit]');
   submitBtn.val('Booked');

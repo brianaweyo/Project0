@@ -1,4 +1,5 @@
 import email
+import functools
 import imaplib
 import json
 from datetime import date, datetime, timedelta
@@ -13,6 +14,7 @@ from django.core.mail import send_mail
 from django.db import IntegrityError
 from django.http import HttpResponse, JsonResponse
 from django.shortcuts import get_object_or_404, redirect, render
+from django.urls import reverse
 from django.utils import timezone
 from django.utils.dateparse import parse_datetime
 from django.views.decorators.http import require_POST
@@ -42,6 +44,10 @@ def landing_page(request):
     return render(request, "accounts/pages/landingpage.html")
 
 
+from django.shortcuts import redirect
+from django.urls import reverse
+
+
 def user_login(request):
     if request.method == "POST":
         form = LoginForm(request.POST)
@@ -53,7 +59,6 @@ def user_login(request):
             if user is not None:
                 if user.is_active:
                     login(request, user)
-                    return HttpResponse("Authenticated successfully")
                 else:
                     return HttpResponse("Disabled Account")
             else:
@@ -110,7 +115,6 @@ def edit(request):
 
 @login_required
 def payment_form(request):
-
     # Retrieve the package data from the database or any other source
     package_id = request.GET.get("package_id")
     package = get_object_or_404(Package, pk=package_id)
@@ -118,14 +122,15 @@ def payment_form(request):
     context = {"package": package}
     return render(request, "accounts/pages/payment_form.html", context)
 
+
 from django.views.decorators.csrf import csrf_exempt
+
 
 @csrf_exempt
 @login_required
 def payment_index(request):
-    global package_name 
-    if request.method == "POST":
 
+    if request.method == "POST":
         # Retrieve the form data
         amount = float(request.POST.get("amount"))
         amount = round(
@@ -134,16 +139,30 @@ def payment_index(request):
         phone_number = request.POST.get("phone_no")
         package_name = request.POST.get("package_name")
 
+        # storing the two in order to be accessed from the response in payment_result
+        request.session["session_package_name"] = package_name
+        request.session["username"] = request.user.username
+
+        request.session.save()  # Save the session
+
+        package_retrieved_name = request.session.get("session_package_name")
+        username = request.session.get("username")
+
+        print(package_name)
+        print(username)
+
+        
+
         cl = MpesaClient()
         account_reference = "reference"
         transaction_desc = "Description"
-        callback_url = "https://cdca-41-89-10-241.ngrok-free.app/payment_result/"
+        callback_url = "https://ed51-105-160-111-11.ngrok-free.app/payment_result/"
         response = cl.stk_push(
             phone_number, amount, account_reference, transaction_desc, callback_url
         )
-                # Store package_name in session
-        package_name = package_name
+
     return HttpResponse(response)
+
 
 @csrf_exempt
 def payment_result(request):
@@ -152,54 +171,35 @@ def payment_result(request):
     if request.method == "POST":
         result = cl.parse_stk_result(request.body)
         if result["ResultCode"] == 0:
-           amount = result.get("Amount")
-           receipt_no = result.get("MpesaReceiptNumber")
-           transaction_date = result.get("TranasactionDate")
-           phone_number = result.get("PhoneNumber")
+            amount = result.get("Amount")
+            receipt_no = result.get("MpesaReceiptNumber")
+            transaction_date = result.get("TransactionDate")
+            phone_number = result.get("PhoneNumber")
 
+            print(amount)
+            print(receipt_no)
+            print(transaction_date)
+            print(phone_number)
+
+
+            
+            transaction_date_str = str(transaction_date)
+            transaction_date = datetime.strptime(transaction_date_str, "%Y%m%d%H%M%S")
+            print(transaction_date)
            
-           # Convert the value to a string
-           transaction_date_str = str(transaction_date)
 
-            # Parse the string using the appropriate format
-           transaction_date = datetime.strptime(transaction_date_str, "%Y%m%d%H%M%S")
+            # Retrieve the package_name and username from the session
+            package_name = request.session.get("session_package_name")
+            username = request.session.get("username")
+
+            print(package_name)
+            print(username)
 
 
-        #   package = Package.objects.get(package_name=package_name)
-           transaction = Transaction.objects.create(
-                amount=amount,
-                package=package_name,
-                user=request.user,  # Assuming you have a logged-in user
-                transaction_date=transaction_date,
-                status='Complete',  # Set the initial status as 'Pending'
-                sender_no= phone_number
-                )
-             
     return HttpResponse("okay")
 
 
-        # @csrf_exempt 
-        # def mpesa_callback (request):
-
-
-
-            #     package = Package.objects.get(package_name=package_name)
-            #     transaction = Transaction.objects.create(
-            #         amount=amount,
-            #         package=package,
-            #         user=request.user,  # Assuming you have a logged-in user
-            #         transaction_date=timezone.now().date(),
-            #         # status='Pending',  # Set the initial status as 'Pending'
-            #         sender_no=request.POST.get(
-            #             "phone_no"
-            #         ),  # Assuming you have a 'phone_number' field in your User model
-            #     )
-            #     # return HttpResponse(response)
-            #     return redirect("payment_success")
-
-            # # If the request method is not POST, you can handle it as desired
-            # # For example, you can redirect the user to the payment form again
-            # return redirect("payment_form")
+ 
 
 
 def payment_success_page(request):
@@ -520,15 +520,13 @@ def send_email(request):
 def inbox(request):
     # Assuming the logged-in user's email address is stored in the 'email' field
     email = request.user.email
-    
+
     # Query the database to get the count of emails sent to the logged-in user
     total_notifications = Email.objects.filter(recipient=email).count()
 
-    context = {
-        'total_notifications': total_notifications
-    }
-    
-    return render(request, 'inbox.html', context)
+    context = {"total_notifications": total_notifications}
+
+    return render(request, "inbox.html", context)
 
 
 def services(request):

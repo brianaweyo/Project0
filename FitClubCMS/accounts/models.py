@@ -48,17 +48,6 @@ class Transaction(models.Model):
     def __str__(self):
         return f"Transaction {self.transaction_id}"
 
-    def save(self, *args, **kwargs):
-        current_date = datetime.now().date()
-
-        if self.transaction_date > current_date:
-            self.status = "pending"
-        elif self.transaction_date == current_date:
-            self.status = "in progress"
-        else:
-            self.status = "complete"
-
-        super().save(*args, **kwargs)
 
 
 class Trainers(models.Model):
