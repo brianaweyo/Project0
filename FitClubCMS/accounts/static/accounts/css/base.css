@@ -1,5 +1,43 @@
+@font-face {
+  font-family: "TT Wellingtons Trial";
+  src: url("../tt_wellingtonss/TT Wellingtons Trial Regular.otf") format('opentype');
+  font-weight: 400;
+}
+
+@font-face {
+  font-family: "TT Wellingtons Trial";
+  src: url("../Fonts/TT Wellingtons Trial Medium.otf") format('opentype');
+  font-weight: 500;
+}
+
+@font-face {
+  font-family: "TT Wellingtons Trial";
+  src: url("../tt_wellingtons/TT Wellingtons Trial DemiBold.otf") format('opentype');
+  font-weight: 600;
+}
+
+@font-face {
+  font-family: "TT Wellingtons Trial";
+  src: url("../tt_wellingtons/TT Wellingtons Trial Bold.otf") format('opentype');
+  font-weight: 700;
+}
+
+@font-face {
+  font-family: "TT Wellingtons Trial";
+  src: url("../tt_wellingtons/TT Wellingtons Trial ExtraBold.otf") format('opentype');
+  font-weight: 800;
+}
+
+@font-face {
+  font-family: "TT Wellingtons Trial";
+  src: url("../tt_wellingtons/ Wellingtons Trial Black.otf") format('opentype');
+  font-weight: 900;
+}
+
+
 
 body{
+  font-family: "TT Wellingtons Trial", sans-serif;
     list-style: none;
     text-decoration: none;
     display: flex;
@@ -8,6 +46,9 @@ body{
 }
 
 #wrapper .navbar{
+  font-family: "TT Wellingtons Trial", sans-serif;
+  font-weight: 600;
+  font-size: 1.3rem;
   background-color: rgb(41, 51, 82);
   color: #ffffff;
   height: 5em;
@@ -23,7 +64,7 @@ body{
 }
 .nav-link{
   color:#ffffff;
-  opacity: 0.75;
+  opacity: 0.8;
 }
 .nav-link:hover{
   color: #ffffff;
@@ -53,12 +94,20 @@ body{
   justify-content: space-evenly;
   align-items: flex-start;
   flex-direction: column;
+  font-size: 1.2rem;
+  font-weight: 500;
 } 
 .register-link{
   text-align: center;
   font-weight: 300;
 }
 
+#services-header{
+  text-align: center;
+  font-weight: 600;
+  font-size: 2rem;
+  padding: 1.3rem;
+}
 .about .p{
   font-size: 0.9em;
   line-height: 23px;
@@ -89,6 +138,11 @@ body{
   width: 50%;
   
 }
+
+.programs-intro{
+  font-size: 1.2rem;
+  font-weight: 500;
+}
 .services-card{
   padding-left: 15px;
 }
@@ -97,21 +151,186 @@ body{
   display: flex;
   flex-direction: row;  
 }
-.carousel,.service-statement{
+.carousel,.testimonies{
   width: 50%;
   padding-left: 5px;
 }
+.testimonies{
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  margin-top: auto;
+  margin-bottom: auto;
+  font-weight: 500;
+  font-size: 1.2rem;
+}
+.testimonies h4{
+  font-size: 2rem;
+}
+/* #about-page{
+  
+} */
 
-/* .service-statement{
-  width: 40%;
+.org-mission{
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  margin-top: auto;
+  margin-bottom: auto;
+}
+.org-mission h3{
+  font-size: 2rem;
+  font-weight: 600;
+}
+.org-mission{
+  font-size: 1.3rem;
+  font-weight: 400;
+}
+blockquote::before,
+blockquote::after {
+  font-weight: 900;
+}
+
+blockquote::before {
+  content: "“";
+}
+
+blockquote::after {
+  content: "”";
+}
+
+.card-title{
+  font-weight: 600;
+}
+.card-text{
+ font-size: 1.1rem;
+ font-weight: 600;
+}
+.card-img-top{
+  border-radius: 100px;
+}
+
+.contact-page{
+  display: flex;
+  flex-direction: column; 
+}
+.contact-text .text-center{
+  align-items: center;
+  font-size: 1.2rem;
+  font-weight: 400;
+
+}
+.contact-text > h2{
+  text-align:  center;
+  font-size: 2rem;
+  font-weight: 600;
+}
+.contact-container{
+  display: flex;
+  flex-direction: row;
+}
+.contact-info, .contact-form{
+  width: 50%;
+}
+.contact-info{
+  margin-left: 2rem;
+}
+.contact-container .contact-info{
+ width: 50%;
+ display: flex;
+ flex-direction: column;
+}
+
+.contact-container .contact-info .box{
+  position: relative;
+  padding: 20px 0;
+  display: flex;
+}
+
+.contact-container .contact-info .box .icon{
+  min-width: 60px;
+  height: 60px;
+  background-color: rgb(41, 51, 82);
   display: flex;
   justify-content: center;
   align-items: center;
-  padding-right: 5px;
-  
+  border-radius: 50px;
+  font-size: 1.5rem;
+  color: #fff;
+}
+.contact-container .contact-info .box .contact-text{
+  display: flex;
+  margin-left: 10px;
+  font-size: 1.2rem;
+  flex-direction: column;
+  font-weight: 600;
 
-} */
+}
+.contact-container .contact-info .box .contact-text h3{
+  font-weight: 600;
+  color: rgb(41, 51, 82);
+}
 
+.contact-form{
+ background-color: #fff;
+ display: flex;
+ align-items: center;
+}
+
+.contact-form h2{
+  font-size: 30px;
+  color: #333;
+}
+.contact-form form{
+  width: 50%;
+  border-radius: 7px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2); 
+}
+.contact-form .input-box{
+  position:relative;
+  width: 100%;
+  margin-top: 20px;
+
+}
+
+.contact-form .input-box input,
+.contact-form .input-box textarea{
+  width: 100%;
+  font-size: 1.2rem;
+  margin: 10px 0;
+  border: none;
+  border-bottom: 2px solid #333;
+  outline: none;
+}
+.contact-form .input-box span{
+ position: absolute;
+ left: 0;
+ padding: 5px 0;
+ font-size: 1.3rem;
+ margin: 10px 20px;
+ pointer-events: none;
+ transition: 0.5s;
+ color: rgb(41, 51, 82);
+}
+.contact-form .input-box input:focus~ span,
+.contact-form .input-box input:valid~ span,
+.contact-form .input-box textarea:focus~ span,
+.contact-form .input-box textarea:valid~ span{
+  color: rgb(41, 51, 82);
+  font-size: 12px;
+  transform: translateY(-20px);
+}
+
+.contact-form .input-box input[type="submit"]{
+  width: 100%;
+  background-color: rgb(41, 51, 82);
+  color: #fff;
+  border: none;
+  border-radius: 50px;
+  cursor: pointer;
+  padding: 10px;
+  font-size: 1.4em;
+}
 
 
 #footer {
@@ -205,122 +424,3 @@ body{
 /* styling contact section */
 
 
-.contact-page{
-  display: flex;
-  flex-direction: column; 
-}
-.contact-text{
-  align-items: center;
-
-}
-.contact-text > h2{
-  text-align:  center;
-}
-
-.contact-container{
-  display: flex;
-  flex-direction: row;
-}
-.contact-info, .contact-form{
-  width: 50%;
-}
-.contact-info{
-  margin-left: 2rem;
-}
-.contact-container .contact-info{
- width: 50%;
- display: flex;
- flex-direction: column;
-}
-
-.contact-container .contact-info .box{
-  position: relative;
-  padding: 20px 0;
-  display: flex;
-}
-
-.contact-container .contact-info .box .icon{
-  min-width: 60px;
-  height: 60px;
-  background-color: blue;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  border-radius: 50px;
-  font-size: 22px;
-  color: #fff;
-}
-.contact-container .contact-info .box .contact-text{
-  display: flex;
-  margin-left: 10px;
-  font-size: 16px;
-  flex-direction: column;
-  font-weight: 200;
-
-}
-.contact-container .contact-info .box .contact-text h3{
-  font-weight: 300;
-  color: #576567;
-}
-
-.contact-form{
- background-color: #fff;
- display: flex;
-align-items: center;
-}
-
-.contact-form h2{
-  font-size: 30px;
-  color: #333;
-}
-.contact-form form{
-  width: 50%;
-  margin-top: 10px;
-  border-radius: 7px;
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2); 
-}
-.contact-form .input-box{
-  position:relative;
-  width: 100%;
-  margin-top: 20px;
-
-}
-
-.contact-form .input-box input,
-.contact-form .input-box textarea{
-  width: 100%;
-  font-size: 1em;
-  margin: 10px 0;
-  border: none;
-  font-size: 1.2em;
-  border-bottom: 2px solid #333;
-  outline: none;
-}
-.contact-form .input-box span{
- position: absolute;
- left: 0;
- padding: 5px 0;
- font-size: 16px;
- margin: 10px 20px;
- pointer-events: none;
- transition: 0.5s;
- color: #666;
-}
-.contact-form .input-box input:focus~ span,
-.contact-form .input-box input:valid~ span,
-.contact-form .input-box textarea:focus~ span,
-.contact-form .input-box textarea:valid~ span{
-  color: #e91e63;
-  font-size: 12px;
-  transform: translateY(-20px);
-}
-
-.contact-form .input-box input[type="submit"]{
-  width: 30%;
-  background-color: #429735;
-  color: #fff;
-  border: none;
-  cursor: pointer;
-  padding: 10px;
-  font-size: 1.4em;
-}

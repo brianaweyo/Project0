@@ -168,7 +168,7 @@ label[for^="id_password"] {
     justify-content: center;
   }
   .custom-button{
-    background-color: #4CAF50;
+    background-color: rgb(41, 51, 82);
     color: white;
     border: none;
     width: 100%;
@@ -181,10 +181,11 @@ label[for^="id_password"] {
     height: 2em;
     height: 2.3em;
     border-radius: 17px;
-    background-color: #e9bd43;
+    /* background-color: #e9bd43; */
+    background-color: rgb(41, 51, 82);
     font-size: 1.1em;
     margin-top: 2em;
-    color: black;
+    color: white;
   }
 /* Dashboard form */
 .biodata form input[type="text"]{

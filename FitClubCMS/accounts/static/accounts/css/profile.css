@@ -11,7 +11,7 @@
  left: 0;
  height: 100%;
  width: 260px;
- background: #11101d;
+ background: rgb(41, 51, 82);
  z-index: 100;
  transition: a 0.5s ease;
 }
@@ -100,8 +100,8 @@
 
 }
 .sidebar .nav-links li a .link_name{
-    font-size: 18px;
-    font-weight: 400;
+    font-size: 1rem;
+    font-weight: 600;
     color: #fff;
 }
 .sidebar.close .nav-links li a .link_name{
@@ -120,7 +120,8 @@
 }
 .sidebar .nav-links li .sub-menu a{
     color: #fff;
-    font-size: 15px;
+    font-size: 1rem;
+    font-weight: 600;
     padding: 5px 0 ;
     white-space: nowrap;
     opacity: 0.6;
@@ -234,6 +235,12 @@ white-space: nowrap;
 .sidebar.close ~ .home-section{
     left: 78px;
     width: calc(100% - 78px);
+}
+
+.logout-link{
+    font-size: 1.1rem;
+    font-weight: 600;
+    color: rgb(41, 51, 82);
 }
 .home-section .home-content{
     height: 60px;
@@ -429,11 +436,11 @@ table input[type="text"]{
     margin-right: 1.5em;
 }
 
-  .custom-icon-color{
-    color: #001d3d;
+.custom-icon-color{
+    color: rgb(41, 51, 82);
   }
 .user-icon{
-    color: #5f9360;
+    color: rgb(41, 51, 82);
     cursor: pointer;
 }
 .logout-link{

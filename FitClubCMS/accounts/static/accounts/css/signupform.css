@@ -1,9 +1,47 @@
+@font-face {
+  font-family: "TT Wellingtons Trial";
+  src: url("../tt_wellingtonss/TT Wellingtons Trial Regular.otf") format('opentype');
+  font-weight: 400;
+}
+
+@font-face {
+  font-family: "TT Wellingtons Trial";
+  src: url("../Fonts/TT Wellingtons Trial Medium.otf") format('opentype');
+  font-weight: 500;
+}
+
+@font-face {
+  font-family: "TT Wellingtons Trial";
+  src: url("../tt_wellingtons/TT Wellingtons Trial DemiBold.otf") format('opentype');
+  font-weight: 600;
+}
+
+@font-face {
+  font-family: "TT Wellingtons Trial";
+  src: url("../tt_wellingtons/TT Wellingtons Trial Bold.otf") format('opentype');
+  font-weight: 700;
+}
+
+@font-face {
+  font-family: "TT Wellingtons Trial";
+  src: url("../tt_wellingtons/TT Wellingtons Trial ExtraBold.otf") format('opentype');
+  font-weight: 800;
+}
+
+@font-face {
+  font-family: "TT Wellingtons Trial";
+  src: url("../tt_wellingtons/ Wellingtons Trial Black.otf") format('opentype');
+  font-weight: 900;
+}
+ 
+ 
  body{
     background-color: rgb(41, 51, 82);
+    font-family: "TT Wellingtons Trial", sans-serif;
  }
  .signup-box{
     width: 360px;
-    height: 600px;
+    height: 620px;
     border-radius: 14px;
     margin: auto;
     background-color: white;
@@ -16,14 +54,7 @@
     padding: 0 100px;
     font-weight: bolder;
    }
- .signup-box p input[type="submit"]{
-    height: 35px;
-    margin-top: 20px;
-    border: none;
-    background-color:rgb(41, 51, 82);
-    color: white;
-    font-size: 18px;
-   }
+
   h1{
     text-align: center;
     padding-top: 15px;
@@ -38,8 +69,8 @@
   .para2{
     text-align: center;
     color: #49c1a2;
-    font-size: 20px;
-    margin-top: 10px;
+    font-size: 1.3rem;
+    margin-top: 7px;
    }
   .para2 a{
     color:white;
@@ -63,7 +94,7 @@
   
    }
  .signup-box form  p input[type="text"], 
-   input[type="email"],input[type="password"],input[type="submit"]{
+   input[type="email"],input[type="password"]{
     width: 100%;
     padding: 7px;
     border: none;
@@ -71,4 +102,19 @@
     border-radius: 6px;
     outline: none;
     background-color: white;
+    font-weight: 600;
+   }
+
+   .signup-box p input[type="submit"]{
+    width: 105%;
+    height: 35px;
+    margin-top: 20px;
+    border: none;
+    border-radius: 6px;
+    background-color:rgb(41, 51, 82);
+    color: white;
+    outline: none;
+    font-size: 1.3rem;
+    font-weight: 600;
+   
    }
