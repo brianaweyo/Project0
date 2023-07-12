@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <style>
+        .document-header {
+            text-align: center;
+            margin-bottom: 20px;
+        }
+        .document-title {
+            font-weight: bold;
+            font-size: 24px;
+            margin-bottom: 10px;
+        }
+        .organization-name {
+            font-weight: bold;
+            font-size: 18px;
+        }
+        .organization-logo {
+            max-width: 200px;
+            max-height: 200px;
+            margin-top: 10px;
+        }
+    </style>
+</head>
+<body>
+    <div class="document-header">
+        <div class="document-title">{{ document_title }}</div>
+        <div class="organization-name">{{ organization_name }}</div>
+        <!-- <img src="{{ organization_logo }}" alt="Organization Logo" class="organization-logo"> -->
+    </div>
+</body>
+</html>

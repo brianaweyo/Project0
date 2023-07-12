@@ -7,7 +7,7 @@ from datetime import date, datetime, timedelta
 from django.conf import settings
 from django.contrib import messages
 from django.contrib.auth import authenticate, login
-from django.contrib.auth.decorators import login_required
+from django.contrib.auth.decorators import login_required, user_passes_test
 from django.contrib.auth.models import User
 from django.core import serializers
 from django.core.cache import cache
@@ -30,16 +30,7 @@ from .forms import (
     UserEditForm,
     UserRegistrationForm,
 )
-from .models import (
-    Booking,
-    Email,
-    Events,
-    Package,
-    Profile,
-    Service,
-    Trainers,
-    Transaction,
-)
+from .models import Booking, Email, Events, Package, Profile, Trainers, Transaction
 
 
 def landing_page(request):
@@ -149,18 +140,19 @@ def payment_index(request):
         cl = MpesaClient()
         account_reference = "reference"
         transaction_desc = "Description"
-        callback_url = "https://dd07-41-89-10-241.ngrok-free.app/payment_result/"
+        callback_url = "https://a14e-41-89-10-241.ngrok-free.app/payment_result/"
         response = cl.stk_push(
             phone_number, amount, account_reference, transaction_desc, callback_url
         )
 
-        return redirect('payment_success')
+        return redirect("payment_success")
 
     return HttpResponse(response)
 
 
 @csrf_exempt
 def payment_result(request):
+    print("Response returned")
     cl = MpesaClient()
     if request.method == "POST":
         result = cl.parse_stk_result(request.body)
@@ -200,6 +192,11 @@ def payment_result(request):
                 receipt_no=receipt_no,
                 sender_no=number,
             )
+            # update the package name of the user in profile
+            profile = user.profile
+            profile.package = package_name
+            profile.save()
+
             user = cache.delete("user")
             package_name = cache.delete("package_name")
 
@@ -403,7 +400,7 @@ def add_session(request):
 @login_required
 def sessions_list(request):
     current_time = timezone.now()
-    events = Events.objects.filter(start__gt=current_time)[:8]
+    events = Events.objects.filter(start__gt=current_time)[:5]
 
     context = {"events": events}
     return render(request, "accounts/pages/booking_form.html", context)
@@ -523,9 +520,3 @@ def inbox(request):
     context = {"total_notifications": total_notifications}
 
     return render(request, "inbox.html", context)
-
-
-def services(request):
-    data = Service.objects.all()
-    serialized_data = serializers.serialize("json", data)
-    return JsonResponse(serialized_data, safe=False)

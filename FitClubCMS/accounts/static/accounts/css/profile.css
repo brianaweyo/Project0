@@ -1,11 +1,45 @@
-
-*{
-    margin: 0 ;
-    padding: 0;
-    box-sizing: border-box;
-}
+@font-face {
+    font-family: "TT Wellingtons Trial";
+    src: url("../tt_wellingtonss/TT Wellingtons Trial Regular.otf") format('opentype');
+    font-weight: 400;
+  }
+  
+  @font-face {
+    font-family: "TT Wellingtons Trial";
+    src: url("../Fonts/TT Wellingtons Trial Medium.otf") format('opentype');
+    font-weight: 500;
+  }
+  
+  @font-face {
+    font-family: "TT Wellingtons Trial";
+    src: url("../tt_wellingtons/TT Wellingtons Trial DemiBold.otf") format('opentype');
+    font-weight: 600;
+  }
+  
+  @font-face {
+    font-family: "TT Wellingtons Trial";
+    src: url("../tt_wellingtons/TT Wellingtons Trial Bold.otf") format('opentype');
+    font-weight: 700;
+  }
+  
+  @font-face {
+    font-family: "TT Wellingtons Trial";
+    src: url("../tt_wellingtons/TT Wellingtons Trial ExtraBold.otf") format('opentype');
+    font-weight: 800;
+  }
+  
+  @font-face {
+    font-family: "TT Wellingtons Trial";
+    src: url("../tt_wellingtons/ Wellingtons Trial Black.otf") format('opentype');
+    font-weight: 900;
+  }
+  
+  
+  
+  
 
 .sidebar{
+ font-family: "TT Wellingtons Trial", sans-serif;
  position: fixed;
  top: 0;
  left: 0;
@@ -225,6 +259,7 @@ white-space: nowrap;
 }
 
 .home-section{
+    font-family: "TT Wellingtons Trial", sans-serif;
     position: relative;
     background: #E4E9F7;
     left: 260px;

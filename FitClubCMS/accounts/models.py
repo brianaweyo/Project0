@@ -8,6 +8,7 @@ from django.db.models.signals import post_save
 from django.dispatch import receiver
 
 
+
 class Package(models.Model):
     package_id = models.AutoField(primary_key=True)
     package_name = models.CharField(max_length=255, default=None)
@@ -119,7 +120,7 @@ class Sessions(models.Model):
     start = models.DateTimeField()
     end = models.DateTimeField()
     trainer = models.CharField(max_length=255)
-
+    
     def __str__(self):
         return self.id
 
@@ -127,12 +128,6 @@ class Sessions(models.Model):
         verbose_name = "Session"
         verbose_name_plural = "Sessions"
         db_table = "sessions"
-
-
-class Service(models.Model):
-    service_name = models.CharField(max_length=60, null=False)
-    description = models.TextField(null=False)
-    cost = models.FloatField(null=False)
 
 
 class Email(models.Model):
@@ -146,3 +141,6 @@ class Email(models.Model):
 
     def __str__(self):
         return f"From: {self.sender.email} | To: {self.recipient} | Subject: {self.subject}"  # return self.subject
+    
+
+
