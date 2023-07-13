@@ -18,8 +18,16 @@ from import_export.admin import ExportMixin
 from import_export.formats import base_formats
 from rangefilter.filter import DateRangeFilter, DateTimeRangeFilter
 
-from .models import (Booking, Email, Events, Package, Profile, Sessions,
-                     Trainers, Transaction)
+from .models import (
+    Booking,
+    Email,
+    Events,
+    Package,
+    Profile,
+    Sessions,
+    Trainers,
+    Transaction,
+)
 
 User = get_user_model()
 group_name = "Trainers"
@@ -138,6 +146,7 @@ class ProfileAdmin(CustomExportMixin, admin.ModelAdmin):
     raw_id_fields = ["user"]
     list_filter = ("user", "sex", "package")
     formats = [base_formats.CSV, base_formats.XLSX, base_formats.TSV]
+    list_per_page = 7
 
 
 class PriceRangeFilter(admin.SimpleListFilter):
@@ -187,10 +196,12 @@ class TransactionAdmin(ExportMixin, admin.ModelAdmin):
         "status",
         "receipt_no",
     ]
+    list_per_page = 7
 
     list_filter = (
         "user",
-        ("transaction_date", DateRangeFilter),
+        "package",
+        ("transaction_date",  DateRangeFilter),
     )
 
     def get_queryset(self, request):
@@ -219,11 +230,30 @@ class EventsAdmin(ExportMixin, admin.ModelAdmin):
         "start",
         "trainer",
     )
+    list_per_page = 7
 
 
 @admin.register(Trainers)
 class TrainersAdmin(ExportMixin, admin.ModelAdmin):
-    list_display = ["trainer_id", "user", "first_name", "last_name", "phone_number"]
+    list_display = [
+        "trainer_id",
+        "user",
+        "first_name",
+        "phone_number",
+        "specialization",
+        "experience",
+    ]
+    list_per_page = 7
+
+    def get_list_display(self, request):
+        list_display = super().get_list_display(request)
+        list_display[5] = "experience_in_years"
+        return list_display
+
+    def experience_in_years(self, obj):
+        return obj.experience
+
+    experience_in_years.short_description = "Experience (years)"
 
 
 @admin.register(Booking)
@@ -237,6 +267,7 @@ class BookingAdmin(ExportMixin, admin.ModelAdmin):
         "trainer",
         "book_time",
     ]
+    list_per_page = 7
     list_filter = (
         "user",
         "trainer",
@@ -257,6 +288,7 @@ class EmailAdmin(ExportMixin, admin.ModelAdmin):
         "subject",
         ("sent_date", DateRangeFilter),
     )
+    list_per_page = 7
 
     def sender_email(self, obj):
         return obj.sender.email

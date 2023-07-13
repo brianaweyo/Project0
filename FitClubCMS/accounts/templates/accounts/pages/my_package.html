@@ -1,50 +1,103 @@
 {% extends "base2.html" %}
 {% load static %}
 {% block title %} {% endblock %}
+{% block styles %} 
+ <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" >
+ <link href="{% static 'accounts/css/profile.css' %}" rel="stylesheet">
+ <!-- <link href="{% static 'accounts/css/forms.css' %}" rel="stylesheet"> -->
+{% endblock styles %}
 
 {% block content %}
+ 
+<h4>My Package Subscription Details </h4>
+ 
  <div class="package-descr">
-    <div class="card" style="width: 18rem;">
-        <img src="{{ package.package_photo.url }}" class="card-img-top" alt="...">
-        <div class="card-body">
-          <h5 class="card-title">{{ package.package_name }}</h5>
-          <p class="card-text">{{ package.description }}</p>
-        </div>
-        <ul class="list-group list-group-flush">
-          <li class="list-group-item">Cras justo odio</li>
-          <li class="list-group-item">Dapibus ac facilisis in</li>
-          <li class="list-group-item">Vestibulum at eros</li>
-        </ul>
-        <div class="card-body">
-          <a href="{% url 'payment_form' %}?package_id={{ package.package_id }}" class="card-link">Renew</a>
-          <div class="cost">Ksh {{ package.price }}</div>
-        </div>
-      </div>
+
+        <div class="card my-package-card" style="width: 18rem;">
+            <img src="{{ package.package_photo.url }}" class="card-img-top" alt="...">
+            <div class="card-body">
+              <h5 class="card-title">{{ package.package_name }}</h5>
+              <p class="card-text">{{ package.description }}</p>
+            </div>
+            <ul class="list-group list-group-flush">
+              <!-- <li class="list-group-item">Cras justo odio</li> -->
+            </ul>
+            <div class="card-body">
+              <a href="{% url 'payment_form' %}?package_id={{ package.package_id }}" class="card-link">Renew</a>
+              <div class="cost">Ksh {{ package.price }}</div>
+            </div>
+          </div>
+
      <div class="descr-cont">
+        
 
-      <form action="#" method="POST">
-        <fieldset><legend> Package Details</legend>
-            <label for="dop"> Subscription Date:</lable><input type="date" name="dop" required readonly>  <br>
-            <label for="doe"> Subscription Expiry:</lable><input type="date" name="doe" readonly required> <br>
-            <label for="days_left">Days Remaining:</label><input type="number"  name="days_left" min="0" required readonly><br>
-            <label for="amount"> Amount Paid(Ksh):</label><input type="number"  name="amount" step="0.01" readonly required><br>
-            <label for="goals"> Package Goals:</label><textarea name="goals" rows="7" readonly></textarea><br>
-            <label for="renew"><input type="button" name="renew" value="Renew Subscription"> <br>
-            <label for="upgrade"><input type="button" name="upgrade" value="Upgrade Now"><br>
-        </fieldset>
-        <fieldset><legend>My Goals</legend>
-            <p>Lorem ipsum dolor sit amet consectetur, adipisicing elit. Ad reprehenderit ab voluptates distinctio ut suscipit, maxime unde eos quibusdam optio qui tempore excepturi, 
-            harum, illo quas molestiae! Delectus, veritatis aliquam!</p>
-            <p>Do you want to Upgrade your Package?<a href="{% url 'packages' %}">Upgrage now</a>
+            <div class="profile-overview">
+      
+
+              <div class="row">
+                <div class="col">
+                    <img src="{{ package.photo }}" class="rounded float-left img-fluid mt-5" alt="profile picture" style="width: 200px; height: 200px; padding-left: .5rem;">
+                </div>
+                <div class="col">
+                    <div class="form-outline">
+                        <input type="text" class="form-control mt-5" value="{{ recent_transaction.transaction_date }}" readonly>
+                        <label class="form-label">Subscription Date</label>
+                    </div>
+                </div>
+                <div class="col">
+                    <div class="form-outline">
+                        <input type="email" class="form-control mt-5" value="{{ recent_transaction.transaction_date|date:"F d, Y" }}" readonly>
+                        <label class="form-label">Subscription Expiry</label>
+                    </div>
+                </div>
+            </div>
             
-            <p>For any queries, inquiry or complains email us at <a href="mailto:brianaweyo23@gmail.com"> Brian</a> or call on <a href="tel:+1234567890">Call us</a>
-</p>
-        </fieldset>
-      </form>
-       
-     </div>
+            <hr />
+            
+            <div class="row">
+                <div class="col">
+                    <div class="form-outline">
+                        <input type="text" id="form8Example3" class="form-control" value="{{ package.package_name }}" readonly>
+                        <label class="form-label" for="form8Example3">Package Name</label>
+                    </div>
+                </div>
+                <div class="col">
+                    <div class="form-outline">
+                        <input type="text" class="form-control" value="{{ remaining_days }}" readonly>
+                        <label class="form-label">Remaining Days</label>
+                    </div>
+                </div>
+                <div class="col">
+                    <div class="form-outline">
+                        <input type="email" class="form-control" value="{{ recent_transaction.amount }}" readonly>
+                        <label class="form-label">Amount Paid(Ksh)</label>
+                    </div>
+                </div>
+            </div>
+            
+            <hr />
+            
+            <div class="row">
+              <div class="col">
+                <div class="form-outline">
+                    <a href="{% url 'packages' %}" class="btn btn-primary" role="button">Upgrade</a>
+                </div>
+            </div>
+            <div class="col">
+                <div class="form-outline">
+                  <a href="{% url 'payment_form' %}?package_id={{ package.package_id }}" class="btn btn-primary" role="button">Renew</a>
+                </div>
+            </div>
+                <div class="col">
+                    <div class="form-outline">
+                        <input type="text" class="form-control" value="{{ package.description }}" readonly>
+                        <label class="form-label">Package Description</label>
+                    </div>
+                </div>
+            </div>
+            
+     
 
-
- </div>  
+      </div>  
 
 {% endblock %}

@@ -32,6 +32,7 @@
 <div class="sidebar">
     <div class="logo-details">
         <!-- <i class='bx bxl-c-plus-plus'></i> -->
+        <img src="{% static 'accounts/images/logo3.png' %}" class="img-thumbnail mt-3" style="height: 60px; width: 60px;" alt="logo">
         <span class="logo_name">GenZFit</span>
     </div>
 
@@ -58,7 +59,6 @@
          <ul class="sub-menu">
             <li><a class="link_name" href="#">My Profile</a></li>
             <li><a href="{% url "edit" %}" id="edit-profile">Edit Profile</a></li>
-            <li><a href="#">Notifications</a></li>
          </ul>
         </li>
 
@@ -148,20 +148,12 @@
             </ul>
             {% endif %}
         </li>
-   
-     <li>
-         <div class="profile-details">
-                <div class="profile-content">
-                    <img src="{% static 'accounts/images/bgimage.jpeg' %}">
-                </div>
-        
-                <div class="name-job">
-                    <div class="profile-name">Brian Aweyo</div>
-                    <i class='bx bx-log-out'>Logout</i>
-                </div>  
-            
-         </div>  
-     </li>
+
+        <div class="profile-details">
+            <i class='bx bx-log-out'><a href="{% url 'logout' %}"> Logout</a></i>
+             
+        </div>  
+
    </ul>
 </div>
 

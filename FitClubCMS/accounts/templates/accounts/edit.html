@@ -1,9 +1,15 @@
 {% extends 'base2.html' %}
+{% load static %}
 {% block title %} {% endblock %}
+
+{% block styles %}
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" >
+<link href="{% static 'accounts/css/profile.css' %}" rel="stylesheet">
+{% endblock styles%}
 
 {% block content %}
 
-{% if messages %}
+<!-- {% if messages %}
 <ul class="messages">
 {% for message in messages %}
     <li class="{{ message.tags }}">
@@ -12,17 +18,18 @@
     </li>
     {% endfor %}
 </ul>
-{% endif %}
-    <div class="profile-edit-intro">
-        <h1>Edit your Profile Details</h1>
-            <p>You can edit your account using the following form:</p>
+{% endif %} -->
+{% include 'accounts/components/messages.html' %}
+        <h4>Edit your Profile Details</h4>
+          
       
-        <div class="edit-profile-form">
-                <form  method="post" enctype="multipart/form-data">
+        <div class="edit-profile-page">
+             <form  method="post" enctype="multipart/form-data" class="my-profile-edit">
                     {{ user_form.as_p }}
                     {{ profile_form.as_p }}
                     {% csrf_token %}
                     <p><input type="submit" value="Save changes"></p>
               </form>
-        </div>
+
+              <div class="other-details"></div>
 {% endblock %}

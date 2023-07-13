@@ -8,7 +8,6 @@ from django.db.models.signals import post_save
 from django.dispatch import receiver
 
 
-
 class Package(models.Model):
     package_id = models.AutoField(primary_key=True)
     package_name = models.CharField(max_length=255, default=None)
@@ -27,7 +26,7 @@ class Profile(models.Model):
     user = models.OneToOneField(settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
 
     last_name = models.CharField(max_length=50)
-    phone_no = models.CharField(max_length=50)
+    phone_no = models.CharField(max_length=12)
     address = models.CharField(max_length=256, null=True)
     sex = models.CharField(max_length=10, choices=CHOICES)
     date_of_birth = models.DateField(blank=True, null=True)
@@ -77,8 +76,9 @@ class Trainers(models.Model):
     user = models.OneToOneField(settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
     trainer_id = models.AutoField(primary_key=True)
     first_name = models.CharField(max_length=100)
-    last_name = models.CharField(max_length=100)
     phone_number = models.CharField(max_length=20)
+    specialization = models.TextField(null=True, blank=True)
+    experience = models.DecimalField(max_digits=3, decimal_places=1, null=True, blank=True)
 
     def __str__(self):
         return self.first_name
@@ -120,7 +120,7 @@ class Sessions(models.Model):
     start = models.DateTimeField()
     end = models.DateTimeField()
     trainer = models.CharField(max_length=255)
-    
+
     def __str__(self):
         return self.id
 
@@ -141,6 +141,3 @@ class Email(models.Model):
 
     def __str__(self):
         return f"From: {self.sender.email} | To: {self.recipient} | Subject: {self.subject}"  # return self.subject
-    
-
-

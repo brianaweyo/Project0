@@ -73,8 +73,14 @@ body{
 #main-content{
  width:100%
 }
-
-
+/* Custom styles */
+.collapse {
+  display: none;
+  &.show {
+    display: block;
+    background: rgb(41, 51, 82);
+  }
+}
 
 .index-home-section{
   display: flex;
@@ -146,6 +152,11 @@ body{
 .services-card{
   padding-left: 15px;
 }
+.service-image-caption{
+  margin-top: 0;
+  font-weight: 500;
+  font-size: 1.2rem;
+}
 
 .services-section{
   display: flex;
@@ -155,6 +166,23 @@ body{
   width: 50%;
   padding-left: 5px;
 }
+.carousel-item .carousel-caption{
+  color: #051923;
+}
+.carousel-item .carousel-caption h3{
+  font-weight: 800;
+}
+.carousel-item .carousel-caption p{
+  font-weight: 600;
+  font-size: 1.1rem;
+}
+
+.carousel-item img{
+  opacity: 0.9;
+}
+
+
+
 .testimonies{
   display: flex;
   flex-direction: column;
@@ -206,9 +234,7 @@ blockquote::after {
  font-size: 1.1rem;
  font-weight: 600;
 }
-.card-img-top{
-  border-radius: 100px;
-}
+
 
 .contact-page{
   display: flex;
@@ -257,6 +283,10 @@ blockquote::after {
   border-radius: 50px;
   font-size: 1.5rem;
   color: #fff;
+}
+.contact-text .text-center{
+  font-size: 1.2rem;
+  font-weight: 600;
 }
 .contact-container .contact-info .box .contact-text{
   display: flex;
@@ -424,3 +454,83 @@ blockquote::after {
 /* styling contact section */
 
 
+@media  screen and (max-width: 989px) {
+
+    .index-home-section{
+      flex-direction: column;
+    }
+    .about, .home-photo{
+      width: 100%;
+    }
+  .programs{
+    flex-direction: column;  
+
+  }
+  .services-card, .programs-intro{
+    width: 100%;
+  }
+  .services-card{
+    order: 2;
+  }
+  .programs-intro{
+    margin-right: auto;
+    padding-right: 3rem;
+  }
+
+  .services-section{
+    flex-direction: column;
+  }
+  .slide, .testimonies{
+    width: 100%;
+  }
+  .slide{
+    order: 2;
+  }
+ .about-page{
+  display: flex;
+  flex-direction: column;
+ }
+ .org-mission, .team{
+  width: 100%;
+ }
+
+ .contact-page{
+  flex-direction: column;
+ }
+ .contact-text, .contact-container{
+  width: 100%;
+ }
+  .contact-container{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+  }
+ 
+  .contact-info, .contact-form{
+    width: 100%;
+  }
+  .contact-form{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+  }
+.contact-form form{
+    width: 70%;
+  }
+  .contact-container .contact-info{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+  
+  }
+
+  .contact-container .contact-info .box{
+    padding-left: 1rem;
+  }
+
+  .carousel-item img{
+  opacity: 0.7;
+ }
+}

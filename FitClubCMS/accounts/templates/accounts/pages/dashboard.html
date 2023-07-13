@@ -85,14 +85,14 @@
    </div>
 
 
-  <div>
+  <div class="personalized-info"> 
 
     {% include 'accounts/components/messages.html' %}
 
    <div class="feed-form">
     {% include 'accounts/components/messages.html' %}
 
-    <form method="post" action="{% url 'send_email' %}">
+    <form method="post" class="email-form" action="{% url 'send_email' %}">
       {% csrf_token %}
       <h3>Feedback and Queries</h3>
       {% if request.user.is_authenticated %}
@@ -122,14 +122,14 @@
         <div class="col">
           
           <div class="form-outline">
-            <input type="text" class="form-control mt-5" value="{{ user.first_name }}" readonly />
+            <input type="text" class="form-control mt-5" value="{{ user.first_name|title }}" readonly />
             <label class="form-label">Firstname</label>
           </div>
         </div>
         <div class="col">
        
           <div class="form-outline">
-            <input type="email" class="form-control mt-5 " value="{{ profile.last_name }}" readonly  />
+            <input type="email" class="form-control mt-5 " value="{{ profile.last_name|title }}" readonly  />
             <label class="form-label">Last Name</label>
           </div>
         </div>
@@ -148,7 +148,7 @@
         <div class="col">
           
           <div class="form-outline">
-            <input type="text"  class="form-control" value="{{ profile.sex }}" readonly />
+            <input type="text"  class="form-control" value="{{ profile.sex|title }}" readonly />
             <label class="form-label">Gender</label>
           </div>
         </div>

@@ -1,144 +1,32 @@
 {% extends 'base2.html' %}
 {% load static %}
 
-{% block title %} {% endblock %}
-    
+{% block title %}{% endblock %}
 
- {% block content %}
-    <div class="team-area sp">
-        <div class="container">
-           <div class="row">
-
-              <div class="col-sm-6 col-md-4 col-lg-3 single-team">
-                 <div class="inner">
-                    <div class="team-img">
-                       <img src="{% static 'accounts/images/image8.jpeg' %}" alt="Member Photo">
-                    </div>
-                    <div class="team-content">
-                       <h4>Albert Isha</h4>
-                       <h5>Athletic Trainer</h5>
-                       <div class="team-social">
-                          <a href="#" class="fa fa-facebook"></a>
-                          <a href="#" class="fa fa-twitter"></a>
-                          <a href="#" class="fa fa-linkedin"></a>
-                       </div>
-                    </div>
-                 </div>
-              </div>
-
-              <div class="col-sm-6 col-md-4 col-lg-3 single-team">
-                 <div class="inner">
-                    <div class="team-img">
-                       <img src="{% static 'accounts/images/image4.jpeg'%}" alt="Member Photo">
-                    </div>
-                    <div class="team-content">
-                       <h4>Laurine</h4>
-                       <h5>Athletic Trainer</h5>
-                       <div class="team-social">
-                          <a href="#" class="fa fa-facebook"></a>
-                          <a href="#" class="fa fa-twitter"></a>
-                       </div>
-                    </div>
-                 </div>
-              </div>
-
-              <div class="col-sm-6 col-md-4 col-lg-3 single-team">
-                 <div class="inner">
-                    <div class="team-img">
-                       <img src="{% static 'accounts/images/image3.jpeg'%}" alt="Member Photo">
-                    </div>
-                    <div class="team-content">
-                       <h4>Boaz</h4>
-                       <h5>Athletic Trainer</h5>
-                       <div class="team-social">
-                          <a href="#" class="fa fa-facebook"></a>
-                          <a href="#" class="fa fa-twitter"></a>
-                       </div>
-                    </div>
-                 </div>
-              </div>
-
-              <div class="col-sm-6 col-md-4 col-lg-3 single-team">
-                 <div class="inner">
-                    <div class="team-img">
-                       <img src="{% static 'accounts/images/image8.jpeg' %}" alt="Member Photo">
-                    </div>
-                    <div class="team-content">
-                       <h4>Phelix</h4>
-                       <h5>Athletic Trainer</h5>
-                       <div class="team-social">
-                          <a href="#" class="fa fa-facebook"></a>
-                          <a href="#" class="fa fa-twitter"></a>
-                       </div>
-                    </div>
-                 </div>
-              </div>
-
-              <div class="col-sm-6 col-md-4 col-lg-3 single-team">
-                 <div class="inner">
-                    <div class="team-img">
-                       <img src="{% static 'accounts/images/image3.jpeg'%}" alt="Member Photo">
-                    </div>
-                    <div class="team-content">
-                       <h4>Abu</h4>
-                       <h5>Athletic Trainer</h5>
-                       <div class="team-social">
-                          <a href="#" class="fa fa-facebook"></a>
-                          <a href="#" class="fa fa-twitter"></a>
-                       </div>
-                    </div>
-                 </div>
-              </div>
-
-              <div class="col-sm-6 col-md-4 col-lg-3 single-team">
-                 <div class="inner">
-                    <div class="team-img">
-                       <img src="{% static 'accounts/images/image2.jpeg'%}" alt="Member Photo">
-                    </div>
-                    <div class="team-content">
-                       <h4>Lilian</h4>
-                       <h5>Athletic Trainer</h5>
-                       <div class="team-social">
-                          <a href="#" class="fa fa-facebook"></a>
-                          <a href="#" class="fa fa-twitter"></a>
-                       </div>
-                    </div>
-                 </div>
-              </div>
-
-              <div class="col-sm-6 col-md-4 col-lg-3 single-team">
-                 <div class="inner">
-                    <div class="team-img">
-                       <img src="{% static 'accounts/images/image6.jpeg' %}" alt="Member Photo">
-                    </div>
-                    <div class="team-content">
-                       <h4>Carol</h4>
-                       <h5>Yoga and Group Fitness</h5>
-                       <div class="team-social">
-                          <a href="#" class="fa fa-facebook"></a>
-                          <a href="#" class="fa fa-twitter"></a>
-                       </div>
-                    </div>
-                 </div>
-              </div>
-
-              <div class="col-sm-6 col-md-4 col-lg-3 single-team">
-                 <div class="inner">
-                    <div class="team-img">
-                       <img src="{% static 'accounts/images/image10.jpeg'%}" alt="Member Photo">
-                    </div>
-                    <div class="team-content">
-                       <h4>Nancy</h4>
-                       <h5>Athletic Trainer</h5>
-                       <div class="team-social">
-                          <a href="#" class="fa fa-facebook"></a>
-                          <a href="#" class="fa fa-twitter"></a>
-                       </div>
-                    </div>
-                 </div>
-              </div>
-              
-           </div>
-        </div>
-     </div>
-    {% endblock %}
+{% block content %}
+   <h4>Our Trainers Team</h4>
+   <div class="team-area sp">
+      <div class="container">
+         <div class="row">
+            {% for trainer in trainers %}
+            <div class="col-sm-6 col-md-4 col-lg-3 single-team">
+               <div class="inner">
+                  <div class="team-img">
+                     <img src="{% static 'accounts/images/image10.jpeg' %}" alt="Trainer Photo">
+                  </div>
+                  <div class="trainer-info">
+                     <h4>{{ trainer.first_name|title }}</h4>
+                     <h5>{{ trainer.specialization }}</h5>
+                     <h6>{{ trainer.experience }} years of experience</h6>
+                     <div class="team-social">
+                        <a href="https://www.instagram.com/accounts/login/" <i class="fa-brands fa-twitter fa-2x"></i></a>
+                        <a href="https://twitter.com/i/flow/login?redirect_after_login=%2F" <i class="fa-brands fa-square-instagram fa-2x"></i></a>
+                     </div>
+                  </div>
+               </div>
+            </div>
+            {% endfor %}
+         </div>
+      </div>
+   </div>
+{% endblock %}

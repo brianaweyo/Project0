@@ -19,6 +19,7 @@ from django.shortcuts import get_object_or_404, redirect, render
 from django.urls import reverse
 from django.utils import timezone
 from django.utils.dateparse import parse_datetime
+from django.views.decorators.csrf import csrf_exempt
 from django.views.decorators.http import require_POST
 from django_daraja.mpesa.core import MpesaClient
 
@@ -114,9 +115,6 @@ def payment_form(request):
     return render(request, "accounts/pages/payment_form.html", context)
 
 
-from django.views.decorators.csrf import csrf_exempt
-
-
 @csrf_exempt
 @login_required
 def payment_index(request):
@@ -128,11 +126,13 @@ def payment_index(request):
         )  # Convert to integer by rounding to the nearest whole number
         phone_number = request.POST.get("phone_no")
         package_name = request.POST.get("package_name")
+        package_id = request.POST.get("package_no")
 
         user = request.user
         # storing the two in order to be accessed from the response in payment_result
         cache.set("package_name", package_name)
         cache.set("user", user)
+        cache.set("package_id", package_id)
 
         print(package_name)
         print(user)
@@ -140,7 +140,7 @@ def payment_index(request):
         cl = MpesaClient()
         account_reference = "reference"
         transaction_desc = "Description"
-        callback_url = "https://a14e-41-89-10-241.ngrok-free.app/payment_result/"
+        callback_url = "https://52f1-41-89-10-241.ngrok-free.app/payment_result/"
         response = cl.stk_push(
             phone_number, amount, account_reference, transaction_desc, callback_url
         )
@@ -178,9 +178,11 @@ def payment_result(request):
             # Retrieve the package_name and username from the session
             user = cache.get("user")
             package_name = cache.get("package_name")
+            package_id = cache.get("package_id")
 
             print(package_name)
             print(user)
+            print(package_id)
 
             # create transaction object to save the transaction into the database
             transaction = Transaction.objects.create(
@@ -192,17 +194,25 @@ def payment_result(request):
                 receipt_no=receipt_no,
                 sender_no=number,
             )
+
+            # retrieve the with the given package_id
+            package = get_object_or_404(Package, pk=package_id)
+
+            print(package)
+
             # update the package name of the user in profile
             profile = user.profile
-            profile.package = package_name
+            profile.package = package
             profile.save()
 
             user = cache.delete("user")
             package_name = cache.delete("package_name")
+            package_id = cache.delete("package_id")
 
     return HttpResponse("okay")
 
 
+@login_required
 def payment_success_page(request):
     return render(request, "accounts/pages/payment_success.html")
 
@@ -320,14 +330,33 @@ def packages(request):
 @login_required
 def my_package(request):
     profile = Profile.objects.get(user=request.user)
-
     package = profile.package
-    context = {"package": package}
+
+    recent_transaction = (
+        Transaction.objects.filter(user=request.user)
+        .order_by("-transaction_date")
+        .first()
+    )
+
+    remaining_days = None
+    if recent_transaction:
+        current_date = datetime.now().date()
+        subscription_date = recent_transaction.transaction_date.date()
+        expiry_date = subscription_date + timedelta(days=30)
+        remaining_days = (expiry_date - current_date).days
+
+    context = {
+        "package": package,
+        "recent_transaction": recent_transaction,
+        "remaining_days": remaining_days,
+    }
     return render(request, "accounts/pages/my_package.html", context)
 
 
 def trainers(request):
-    return render(request, "accounts/pages/trainers.html")
+    trainers = Trainers.objects.all()
+    context = {"trainers": trainers}
+    return render(request, "accounts/pages/trainers.html", context)
 
 
 def schedule(request):
@@ -415,33 +444,75 @@ def book_session(request):
         event_trainer = request.POST.get("event_trainer")
 
         # Get the User instance of the logged-in user
-        user = User.objects.get(username=request.user.username)
+        user = request.user
 
-        # Check if a booking with the same details already exists
-        existing_booking = Booking.objects.filter(
-            user=user,
-            name=event_name,
-            start=event_start,
-            end=event_end,
-            trainer=event_trainer,
-        ).exists()
-
-        if existing_booking:
-            messages.error(request, "You have already booked this session!")
-
-        else:
-            booking = Booking.objects.create(
+        # Check if the user has a package in their profile
+        if user.profile.package:
+            # Check if a booking with the same details already exists
+            existing_booking = Booking.objects.filter(
                 user=user,
                 name=event_name,
                 start=event_start,
                 end=event_end,
                 trainer=event_trainer,
-            )
-            messages.success(request, "Session booked successfully.")
+            ).exists()
+
+            if existing_booking:
+                messages.error(request, "You have already booked this session!")
+            else:
+                booking = Booking.objects.create(
+                    user=user,
+                    name=event_name,
+                    start=event_start,
+                    end=event_end,
+                    trainer=event_trainer,
+                )
+                messages.success(request, "Session booked successfully.")
+        else:
+            messages.error(request, "Kindly enroll for a package to book a Session.")
 
         return redirect("sessions_list")
 
-    return render("sessions_list")
+    return render(request, "sessions_list.html")
+
+
+# @login_required
+# def book_session(request):
+#     if request.method == "POST":
+#         event_name = request.POST.get("event_name")
+#         event_start = request.POST.get("event_start")
+#         event_end = request.POST.get("event_end")
+#         event_trainer = request.POST.get("event_trainer")
+
+#         # Get the User instance of the logged-in user
+#         user = User.objects.get(username=request.user.username)
+
+
+#         # Check if a booking with the same details already exists
+#         existing_booking = Booking.objects.filter(
+#             user=user,
+#             name=event_name,
+#             start=event_start,
+#             end=event_end,
+#             trainer=event_trainer,
+#         ).exists()
+
+#         if existing_booking:
+#             messages.error(request, "You have already booked this session!")
+
+#         else:
+#             booking = Booking.objects.create(
+#                 user=user,
+#                 name=event_name,
+#                 start=event_start,
+#                 end=event_end,
+#                 trainer=event_trainer,
+#             )
+#             messages.success(request, "Session booked successfully.")
+
+#         return redirect("sessions_list")
+
+#     return render("sessions_list")
 
 
 @login_required

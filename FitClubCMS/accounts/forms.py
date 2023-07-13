@@ -69,11 +69,21 @@ class UserEditForm(forms.ModelForm):
 class ProfileEditForm(forms.ModelForm):
     class Meta:
         model = Profile
-        fields = ["sex", "phone_no", "photo", "date_of_birth"]
+        fields = [
+            "phone_no",
+            "sex",
+            "date_of_birth",
+            "photo",
+        ]
 
         widgets = {
             "date_of_birth": DateInput(attrs={"type": "date"}),
         }
+
+        photo = forms.ImageField(
+          widget=forms.FileInput(attrs={"class": "custom-photo-field"})
+        )
+
 
 
 class SessionForm(forms.Form):

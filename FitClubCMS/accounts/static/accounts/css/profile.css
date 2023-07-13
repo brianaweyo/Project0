@@ -297,6 +297,23 @@ white-space: nowrap;
     font-weight: 600;
 }
 
+#content-section h4{
+    font-weight: 800;
+    text-align: center;
+    font-size: 2rem;
+    margin: 2rem;
+  }
+
+.top-right .user-profile .user-name{
+    font-size: 1.2rem ;
+}
+
+.biodata form input, .notification-count{
+    font-size: 1rem;
+    font-weight: 600;
+}
+
+
 
 .biodata{
     display: flex;
@@ -338,13 +355,28 @@ white-space: nowrap;
  }
 .card .card-body .card-title{
     text-align: center;
-    font-weight: 600;
+    font-weight: 800;
 }
 .card .card-body{
     text-align: center;
 }
- 
 
+.email-form h3{
+    font-weight: 800;
+}
+.email-form .form-group label{
+    font-size: larger;
+    font-weight: 400;
+}
+ .profile-overview .row .col label{
+    font-size: large;
+    font-weight: 600;
+    margin: 1rem 1rem;
+    
+ }
+ .profile-overview .row .col  input{
+    font-size: 1.2rem;
+ }
  .single-team .inner {
     text-align: center;
 	margin-bottom: 35px;
@@ -405,6 +437,27 @@ white-space: nowrap;
 	border-radius: 15px 15px 0px 0px;
 	margin-top: 17px;
 }
+/* My package page styles  */
+.package-descr{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-evenly;
+    align-items: center;
+}
+
+.package-descr .card, .descr-cont{
+    width: 50%;
+}
+.package-details-form fieldset{
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+.package-descr .my-package-card{
+    width: 80%;
+}
+
+
 
 
 /* Booking table styles */
@@ -483,6 +536,7 @@ table input[type="text"]{
 }
 .card-text{
     color: #11101d;
+    font-weight: 600;
 }
 
 .feed-form {
@@ -514,6 +568,82 @@ table input[type="text"]{
   }
 
 
+
+  .quick-access .row{
+    flex-wrap: wrap;
+
+  }
+
+
+  .edit-profile-page{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .my-profile-edit, .other-details{
+     width: 50%;
+  }
+
+  .my-profile-edit{
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: center;
+    margin: auto;
+    /* font-size: 1.5rem; */
+
+  }
+  .my-profile-edit p{
+    padding-top: 1rem;
+  }
+
+  .my-profile-edit p input[type="text"] {
+    width: 80%;
+    border-radius: 5px;
+    height: 2.5rem;
+    border-style: none;
+  }
+  .my-profile-edit p input[type="email"]{
+    width: 80%;
+    border-radius: 5px;
+    height: 2.5rem;
+    border-style: none;
+  }
+  #id_date_of_birth{
+    width: 80%;
+    border-radius: 5px;
+    height: 2.5rem;
+    border-style: none;
+  }
+  #id_photo{
+    width: 50%;
+    border-radius: 5px;
+    height: 2.5rem;
+    border-style: none;
+    font-size: 1.3rem;
+    background-color: #fff;
+  }
+
+  .my-profile-edit p select{
+    width: 100%;
+    border-radius: 5px;
+    height: 2.5rem;
+    border-style: none;
+  }
+  #photo-clear_id{
+    font-size: 1rem;
+  }
+  .my-profile-edit p input[type="submit"]{
+    color: rgb(41, 51, 82);
+  }
+
+  .my-profile-edit p  label{
+    font-size: 1.1rem;
+    font-weight: 600;
+  }
+
 .notification {
     position: fixed;
     top: 50%;
@@ -529,8 +659,94 @@ table input[type="text"]{
     font-size: 1.3em;
 
 }
-  @media (max-width: 768px) {
+/* @media (max-width: 768px) {
     .feed-form {
       max-width: 100%;
     }
-  }
+  } */
+
+@media  screen and (max-width: 989px){
+
+      #content-section .top-right .user-profile .user-name,
+      #content-section .top-right .user-profile i{
+        display: none;
+      }
+      #content-section h4{
+        text-align: center;
+        margin: 1rem;
+      }
+
+      .biodata form{
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        width: 70%;
+        font-size: 1.1rem;
+        font-weight: 800;
+
+      }
+      .quick-access .justify-content-around{
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        width: 100%;
+      }
+    .quick-access .justify-content-around .col-sm-3{
+       min-width: 80%;
+       padding: 1rem;
+       font-size: 1.2rem;
+    }
+    .personalized-info .feed-form{
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        min-width: 100%;
+    }
+    .email-form, .profile-overview{
+        min-width: 90%;
+        margin: 1rem;
+    }
+    .profile-overview {
+        display: flex;
+        flex-direction: column;
+        padding: 1rem 1rem;
+        font-size: 1.2rem;
+    }
+
+    .email-form{
+        font-size: 1.2rem;
+        order: 2;
+    }
+
+    .profile-overview img{
+        display: none;
+    }
+
+    .package-descr {
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        width: 100%;
+    }
+    .package-descr .descr-cont{
+        width: 100%;
+    }
+    .package-details-form{
+        width: 100%;
+    }
+
+    .package-details-form fieldset {
+        display: flex;
+        flex-direction: column;
+        justify-content: space-around;
+        align-items: center;
+      
+    } 
+    .package-details-form fieldset p {
+       width: 100%;
+      
+    } 
+}
+  

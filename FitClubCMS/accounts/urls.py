@@ -25,7 +25,9 @@ urlpatterns = [
     path("add_session/", views.add_session, name="add_session"),
     path("book_session/", views.book_session, name="book_session"),
     path("my_bookings/", views.my_bookings, name="my_bookings"),
-    path("cancel_booking/<int:booking_id>/", views.cancel_booking, name="cancel_booking"),
+    path(
+        "cancel_booking/<int:booking_id>/", views.cancel_booking, name="cancel_booking"
+    ),
     path("payment_history/", views.payment_history, name="payment_history"),
     path("send_email/", views.send_email, name="send_email"),
     path("payment_result/", views.payment_result, name="payment_result"),
