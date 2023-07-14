@@ -16,7 +16,7 @@
              <div class="intro">
                 <h2>Payment Details</h2>
                 <hr>
-                <p>Accepted</p>
+                <p class="mpesa-input-labels">Accepted</p>
             </div>
 
             <div class="m-pesa-logo">
@@ -26,28 +26,28 @@
             <div class="payment-info">
 
                <p>
-                <label for="amount">Amount(Ksh):</label>
+                <label for="amount" class="mpesa-input-labels">Amount(Ksh):</label>
                 <input type="number" name="amount" value="{{ package.price }}" readonly> 
                </p>
                 
                <p>
-                <label for="today">Date:</label>
+                <label for="today" class="mpesa-input-labels">Date:</label>
                 <input type="date" name="today" id="todayField" value="{% now 'Y-m-d' %}" readonly>
                </p>
 
                <p>
-                <label for="package_name">Package</label>:</label>
+                <label for="package_name" class="mpesa-input-labels">Package</label>:</label>
                 <input type="text" name="package_name" value="{{ package.package_name }}" id="package_name" readonly> 
                </p>
 
                <p>
-                <label for="package_no">Package Reference No:</label>:</label>
+                <label for="package_no" class="mpesa-input-labels">Package Reference No:</label>:</label>
                 <input type="text" name="package_no" value="{{ package.package_id }}" id="package_no" readonly> 
                </p>
 
 
                <p>
-                <label for="phone_no">M-Pesa No:</label>
+                <label for="phone_no" class="mpesa-input-labels">M-Pesa No:</label>
                 <input type="tel" name="phone_no" id="phone_no" placeholder="e.g., 07...or 01..." required> 
                </p>
 

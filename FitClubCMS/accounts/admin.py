@@ -4,6 +4,7 @@ from django import forms
 from django.conf import settings
 from django.contrib import admin, messages
 from django.contrib.auth import get_user_model
+from django.contrib.auth.admin import UserAdmin
 from django.contrib.auth.models import Group
 from django.core.exceptions import ValidationError
 from django.core.mail import EmailMessage, send_mail
@@ -41,6 +42,18 @@ for trainer in trainers:
     user.is_staff = True
     user.groups.add(group)
     user.save()
+
+# Create the 'Clients' group and add non-staff users to it
+clients_group_name = "Clients"
+clients_group, created = Group.objects.get_or_create(name=clients_group_name)
+clients_group.is_staff = False 
+clients_group.save()
+
+non_staff_users = User.objects.filter(is_staff=False)
+for user in non_staff_users:
+    user.groups.add(clients_group)
+    user.save()
+
 
 
 class CustomExportMixin(ExportMixin):
@@ -113,6 +126,23 @@ class EventsResource(resources.ModelResource):
 class SessionsResource(resources.ModelResource):
     class Meta:
         model = Sessions
+
+
+class CustomUserAdmin(ExportMixin, UserAdmin):
+    list_display = [
+        "id",
+        "username",
+        "email",
+        "first_name",
+        "last_name",
+        "is_staff",
+        "is_superuser",
+    ]
+
+
+
+admin.site.unregister(User)
+admin.site.register(User, CustomUserAdmin)
 
 
 # filters to enable report generation
@@ -201,7 +231,7 @@ class TransactionAdmin(ExportMixin, admin.ModelAdmin):
     list_filter = (
         "user",
         "package",
-        ("transaction_date",  DateRangeFilter),
+        ("transaction_date", DateRangeFilter),
     )
 
     def get_queryset(self, request):
@@ -231,6 +261,7 @@ class EventsAdmin(ExportMixin, admin.ModelAdmin):
         "trainer",
     )
     list_per_page = 7
+    ordering = ["-start"]
 
 
 @admin.register(Trainers)

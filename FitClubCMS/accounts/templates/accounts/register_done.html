@@ -1,11 +1,23 @@
 {% extends "base.html" %}
+{% load static %}
 
-{% block title %}{% endblock %}
+{% block title %}Registration Done{% endblock %}
+
+{% block styles %}
+<link rel="stylesheet" href="{% static 'accounts/css/login.css' %}">
+{% endblock styles %}
 
 {% block content %}
+
+<div class="successfully-registered">
  <h1>Welcome {{ new_user.first_name }}!</h1>
  <p>
  Your account has been successfully created. 
  Now you can <a href="{% url "login" %}">log in</a>.
  </p>
 {% endblock %}
+</div>
+
+{% block navigationbar %}{% endblock navigationbar %}
+
+{% block footer %}{% endblock footer %}

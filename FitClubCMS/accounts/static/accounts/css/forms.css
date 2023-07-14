@@ -304,6 +304,8 @@ label[for^="id_password"] {
 .payment-form form .payment-info p input{
   display: flex;
   width: 100%;
+  font-size: 1.1rem;
+  font-weight: 800;
   outline: none;
   border-style: none;
   margin-right: 0;
@@ -314,4 +316,10 @@ label[for^="id_password"] {
   background-color: #429735;
   margin-bottom: 30px;
   padding-left: 20%;
+}
+
+
+.mpesa-input-labels{
+  font-size: 1.2rem;
+  color: black;
 }

@@ -121,3 +121,25 @@ body {
     align-items: center;
     text-align: center;
   }
+
+
+  .successfully-registered{
+     margin-top: 3rem;
+     text-align: center;
+     color: #fff;
+  }
+
+  .successfully-registered h1{
+    font-size: 1.7rem;
+    font-weight: 800;
+  }
+
+  .successfully-registered p{
+    font-size: 1.3rem;
+    font-weight: 600;
+  }
+  .successfully-registered p a{
+    color: goldenrod;
+  }
+
+
